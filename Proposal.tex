@@ -1,0 +1,86 @@
+\documentclass[sigconf]{acmart}
+% Cleaning
+\pagestyle{fancy} % removes running headers
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+\fancyhead{}
+\settopmatter{printacmref=false, printfolios=false}
+% Copyright
+\setcopyright{none}
+% \setcopyright{acmcopyright}
+% \setcopyright{acmlicensed}
+% \setcopyright{rightsretained}
+% \setcopyright{usgov}
+% \setcopyright{usgovmixed}
+% \setcopyright{cagov}
+% \setcopyright{cagovmixed}
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\acmDOI{}
+
+\usepackage{listings}
+\definecolor{codegray}{rgb}{0.97,0.97,0.97}
+
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\topmargin}{0pt}
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+%\linespread{0.95}
+\usepackage{mdwlist}
+\usepackage{amsmath}
+
+
+\begin{document}
+\title{PluggedIn: Representing Electric Vehicle Charging Accessibility}
+\author{JungwonYoun}
+\affiliation{
+  \institution{University of Victoria}
+%   \streetaddress{P.O. Box 1212}
+%   \city{Toronto}
+%   \state{ON}
+%   \country{Canada}
+%   \postcode{43017-6221}
+}
+\email{jungwonyoun@uvic.ca }
+\author{Edit1}
+% \authornotemark[1]
+%\orcid{0000-0002-6033-6564}
+\affiliation{
+ \institution{University of Victoria}
+%   \city{Fredericton}
+%   \state{NB}
+%   \country{Canada}
+}\email{eidt1@uvic.ca}
+
+\begin{abstract}
+Identifying EV charging locations alone is insufficient to determine whether a particular vehicle can use a facility under specific conditions. While existing models represent many relevant factors, their integration for vehicle-specific practical usability remains limited. This project proposes an integrated data model connecting charging facilities, vehicle characteristics, and operating and access conditions to support machine-interpretable usability queries.
+\end{abstract}
+
+%\keywords{More Specific Keywords, Specific Keyword, General Keyword}
+
+\maketitle
+
+\section{Introduction}
+For the widespread adoption of electric vehicles (EVs), drivers must be able to charge their vehicles when and where they need to. This is particularly important for commercial vehicles that operate on fixed routes and schedules, where charging station locations alone are not sufficient. The practical usability of a charging facility depends on multiple factors, including connector compatibility, operating hours, access conditions, parking restrictions, and vehicle-specific suitability~\cite{evkg}. Therefore, the important question for drivers is not simply, ``Where is the charging station?'' but, ``Can my vehicle actually use this charging facility under the required conditions?''
+
+Public charging information is distributed across different sources that may use different terminologies and representations~\cite{Liu_2025}, making it difficult to consistently integrate and query relationships among the data. This project investigates how charging facilities, connector standards, operating and access conditions, vehicle characteristics, and their relationships can be modeled to support machine-interpretable, vehicle-specific usability queries.
+
+\section{Motivation}
+Put Motivation here
+
+\subsection{Motivating Example}
+Put Motivating Example here
+
+\subsection{Gaps in Existing Solutions}
+Put Gaps here
+
+\section{Team Justification}
+Put Team Justification here
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliography.bib}
+
+\end{document}
