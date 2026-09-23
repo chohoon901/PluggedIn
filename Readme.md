@@ -1,4 +1,4 @@
-# Can I Plug?
+# PluggedIn
 
 Figuring out whether a given driver can actually charge at a given station.
 
