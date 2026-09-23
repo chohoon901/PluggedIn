@@ -56,7 +56,7 @@
 }\email{eidt1@uvic.ca}
 
 \begin{abstract}
-put Abstract here.
+Identifying EV charging locations alone is insufficient to determine whether a particular vehicle can use a facility under specific conditions. While existing models represent many relevant factors, their integration for vehicle-specific practical usability remains limited. This project proposes an integrated data model connecting charging facilities, vehicle characteristics, and operating and access conditions to support machine-interpretable usability queries.
 \end{abstract}
 
 %\keywords{More Specific Keywords, Specific Keyword, General Keyword}
@@ -64,13 +64,19 @@ put Abstract here.
 \maketitle
 
 \section{Introduction}
-Put Introduction here
+For the widespread adoption of electric vehicles (EVs), drivers must be able to charge their vehicles when and where they need to. This is particularly important for commercial vehicles that operate on fixed routes and schedules, where charging station locations alone are not sufficient. The practical usability of a charging facility depends on multiple factors, including connector compatibility, operating hours, access conditions, parking restrictions, and vehicle-specific suitability~\cite{evkg}. Therefore, the important question for drivers is not simply, ``Where is the charging station?'' but, ``Can my vehicle actually use this charging facility under the required conditions?''
+
+Public charging information is distributed across different sources that may use different terminologies and representations~\cite{Liu_2025}, making it difficult to consistently integrate and query relationships among the data. This project investigates how charging facilities, connector standards, operating and access conditions, vehicle characteristics, and their relationships can be modeled to support machine-interpretable, vehicle-specific usability queries.
 
 \section{Motivation}
-Put Motivation here
+The burden of this fragmented information falls on the small carriers least able to absorb it. A large logistics firm can commission a feasibility study before electrifying a route; a small one cannot, so an electric vehicle becomes too risky a choice and the firm buys a combustion vehicle instead. Analyses of fleet electrification in Canada likewise identify the shortage of charging infrastructure as an adoption barrier~\cite{bhardwaj2024fleets}. Moreover, the existence of a charging site alone does not tell a driver whether it is worth going there: when Rempel et al. (2024) tested 655 public CCS fast-charging ports in the San Francisco Bay Area, only 73.3\% delivered a two-minute charge~\cite{rempel2024reliability}. This is a maintenance problem, but it is also a problem of disconnected information. ``Equipment is installed here'' and ``this vehicle can charge here now'' are different facts, yet they are treated as the same one, and different datasets use different terms for the same factors. We aim to make these relationships explicit and machine-readable. 
 
 \subsection{Motivating Example}
-Put Motivating Example here
+A truck driver moving freight along a corridor must consider multiple factors, such as the location of charging station; its connector status, network, access conditions, such as operating hours, and even its network provider, equipment operator, and equipment owner, which are not always the same entity.
+
+Because this information may be recorded in different places or expressed in different structures or terms, it can be difficult to join in its published form. The AFDC API uses the code \texttt{J1772COMBO}, whereas ChargePoint calls the same connector CCS1~\cite{afdc_connector_api, chargepoint_connector_types}; the DOE dataset's \texttt{TESLA} value cannot distinguish AC from DC charging; and operating hours appear as free text such as ``9am-5pm'', which cannot be queried directly without processing.
+
+If these connections were expressed in a machine-readable form, the question ``Can this vehicle use the charging facilities it needs while operating on this route?'' would be answered by a single query instead of searches across several sites~\cite{qi2023evkg}. This information is also relevant to infrastructure planning: 77\% of surveyed small fleet owners identified the absence of public charging infrastructure as a barrier to adoption~\cite{bhardwaj2024fleets}, while governments are supporting efforts to identify suitable charging locations~\cite{nrcan2024rfp}.
 
 \subsection{Gaps in Existing Solutions}
 Put Gaps here
