@@ -1,4 +1,4 @@
-\documentclass[sigconf]{acmart}
+ \documentclass[sigconf]{acmart}
 % Cleaning
 \pagestyle{fancy} % removes running headers
 \settopmatter{printacmref=false} % Removes citation information below abstract
@@ -45,7 +45,7 @@
 %   \postcode{43017-6221}
 }
 \email{jungwonyoun@uvic.ca }
-\author{Edit1}
+\author{Sunghun Cho}
 % \authornotemark[1]
 %\orcid{0000-0002-6033-6564}
 \affiliation{
@@ -53,7 +53,16 @@
 %   \city{Fredericton}
 %   \state{NB}
 %   \country{Canada}
-}\email{eidt1@uvic.ca}
+}\email{shcho980901@uvic.ca}
+\author{Dockal Elias}
+% \authornotemark[1]
+%\orcid{0000-0002-6033-6564}
+\affiliation{
+ \institution{University of Victoria}
+%   \city{Fredericton}
+%   \state{NB}
+%   \country{Canada}
+}\email{eliasdockal@uvic.ca}
 
 \begin{abstract}
 Identifying EV charging locations alone is insufficient to determine whether a particular vehicle can use a facility under specific conditions. While existing models represent many relevant factors, their integration for vehicle-specific practical usability remains limited. This project proposes an integrated data model connecting charging facilities, vehicle characteristics, and operating and access conditions to support machine-interpretable usability queries.
@@ -62,23 +71,24 @@ Identifying EV charging locations alone is insufficient to determine whether a p
 %\keywords{More Specific Keywords, Specific Keyword, General Keyword}
 
 \maketitle
-
 \section{Introduction}
-For the widespread adoption of electric vehicles (EVs), drivers must be able to charge their vehicles when and where they need to. This is particularly important for commercial vehicles that operate on fixed routes and schedules, where charging station locations alone are not sufficient. The practical usability of a charging facility depends on multiple factors, including connector compatibility, operating hours, access conditions, parking restrictions, and vehicle-specific suitability~\cite{evkg}. Therefore, the important question for drivers is not simply, ``Where is the charging station?'' but, ``Can my vehicle actually use this charging facility under the required conditions?''
-
-Public charging information is distributed across different sources that may use different terminologies and representations~\cite{Liu_2025}, making it difficult to consistently integrate and query relationships among the data. This project investigates how charging facilities, connector standards, operating and access conditions, vehicle characteristics, and their relationships can be modeled to support machine-interpretable, vehicle-specific usability queries.
+For widespread EV adoption, drivers must be able to charge when and where needed. This is particularly important for commercial vehicles operating on fixed routes and schedules, where charging station locations alone are insufficient. Practical usability depends on factors such as connector compatibility, operating hours, access conditions, parking restrictions, and vehicle-specific suitability~\cite{evkg}. Therefore, the important question for drivers is not simply, ``Where is the charging station?'' but, ``Can my vehicle actually use this charging facility under the required conditions?'' However, Public charging information is distributed across sources that may use different terminologies and representations~\cite{Liu_2025}, making consistent integration and querying difficult. This project investigates how charging facilities, connector standards, operating and access conditions, vehicle characteristics, and their relationships can be modeled to support machine-interpretable, vehicle-specific usability queries.
 
 \section{Motivation}
-Put Motivation here
+The burden of fragmented information falls on small carriers least able to absorb it. Unlike a large logistics firm, a small one may be unable to commission a feasibility study before electrifying a route, making an electric vehicle too risky a choice. Moreover, a charging site's existence does not guarantee usability: Rempel et al. (2024) tested 655 public CCS fast-charging ports in the San Francisco Bay Area, but only 73.3\% delivered a two-minute charge~\cite{rempel2024reliability}. Beyond maintenance, disconnected information is also a problem: ``Equipment is installed here'' and ``this vehicle can charge here now'' are different facts, yet are treated as the same. We aim to make these relationships explicit and machine-readable.
 
 \subsection{Motivating Example}
-Put Motivating Example here
+A truck driver moving freight along a corridor must consider charging locations, connector status, access conditions, operating hours, and the network provider, equipment operator, and owner, which may be different entities.
+
+In its current form, this information is difficult to join across different sources, structures, and terms. The AFDC API uses \texttt{J1772COMBO}, whereas ChargePoint calls the same connector CCS1~\cite{afdc_connector_api, chargepoint_connector_types}; the DOE dataset's \texttt{TESLA} value cannot distinguish AC from DC charging; and free-text operating hours such as ``9am-5pm'' require processing before querying.
+
+Expressing these connections in a machine-readable form would allow a single query to answer ``Can this vehicle use the charging facilities it needs along this route?'' instead of searches across several sites~\cite{evkg}. This also supports infrastructure planning: 77\% of surveyed small fleet owners identified the absence of public charging infrastructure as an adoption barrier~\cite{bhardwaj2024fleets}, while governments support efforts to identify suitable charging locations~\cite{nrcan2024rfp}.
 
 \subsection{Gaps in Existing Solutions}
-Put Gaps here
+Existing EV charging applications and datasets provide useful location information but often require manual interpretation. Semantic models such as EVKG integrate information about EVs and charging infrastructure, but do not focus on combining the parameters required to determine practical usability. Commercial platforms may provide route optimization or charging information but generally lack a common, machine-interpretable representation for vehicle-specific queries. Our project addresses this gap by integrating these parameters into a unified model.
 
 \section{Team Justification}
-Put Team Justification here
+The project team combines graduate students in Applied Data Science with backgrounds in high-tech manufacturing, engineering, computer science, and data science. This provides complementary experience in software development, data modeling, and semantic technologies required for the project.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{bibliography.bib}
