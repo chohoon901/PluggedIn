@@ -36,7 +36,7 @@
 
 \author{Jungwon Youn}
 \affiliation{
-  \institution{University of Victoria}
+  \institution{Data Analysis}
   \city{Victoria}
   \state{BC}
   \country{Canada}
@@ -45,7 +45,7 @@
 
 \author{Sunghun Cho}
 \affiliation{
-  \institution{University of Victoria}
+  \institution{Semantic Modeling}
   \city{Victoria}
   \state{BC}
   \country{Canada}
@@ -54,12 +54,13 @@
 
 \author{Elias Dockal}
 \affiliation{
-  \institution{University of Victoria}
+  \institution{Data Modeling}
   \city{Victoria}
   \state{BC}
   \country{Canada}
 }
 \email{eliasdockal@uvic.ca}
+
 
 \begin{abstract}
 EV charging usability depends on multiple factors, including connector compatibility, operating hours, access conditions, and network information. This project compares existing charging infrastructure data, interoperability protocols, and semantic models to identify differences and gaps in how these factors are represented. Based on this comparison, we design PluggedIn, a data model centered on vehicle-specific practical usability. PluggedIn integrates these factors while explicitly representing adapter compatibility, driver network membership, and structured operating periods, providing a foundation for future knowledge graph representation. The project repository, data models, and related artifacts are available at \url{https://github.com/chohoon901/PluggedIn}
@@ -165,7 +166,7 @@ The comparison of existing representations shows that information needed to dete
 
 \textbf{Network access and membership.} None of the examined models records a driver's network membership. Existing data identifies a station's network, leaving the driver to determine whether it can be used for payment. EVKG, for example, specifies the network directly in the query rather than storing driver memberships~\cite{evkg}. PluggedIn therefore connects \texttt{Driver} to \texttt{Network} through \texttt{MemberOf}, while \texttt{AcceptsGuestPayment} represents whether drivers without network membership can pay at the station.
 
-\textbf{Operating and organizational information.} Several public models store operating hours as free text or mix them with other values, limiting structured queries. PluggedIn therefore separates \texttt{OperatingPeriod} from \texttt{Station}, with \texttt{Day}, \texttt{OpenTime}, and \texttt{CloseTime}. This supports queries for stations with restricted hours, including 77 with explicit numeric schedules in our BC data, of which 21 indicate weekday-only operation and 8 indicate overnight-only operation(5 of them open 24 hours at weekend)~\cite{ocm}. Organizational information also varies across models. PluggedIn distinguishes \texttt{OwnedBy}, \texttt{OperatedBy}, and \texttt{ServedBy}, and uses an ISA structure for \texttt{Organization}, allowing an organization to be stored once while playing multiple roles.
+\textbf{Operating and organizational information.} Several public models store operating hours as free text or mix them with other values, limiting structured queries. PluggedIn therefore separates \texttt{OperatingPeriod} from \texttt{Station}, with \texttt{Day}, \texttt{OpenTime}, and \texttt{CloseTime}. This supports queries for stations with restricted hours, including 77 with explicit numeric schedules in our BC data, of which 21 indicate weekday-only operation and 8 indicate overnight-only operation (5 of which are open 24 hours on weekends)~\cite{ocm}. Organizational information also varies across models. PluggedIn distinguishes \texttt{OwnedBy}, \texttt{OperatedBy}, and \texttt{ServedBy}, and uses an ISA structure for \texttt{Organization}, allowing an organization to be stored once while playing multiple roles.
 
 Since the final goal is a knowledge graph, the ERD was designed with semantic representation in mind. \texttt{ConnectorType} is modeled as an entity so that differently named connectors across sources can share one \texttt{ConnectorType}, while relationships are named as verbs that can later serve as triple predicates. Relationships with attributes, such as \texttt{MemberOf}, can later be represented through a separate \texttt{Membership} node.
 
