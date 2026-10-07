@@ -5,6 +5,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{float} % [H]: table right below the heading
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
 \usetikzlibrary{positioning}
 \pagestyle{fancy} % removes running headers
 \settopmatter{printacmref=false} % Removes citation information below abstract
@@ -70,7 +72,7 @@ EV charging usability depends on multiple factors, including connector compatibi
 % ===============================================================
 \section{Introduction}
 % ===============================================================
-Reliable EV charging requires more than simply locating a charging station. Whether a specific vehicle can use a facility depends on factors such as connector compatibility, operating hours, access restrictions, network and payment conditions, and vehicle-specific suitability~\cite{evkg}. 
+Reliable EV charging requires more than simply locating a charging station. Whether a specific vehicle can use a facility depends on factors such as connector compatibility, operating hours, access restrictions, network and payment conditions, and vehicle-specific suitability~\cite{evkg}.
 
 Existing EV charging information representations model these factors using different structures and for different purposes~\cite{evca}. Therefore, this project investigates and compares how existing EV charging data and models represent and connect such information. Based on the characteristics and differences identified through this comparison, we design the PluggedIn conceptual data model to integrate the information needed to determine the practical usability of charging facilities for specific vehicles.
 % ===============================================================
@@ -97,11 +99,11 @@ Semantic Knowledge Representations connect EV-related information through semant
   sub/.style={rectangle, draw, rounded corners, text width=2.0cm, align=center, fill=white, font=\footnotesize}
 ]
   \node[main] (root) {EV Charging Information Representations};
-  
+
   \node[main, below=of root, xshift=-2.2cm, text width=2.0cm] (cat1) {1. Infrastructure Data};
   \node[main, below=of root, xshift=0cm, text width=2.0cm] (cat2) {2. Protocols};
   \node[main, below=of root, xshift=2.2cm, text width=2.0cm] (cat3) {3. Semantic Models};
-  
+
   \draw[->] (root.south) -- (cat1.north);
   \draw[->] (root.south) -- (cat2.north);
   \draw[->] (root.south) -- (cat3.north);
@@ -137,18 +139,17 @@ The NLR dataset is the official list of alternative-fuel stations operated by th
     \textbf{Model} & \textbf{Key entities} & \textbf{Strengths} & \textbf{Limitations} \\
     \midrule
     NLR & Station (flat record) & National, open; coded access and vehicle class & Hours as free text; one network field \\
-    OCM & POI, Connection, Operator & Per-connector type, power, quantity & Hours in free text; 83\% from the U.S. Department of Energy dataset; 19\% no operator \\
-    OSM & Tagged node & Keys for owner, operator, network, hours & Keys rarely filled (owner 0\%) \\
+    OCM & POI, Connection, Operator & Per-connector type, power, quantity & Hours in free text; 82\% AFDC-sourced; 19\% missing or unknown operator~\cite{ocm} \\
+    OSM & Tagged node or way & Keys for owner, operator, network, hours & Keys rarely filled (owner 0\%)~\cite{osm_data} \\
     OCPI & Location, EVSE, Connector & Structured hours, parking, roles & Not public (B2B only) \\
     EVKG & Station, Network, ConnectorType & Vehicle--connector matching & Hours as string; no adapters or membership \\
     EVCA & Station, Neighbourhood, Trip & Links charging to mobility data & No hours or access; operator only \\
     \bottomrule
   \end{tabularx}
 \end{table}
+Open Charge Map (OCM) is a crowdsourced charging station platform~\cite{ocm}. It records connector type, power, and quantity separately under each station (POI); about 20\% of BC records have two or more connector types~\cite{ocm}.\footnote{From our analysis of BC extracts retrieved on 5~October~2026: 2,687 OCM stations (OCM API) and 885 OSM stations (Overpass API)~\cite{ocm,osm_data}.} However, operating hours are free text, organizations use a single operator field, and 82\% of BC records identify AFDC as their data provider~\cite{ocm}. Its separation of connectors from stations can inform our model.
 
-Open Charge Map (OCM) is a crowdsourced charging station platform~\cite{ocm}. It records connector type, power, and quantity separately under each station (POI); about 20\% of BC stations have two or more connector types.\footnote{From our analysis of BC extracts retrieved on 5~October~2026: 2,646 OCM stations (OCM API) and 885 OSM stations (Overpass API).} However, operating hours are free text, organizations use a single operator field, and 83\% of BC records come from NLR. Its separation of connectors from stations can inform our model.
-
-OpenStreetMap (OSM) provides keys for owner, operator, network, operating hours, and truck access~\cite{osm}, but their use is not enforced. In BC, the owner key was never used, while network, connector, and operating-hours keys were filled for 22\% or less~\cite{osm}. This illustrates the gap between expressible structure and actual data.
+OpenStreetMap (OSM) provides keys for owner, operator, network, operating hours, and truck access~\cite{osm}, but they are optional. In our BC extract, the owner key was unused, while network, connector, and operating-hours keys were filled under 22\%~\cite{osm_data}. This illustrates the gap between expressible structure and actual data.
 
 OCPI structures day-of-week operating hours, permitted parking vehicle types, and owner/operator roles within a Location--EVSE--Connector hierarchy~\cite{ocpi}, coming closest to answering our questions. However, its data is exchanged between participating businesses rather than provided as public infrastructure data. Its hierarchy and structured hours can inform our model.
 
@@ -156,24 +157,24 @@ EVKG is a policy-oriented knowledge graph that links electric vehicle adoption, 
 
 EVCA is an urban-planning ontology linking charging stations, neighbourhoods, and travel data~\cite{evca}. It supports aggregations such as stations per neighbourhood, but does not represent operating hours, access conditions, or vehicle compatibility. Its conversion of OCM data to RDF can guide later stages of our project.
 
-\section{Entity-Relationship Diagram and Project Positioning}
-The comparison of existing representations shows that information needed to determine the practical usability of a charging facility is distributed across models with different structures and purposes. PluggedIn therefore centers its conceptual model on whether a specific vehicle can use a charging facility under specific conditions. It integrates vehicle–connector compatibility with operating and access conditions, vehicle suitability, and network information, while addressing several gaps identified in the examined models.
 
-\textbf{Adapter-mediated compatibility.} None of the six models examined represents which adapters are compatible with which connectors. This is relevant as CCS1 and NACS connectors coexist in North America, allowing otherwise incompatible vehicles and chargers to connect through adapters. However, this judgment is often left to the driver; in more than 20 BC records in OCM~\cite{ocm}, adapter requirements remain only as free text, while EVKG represents only direct compatibility~\cite{evkg}. PluggedIn therefore introduces an \texttt{Adapter} entity connected to \texttt{ConnectorType} through directional \texttt{ConvertsFrom} and \texttt{ConvertsTo} relationships, with \texttt{MaxPowerKW} representing its power constraint.
+\section{Entity-Relationship Diagram and Project Positioning}
+The comparison of existing representations shows that information needed to determine the practical usability of a charging facility is distributed across models with different structures and purposes. PluggedIn therefore centers its conceptual model on whether a specific vehicle can use a charging facility under specific conditions. It integrates vehicle--connector compatibility with operating and access conditions, vehicle suitability, and network information, while addressing several gaps identified in the examined models.
+
+\textbf{Adapter-mediated compatibility.} None of the six models examined represents which adapters are compatible with which connectors. This is relevant as CCS1 and NACS connectors coexist in North America, allowing otherwise incompatible vehicles and chargers to connect through adapters. However, this judgment is often left to the driver; in 21 BC records in our OCM extract~\cite{ocm}, advice to check adapter requirements is provided as free text, while EVKG represents only direct compatibility~\cite{evkg}. PluggedIn therefore introduces an \texttt{Adapter} entity connected to \texttt{ConnectorType} through directional \texttt{ConvertsFrom} and \texttt{ConvertsTo} relationships, with \texttt{MaxPowerKW} representing its power constraint.
 
 \textbf{Network access and membership.} None of the examined models records a driver's network membership. Existing data identifies a station's network, leaving the driver to determine whether it can be used for payment. EVKG, for example, specifies the network directly in the query rather than storing driver memberships~\cite{evkg}. PluggedIn therefore connects \texttt{Driver} to \texttt{Network} through \texttt{MemberOf}, while \texttt{AcceptsGuestPayment} represents whether drivers without network membership can pay at the station.
 
-\textbf{Operating and organizational information.} Several public models store operating hours as free text or mix them with other values, limiting structured queries. PluggedIn therefore separates \texttt{OperatingPeriod} from \texttt{Station}, with \texttt{Day}, \texttt{OpenTime}, and \texttt{CloseTime}. This supports queries for stations with restricted hours, including 77 in our BC data, of which 45 open only on weekdays and 7 only at night. Organizational information also varies across models. PluggedIn distinguishes \texttt{OwnedBy}, \texttt{OperatedBy}, and \texttt{ServedBy}, and uses an ISA structure for \texttt{Organization}, allowing an organization to be stored once while playing multiple roles.
+\textbf{Operating and organizational information.} Several public models store operating hours as free text or mix them with other values, limiting structured queries. PluggedIn therefore separates \texttt{OperatingPeriod} from \texttt{Station}, with \texttt{Day}, \texttt{OpenTime}, and \texttt{CloseTime}. This supports queries for stations with restricted hours, including 77 with explicit numeric schedules in our BC data, of which 21 indicate weekday-only operation and 8 indicate overnight-only operation(5 of them open 24 hours at weekend)~\cite{ocm}. Organizational information also varies across models. PluggedIn distinguishes \texttt{OwnedBy}, \texttt{OperatedBy}, and \texttt{ServedBy}, and uses an ISA structure for \texttt{Organization}, allowing an organization to be stored once while playing multiple roles.
 
 Since the final goal is a knowledge graph, the ERD was designed with semantic representation in mind. \texttt{ConnectorType} is modeled as an entity so that differently named connectors across sources can share one \texttt{ConnectorType}, while relationships are named as verbs that can later serve as triple predicates. Relationships with attributes, such as \texttt{MemberOf}, can later be represented through a separate \texttt{Membership} node.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{bibliography.bib}
-%\newpage
-% \begin{figure*}
-%     \centering
-% \includegraphics[]{figures/
-% .pdf}
-%   \caption{The draft version of our project's ER diagram.}
-% \end{figure*}
+\begin{figure*}[p]
+  \centering
+  \includegraphics[width=\textwidth]{pluggedin_erd_portrait.pdf}
+  \caption{The draft version of our project's ER diagram.}
+  \label{fig:erd}
+\end{figure*}
 \end{document}
