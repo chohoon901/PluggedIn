@@ -183,19 +183,20 @@ Since the final goal is a knowledge graph, the ERD was designed with semantic re
 
 \clearpage
 \appendix
-\section{Original Draft: Abstract}
+\section{Appendix: Original Draft Before AI-Assisted Editing}
+\subsection{Abstract}
 
 EV charging usability depends on multiple factors, including connector compatibility, operating hours, access conditions, and network information. This project compares existing charging infrastructure data, interoperability protocols, and semantic models to identify differences and gaps in how these factors are represented. Based on this comparison, we design PluggedIn, a data model centered on vehicle-specific practical usability. PluggedIn integrates these factors while explicitly representing adapter compatibility, driver network membership, and structured operating periods, providing a foundation for future knowledge graph representation. The project repository, data models, and related artifacts are available at https://github.com/chohoon901/PluggedIn
 
 
-\section{Original Draft: Introduction}
+\subsection{Introduction}
 
 Reliable EV charging requires more than simply locating a charging station. Whether a specific vehicle can use a facility depends on factors such as connector compatibility, operating hours, access restrictions, network and payment conditions, and vehicle-specific suitability.
 
 Existing EV charging information representations model these factors using different structures and for different purposes. Therefore, this project investigates and compares how existing EV charging data and models represent and connect such information. Based on the characteristics and differences identified through this comparison, we design the PluggedIn conceptual data model to integrate the information needed to determine the practical usability of charging facilities for specific vehicles.
 
 
-\subsection{Original Draft: History}
+\subsection{History}
 
 How we track fuel and energy infrastructure has changed a lot with transportation over time. Long before computer networks, finding fuel meant using analog things like paper maps, travel directories, and local books. Back then, travelers had to manually check separate, static records just to find a place to stop.
 
@@ -203,7 +204,7 @@ Later, as computers got better, data moved into relational databases. Public and
 
 Still, because these platforms were built separately, they ended up with messy schemas, different naming styles, and lots of free text. This is why we are moving toward semantic web tech and knowledge graphs today: they help connect vehicle specs, connector types, and access rules into one machine-readable system.
 
-\subsection{Original Draft: Hierarchy of Existing Representations}
+\subsection{Hierarchy of Existing Representations}
 
 Existing systems for representing EV charging information do not exist in a single form; they consist of various forms such as data, protocols, and knowledge graphs. Although these representations address the same EV charging domain, they structure the information differently depending on their primary purpose and modeling perspective. In this project, the investigated existing representations were classified into three categories based on these differences: (1) representation of charging infrastructure, (2) information exchange and interoperability protocols, and (3) meaning-based knowledge representation.
 
@@ -213,7 +214,7 @@ The second category, Interoperability Protocols, includes OCPI and OICP. Their p
 
 The third category, Semantic Knowledge Representations, includes EVKG and EVCA. They focus not merely on storing or exchanging information related to EV charging, but on explicitly expressing and linking the meanings of different concepts and relationships. EVKG connects various concepts such as EVs, charging infrastructure, and connectors through ontology and knowledge graphs, while EVCA focuses on meaningfully integrating previously isolated EV charging-related data silos based on ontology. Although the two models differ in specific scope and approach, they share the common feature of providing machine-interpretable and interoperable representations by linking EV charging information through semantic relationships. These classifications show that EV charging information has been modeled according to different purposes and perspectives: representing actual infrastructure data, facilitating information exchange between systems, and expressing meaning-based knowledge.
 
-\section{Original Draft: Comparative analysis}
+\subsection{Comparative analysis}
 
 The NLR dataset is the official list of alternative-fuel charging and fuelling stations operated by the U.S. Department of Energy. It stores each station as a single record, with the network as a single string field and operating hours as free text. As a result, access restrictions and vehicle class can be determined from codes, but it is difficult to determine whether a station is open at a given time, which account can be used for payment, or whether a port fits the vehicle. It is the origin of Canadian charging station data, and its approach of encoding access restrictions and vehicle class as codes can be a reference for our project.
 
@@ -228,7 +229,7 @@ EVKG is a policy-oriented knowledge graph that links electric vehicle adoption, 
 EVCA is an urban-planning ontology that links charging station, neighbourhood, and travel data in Eindhoven. It is designed for aggregations such as the number of charging stations per neighbourhood or per operator. Because it has no operating hours, access conditions, or vehicle compatibility, it cannot answer whether an individual station can be used now. Its process of converting OCM data into RDF can be a reference for later stages of our project.
 
 
-\section{Entity-Relationship Diagram And Project Positioning}
+\subsection{Entity-Relationship Diagram And Project Positioning}
 
 Public models have a weak structure, industry standards are not public, and adapter compatibility and driver membership are not found anywhere. Therefore, the key strength of our ERD is that it is open source and multi-source, combining the strengths of the existing models.
 
