@@ -178,4 +178,62 @@ Since the final goal is a knowledge graph, the ERD was designed with semantic re
   \caption{The draft version of our project's ER diagram.}
   \label{fig:erd}
 \end{figure*}
+
+
+
+\clearpage
+\appendix
+\section{Original Draft: Abstract}
+
+EV charging usability depends on multiple factors, including connector compatibility, operating hours, access conditions, and network information. This project compares existing charging infrastructure data, interoperability protocols, and semantic models to identify differences and gaps in how these factors are represented. Based on this comparison, we design PluggedIn, a data model centered on vehicle-specific practical usability. PluggedIn integrates these factors while explicitly representing adapter compatibility, driver network membership, and structured operating periods, providing a foundation for future knowledge graph representation. The project repository, data models, and related artifacts are available at https://github.com/chohoon901/PluggedIn
+
+
+\section{Original Draft: Introduction}
+
+Reliable EV charging requires more than simply locating a charging station. Whether a specific vehicle can use a facility depends on factors such as connector compatibility, operating hours, access restrictions, network and payment conditions, and vehicle-specific suitability.
+
+Existing EV charging information representations model these factors using different structures and for different purposes. Therefore, this project investigates and compares how existing EV charging data and models represent and connect such information. Based on the characteristics and differences identified through this comparison, we design the PluggedIn conceptual data model to integrate the information needed to determine the practical usability of charging facilities for specific vehicles.
+
+
+\subsection{Original Draft: History}
+
+How we track fuel and energy infrastructure has changed a lot with transportation over time. Long before computer networks, finding fuel meant using analog things like paper maps, travel directories, and local books. Back then, travelers had to manually check separate, static records just to find a place to stop.
+
+Later, as computers got better, data moved into relational databases. Public and private groups started putting station coordinates and grid info into digital tables, but these databases usually stayed locked inside separate company systems. When the internet and web apps came along, APIs—like the Alternative Fuels Data Center (AFDC)—finally made station data available online.
+
+Still, because these platforms were built separately, they ended up with messy schemas, different naming styles, and lots of free text. This is why we are moving toward semantic web tech and knowledge graphs today: they help connect vehicle specs, connector types, and access rules into one machine-readable system.
+
+\subsection{Original Draft: Hierarchy of Existing Representations}
+
+Existing systems for representing EV charging information do not exist in a single form; they consist of various forms such as data, protocols, and knowledge graphs. Although these representations address the same EV charging domain, they structure the information differently depending on their primary purpose and modeling perspective. In this project, the investigated existing representations were classified into three categories based on these differences: (1) representation of charging infrastructure, (2) information exchange and interoperability protocols, and (3) meaning-based knowledge representation.
+
+The first category, Charging Infrastructure Data Representations, includes the NLR AFDC API, OCM, and OSM. They focus on recording and providing data related to real-world charging facilities and their information. The NLR AFDC API provides structured information on alternative fuel and EV charging stations in the United States, while OCM offers publicly collected data such as charging POIs, connections, operators, and usage in the form of a database and APIs. OSM represents charging facilities as geographic features in the real world and uses tags to indicate their associated attributes. While they all share the commonality of representing charging infrastructure as data, the modeling approaches differ in that NLR and OCM provide charging facility information as structured records, whereas OSM uses geographic objects and tags.
+
+The second category, Interoperability Protocols, includes OCPI and OICP. Their primary goal is not merely to store and provide charging information, but to standardize and exchange information among different charging actors and systems. OCPI is a protocol for exchanging charging information between entities such as CPOs and eMSPs, while OICP supports eRoaming and related information exchange between CPOs and EMPs. Both protocols also describe charging infrastructure in detail, but unlike NLR, OCM, and OSM, their primary purpose is to support information exchange and interoperability among different systems and operators.
+
+The third category, Semantic Knowledge Representations, includes EVKG and EVCA. They focus not merely on storing or exchanging information related to EV charging, but on explicitly expressing and linking the meanings of different concepts and relationships. EVKG connects various concepts such as EVs, charging infrastructure, and connectors through ontology and knowledge graphs, while EVCA focuses on meaningfully integrating previously isolated EV charging-related data silos based on ontology. Although the two models differ in specific scope and approach, they share the common feature of providing machine-interpretable and interoperable representations by linking EV charging information through semantic relationships. These classifications show that EV charging information has been modeled according to different purposes and perspectives: representing actual infrastructure data, facilitating information exchange between systems, and expressing meaning-based knowledge.
+
+\section{Original Draft: Comparative analysis}
+
+The NLR dataset is the official list of alternative-fuel charging and fuelling stations operated by the U.S. Department of Energy. It stores each station as a single record, with the network as a single string field and operating hours as free text. As a result, access restrictions and vehicle class can be determined from codes, but it is difficult to determine whether a station is open at a given time, which account can be used for payment, or whether a port fits the vehicle. It is the origin of Canadian charging station data, and its approach of encoding access restrictions and vehicle class as codes can be a reference for our project.
+
+Open Charge Map (OCM) is a crowdsourced charging station platform. This dataset records the type, power, and quantity of each connector separately under each station (POI), which shows that about 20\% of BC stations have two or more connector types. However, operating hours are mixed into free text, organizations are represented by a single operator field, and 83\% of BC records come from the U.S. Department of Energy dataset, so they inherit its limitations. Its structure of separating connectors from stations is a direct reference for our project.
+
+OpenStreetMap (OSM) provides keys for owner, operator, network, operating hours, and truck access in its schema, but none of these keys is enforced; among 885 stations in BC, the owner key was never used, and the network, connector, and operating-hours keys were filled for 22\% or less. In other words, it shows the gap between the structure that can be expressed and the data that is actually expressed.
+
+OCPI is a roaming protocol between businesses that structures day-of-week operating hours, permitted parking vehicle types, and owners and operators within a location–EVSE–connector hierarchy, and among the compared models it comes closest to answering our questions. However, this data is exchanged only between contracted businesses and is not public, so the necessary structure exists in industry but not in public data. Its three-level hierarchy and day-of-week operating-hours structure can be a reference for our project.
+
+EVKG is a policy-oriented knowledge graph that links electric vehicle adoption, charging infrastructure, and the power grid in the United States. By representing direct vehicle–connector compatibility, it serves as the starting point for our model. However, it does not represent adapter-mediated compatibility or a driver's network membership, and its operating hours are strings and therefore not machine-readable.
+
+EVCA is an urban-planning ontology that links charging station, neighbourhood, and travel data in Eindhoven. It is designed for aggregations such as the number of charging stations per neighbourhood or per operator. Because it has no operating hours, access conditions, or vehicle compatibility, it cannot answer whether an individual station can be used now. Its process of converting OCM data into RDF can be a reference for later stages of our project.
+
+
+\section{Entity-Relationship Diagram And Project Positioning}
+
+Public models have a weak structure, industry standards are not public, and adapter compatibility and driver membership are not found anywhere. Therefore, the key strength of our ERD is that it is open source and multi-source, combining the strengths of the existing models.
+
+First, none of the six models above shows which adapter is compatible with which connector. To solve this problem, we made an Adapter entity and connected it to the ConnectorType entity, so that it can be linked to Port and Vehicle. Because of this, after converting it into a knowledge graph, we can answer the question "Can this vehicle charge at a port of this charging station?" in an extended way. Second, whether a driver has joined a certain network also could not be found in the models above. By connecting the Driver entity and the Organization.Network entity, we made it possible to answer the question "Can I pay at that charging station?". Besides these, we can find other gaps of our own project, and free-text operating hours is one of them. Most of the models above store operating hours as free text, and sometimes values that are not operating hours are mixed in, so a machine cannot read them. For this, we separated the OperatingHour entity from the Station entity, and because of this, not only the case where a station is open 24 hours but also the case where it is open only at certain times, where a driver is more likely to make a wasted trip, can be used in queries. The Port entity is also a similar text parsing case. We checked that in the NLR dataset, ports were attached to the Station entity. This can cause a data duplication problem, because in the existing dataset we found that more than 20\% of Ports have two or more values. As a similar problem, in most models the owner, operator, and network of a charging station were grouped as an array in one field, or only one field was used. To solve this, we also applied an ISA structure to the Organization entity and separated it into owner, operator, and network, so that we prevent the case where many values are stored with duplication in one entity, and the case where many values are stored in one field as free text or a list.
+
+Since the final goal of this project is not to finish with just making an ERD but to make a knowledge graph, we kept thinking about how the knowledge graph should be made while designing the ERD as well. We made ConnectorType an entity so that we can check whether connectors with different names from different sources are the same, and we named relationships as verbs so that they are easy to use as the verbs of triples. For relationships that have attributes like MemberOf, we plan to put Membership as a separate node to express those attributes.
+
 \end{document}
