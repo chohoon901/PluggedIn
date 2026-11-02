@@ -38,7 +38,7 @@ def test_nlr_access_and_truck_clearance(vehicle, maximum, expected):
 def test_all_entities_and_enums_live_in_the_requested_packages():
     base = 'ca.uvic.ecs.csc501.cmn.'
     for name in ('organization','site_owner','operator','network','station','connector_type',
-                 'port','operating_period','vehicle','vehicle_accepts','driver','membership'):
+                 'port','operating_period','adapter','vehicle','vehicle_accepts','driver','membership'):
         assert import_module(base+'domain.'+name)
     assert import_module(base+'enums.connector_family').ConnectorFamily.from_name('J1772COMBO').value == 'CCS1'
     assert import_module(base+'enums.evaluation').CheckStatus.PASS.value == 'PASS'

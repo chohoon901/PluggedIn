@@ -88,6 +88,17 @@ class DomainTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             Port(None, 1, 0, 1)
 
+    def test_adapter_domain_preserves_schema_fields_and_validation(self):
+        Adapter = self.module('adapter').Adapter
+        value = Adapter(None, 'Reference model', None, Decimal('100'), 1, 2)
+        self.assertEqual(value.from_connector_type_id, 1)
+        self.assertEqual(value.to_connector_type_id, 2)
+        for model, power, from_id, to_id in ((' ', None, 1, 2),
+                ('Model', None, 1, 1), ('Model', None, None, 2), ('Model', Decimal('-1'), 1, 2)):
+            with self.subTest(model=model, power=power, from_id=from_id, to_id=to_id):
+                with self.assertRaises(ValueError):
+                    Adapter(None, model, None, power, from_id, to_id)
+
     def test_repository_protocols_import_without_executing_database_code(self):
         module = self.module('contracts.repositories')
         self.assertTrue(module.UnitOfWork._is_protocol)

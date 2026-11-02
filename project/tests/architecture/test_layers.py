@@ -32,9 +32,6 @@ def test_current_domain_entities_match_the_13_table_65_column_schema():
     assert len(Base.metadata.tables) == 13
     assert sum(len(table.columns) for table in Base.metadata.tables.values()) == 65
     for table_name in TABLES:
-        if table_name == 'adapter':
-            # The user's 3f331c9 commit removed this domain entity, retaining its ORM/table.
-            continue
         module = import_module(f"ca.uvic.ecs.csc501.cmn.domain.{table_name}")
         cls = getattr(module, "".join(part.title() for part in table_name.split("_")))
         names = {field.name for field in fields(cls)}

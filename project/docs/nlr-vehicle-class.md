@@ -16,13 +16,13 @@ Both JSON and SSR vehicle CRUD accept NLR codes. Evaluation evidence includes th
 
 ## Layout
 
-- `cmn/domain/`: the 12 domain entities present at the start of this change, plus entity validation.
+- `cmn/domain/`: all 13 schema-preserving domain entities, plus entity validation.
 - `cmn/domain/value_objects/`: Location and DailyTime.
 - `cmn/enums/`: ConnectorFamily, VehicleClass, CheckStatus, OverallStatus and ReasonCode.
 - `cmn/contracts/`: snapshots, repository contracts, errors and evaluation result dataclasses. Evaluation enums are re-exported from their former contract module for compatibility, but defined only in enums.
 - `cmn/application/` and `cmn/services/`: use cases and pure evaluation logic.
 
-Prior user commit 3f331c9 removed the Adapter domain class. This change preserves that removal; the adapter ORM/table and 13-table/65-column schema are unchanged. All application imports and architecture tests use the new packages.
+Commit 3f331c9 removed the Adapter domain class. The initial package reorganization incorrectly preserved that omission and exempted it from architecture validation. Adapter is now restored under cmn/domain, as required by the development plan. All 13 domain entities are checked against the unchanged 13-table/65-column schema; adapter remains an inactive reference, with no ownership or conversion feature.
 
 ## Existing data
 
