@@ -1,5 +1,9 @@
 \documentclass[sigconf,screen,nonacm]{acmart}
 \usepackage{booktabs}
+\usepackage{graphicx}
+
+% Keep the screenshots within the column and full-page text widths.
+\graphicspath{{./}}
 
 % Entfernt den ACM Reference Block und die Zeilennummern (falls vorhanden)
 \settopmatter{printacmref=false, printccs=false, printfolios=false}
@@ -47,6 +51,26 @@ Our database must answer critical operational questions: \textit{``Can a specifi
 \subsection{Ports, Operating Periods, and Adapter Relations}
 \textbf{OperatingPeriod} records temporal availability by isolating opening and closing times per day, replacing unstructured free-text hours. \textbf{Port} records target-specific outlets and references one station, capturing current types, power capacities, and quantities. \textbf{ConnectorType} standardizes plug nomenclature across disparate sources. To solve real-world connector mismatches, \textbf{Adapter} records hardware specifications, while \textbf{AdapterCompatibility} links adapters to plug-side and inter-side connector types.
 
+% Figure 2 appears on page 1, before Figure 1 on page 2.
+% Set the displayed numbers explicitly to preserve the requested numbering.
+\setcounter{figure}{1}
+\begin{figure}[!b]
+    \centering
+    \includegraphics[width=\columnwidth]{figure2-search-results.png}
+    \caption{PluggedIn search results with station evaluations and a map.}
+    \label{fig:search-results}
+\end{figure}
+
+\setcounter{figure}{0}
+\begin{figure*}[!t]
+    \centering
+    % The source image already has a printed caption. Trim that caption only.
+    \includegraphics[width=\textwidth]{figure1-architecture-compact.jpg}
+    \caption{An overview of the PluggedIn system architecture. Coloured components are the system's main contributions.}
+    \label{fig:architecture}
+\end{figure*}
+\setcounter{figure}{2}
+
 \subsection{Vehicles, Drivers, and Membership Relations}
 \textbf{Vehicle} stores specifications including VIN, licence plate, make, model, class, range, and maximum charging power. \textbf{Driver} captures user details and commercial carrier affiliations. The many-to-many relationship between vehicles and supported connectors becomes \textbf{VehicleConnector}. Similarly, the many-to-many relationship linking drivers to charging networks becomes \textbf{MemberOf}, capturing validity start/end dates and associated payment methods with a unique pair of foreign keys.
 
@@ -58,13 +82,14 @@ Mapping assumptions. Organizations, stations, vehicles, and drivers may exist be
 \subsection{Creating and Populating Relations}
 The PluggedIn relational database is implemented in SQLite with 13 tables representing charging stations, vehicles, drivers, organizations, and their relationships. The schema defines primary keys, foreign keys, uniqueness constraints, and domain checks. Foreign-key enforcement is enabled using \texttt{PRAGMA foreign\_keys = ON}.
 
-Listing~\ref{lst:port} For example, consider the \textbf{Port} relation, which represents the charging ports belonging to a station. The following SQL statement creates the relation:
+For example, consider the \textbf{Port} relation, which represents the charging ports belonging to a station. The following SQL statement creates the relation:
 
 \begin{verbatim}
 CREATE TABLE port (
     port_id INTEGER PRIMARY KEY,
     station_id INTEGER NOT NULL
-        REFERENCES station(station_id) ON DELETE CASCADE,
+        REFERENCES station(station_id)
+        ON DELETE CASCADE,
     number SMALLINT NOT NULL CHECK(number > 0),
     connector_type_id INTEGER NOT NULL
         REFERENCES connector_type(connector_type_id),
@@ -138,21 +163,21 @@ The \texttt{WHERE} clause ensures that only the specified port is modified. Fore
 
 \section{Architecture and User Interface}
 
-PluggedIn is a server-rendered FastAPI application using local SQLite. The presentation (\texttt{pl}), domain (\texttt{cmn}), and data (\texttt{dal}) layers are wired together in \texttt{main.py}; architecture tests check for prohibited imports between layers. Driver, vehicle, and membership CRUD operations, station searches, and station detail pages work without JavaScript, with the map provided as an auxiliary feature.
+PluggedIn is a server-rendered FastAPI application using local SQLite. The presentation (\texttt{pl}), domain (\texttt{cmn}), and data access (\texttt{dal}) layers are connected in \texttt{main.py}. CRUD operations for drivers, vehicles, and memberships, station searches, and detail pages work without JavaScript. An external API supplies the map.
 
-The \texttt{cmn} layer validates input and rates opening hours, access conditions, connectors, and payment conditions as \textbf{Pass/Fail/Unknown}, producing an overall result of \textbf{Available/Unavailable/Needs Review}. The \texttt{dal} layer uses SQLAlchemy ORM and bound parameters, while a unit of work per use case commits or rolls back its database changes together. Successful form saves redirect with HTTP 303; invalid input returns an HTML form with HTTP 400 while preserving entered values. The API returns HTTP 409 for duplicate keys. Updates preserve existing row IDs, so membership references remain intact after driver updates.
+The \texttt{cmn} layer validates input and evaluates opening hours, access, connector compatibility, and payment as \textbf{Pass/Fail/Unknown}, producing an overall \textbf{Available/Unavailable/Needs Review} result. The \texttt{dal} layer uses SQLAlchemy ORM and bound parameters; a unit of work per use case commits or rolls back related database changes together. Successful form submissions redirect with HTTP 303; invalid submissions return an HTML form with HTTP 400, preserving all submitted values. API duplicate-key errors return HTTP 409.
 
 \section{Reproducibility and Evaluation}
 
-The public repository is \url{https://github.com/chohoon901/PluggedIn}. The DDL in \path{dal/scripts/schema.sql} defines 13 tables and 65 columns, and \path{seed_demo.py} generates synthetic stations A--E. The main queries appear in Section 3, ORM implementations in \path{dal/repositories/}, and execution instructions in \path{README.md}. The application uses Python 3.12 or later, FastAPI 0.162.0, and SQLAlchemy 2.0.55, with no separate database server required.
+The application uses Python 3.12, FastAPI 0.162.0, and SQLAlchemy 2.0.55. \path{dal/scripts/schema.sql} defines 13 tables and 65 columns. Section 3 describes the main queries; \path{dal/repositories/} contains ORM implementations, and \path{README.md} provides setup instructions.
 
-In a virtual environment, install the dependencies in \path{requirements-dev.txt} and the project, run \texttt{init\_db}, \texttt{seed\_demo}, and \texttt{validate\_db}, then start the server with uvicorn. Every database connection applies \texttt{PRAGMA foreign\_keys=ON}. UNIQUE constraints reject duplicate driving licence numbers, VINs, and station coordinates. Foreign key constraints reject invalid references and deletion of connector types in use, while \texttt{station.network\_id} allows NULL. When network deletion is permitted, memberships are also deleted through cascading deletion; referencing stations may prevent the deletion.
+In a virtual environment, install the dependencies from \path{requirements-dev.txt} and the project, run \texttt{init\_db}, \texttt{seed\_demo}, and \texttt{validate\_db}, then start uvicorn. UNIQUE constraints reject duplicate driver licence numbers, VINs, and station coordinates. Foreign keys reject invalid references and deletion of connector types in use. Station fields \texttt{network\_id}, \texttt{owner\_id}, and \texttt{operator\_id} allow NULL. Deleting a network cascades to memberships, but referencing stations may prevent deletion.
 
-According to the repository's validation records, all 170 tests, including browser tests, and 91 subchecks passed on 27 October 2026. The team-authored PluggedIn source code is distributed under the MIT License. The bundled Leaflet 1.9.4 is covered by a separate BSD 2-Clause license, whose full text is included in the repository.
+The repository records 170 passing tests, including browser tests, and 91 subtests on 27 October 2026. Team-authored code uses the MIT License; bundled Leaflet 1.9.4 uses BSD 2-Clause, with its full license text included in the repository.
 
 \noindent\textbf{Contributions.} Sunghun Cho: [TODO]; Jungwon Youn: [TODO]; Elias Dockal: [TODO].
 
-\noindent\textbf{AI assistance.} OpenAI Codex implemented the application from our development plan using a test-first approach. Subsequent review identified integer overflow, metadata exceptions, and mobile layout issues, which were reproduced with failing tests and fixed. We cross-checked the test and integrity-check results. Sections 4--5 were drafted by a human and then revised and proofread with assistance from Cursor AI.
+\noindent\textbf{AI assistance.} OpenAI Codex followed the development plan using a test-first approach. Review identified integer overflow, metadata exceptions, and mobile layout issues, reproduced with failing tests and fixed.
 
 
 \onecolumn
@@ -182,7 +207,7 @@ PK/FK: organization\_id references organization.organization\_id, mandatory. No 
 PK/FK: organization\_id references organization.organization\_id, mandatory. No additional CK.
 
 \item \textbf{station} (\underline{station\_id}, latitude, longitude, name, street, city, province, status, access\_restriction, accepts\_guest\_payment, max\_vehicle\_class, has\_truck\_parking, owner\_id, operator\_id, network\_id).\\
-CK: \{latitude, longitude\}. Latitude is between -90 and 90, and longitude between -180 and 180. FK: owner\_id references site\_owner.organization\_id and operator\_id references operator.organization\_id, both mandatory; network\_id references network.organization\_id, optional. Accepts\_guest\_payment and has\_truck\_parking are mandatory Booleans, both defaulting to \texttt{FALSE}.
+CK: \{latitude, longitude\}. Latitude is between -90 and 90, and longitude between -180 and 180. FK: owner\_id references site\_owner.organization\_id and operator\_id references operator.organization\_id, network\_id references network.organization\_id, all optional. Accepts\_guest\_payment and has\_truck\_parking are mandatory Booleans, both defaulting to \texttt{FALSE}.
 
 \item \textbf{connector\_type} (\underline{connector\_type\_id}, name, max\_power\_kw).\\
 CK: \{name\}. Max\_power\_kw must be positive when supplied.
