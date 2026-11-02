@@ -7,4 +7,4 @@ __pycache__/
 test-results/
 playwright-report/
 src/ca/uvic/ecs/csc501/dal/data/*.db*
-
+output/*
