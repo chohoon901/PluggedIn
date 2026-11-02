@@ -1,0 +1,3 @@
+{% extends 'base.html' %}{% from 'macros.html' import errors_summary %}
+{% block title %}Check your request · PluggedIn{% endblock %}
+{% block content %}<section class="error-page"><p class="eyebrow">LET'S CHECK THAT AGAIN</p><span class="error-number">{{ status_code }}</span><h1>{{ message }}</h1>{{ errors_summary(errors) }}<p class="subtle">{{ code }}</p><a class="button" href="/">Back to find charging ↗</a></section>{% endblock %}

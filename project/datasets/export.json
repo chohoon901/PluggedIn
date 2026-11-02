@@ -1,0 +1,2025 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-20T22:05:49Z",
+    "timestamp_areas_base": "2026-09-20T02:36:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "relation",
+      "id": 29269,
+      "tags": {
+        "name": "Pacific Marine Circle Route",
+        "network": "British Columbia Circle Routes",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 326897,
+      "tags": {
+        "distance": "2232",
+        "name": "Alaska Highway",
+        "name:ar": "طريق ألاسكا السريع",
+        "name:es": "Autopista Alaska",
+        "name:fr": "Route de l'Alaska",
+        "name:it": "Autostrada dell'Alaska",
+        "name:lt": "Aliaskos Greitkelis",
+        "name:pnb": "الاسکا ہائی وے",
+        "name:pt": "Estrada do Alasca",
+        "name:uk": "Аляскинське Шосе",
+        "name:ur": "الاسکا ہائی وے",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q628076",
+        "wikipedia": "en:Alaska Highway"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 326933,
+      "tags": {
+        "description": "http://en.wikipedia.org/wiki/British_Columbia_Highway_2",
+        "name": "Highway 2 (BC) (Alberta to Dawson Creek)",
+        "network": "CA:BC",
+        "ref": "2",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417199,
+      "tags": {
+        "is_in:state": "WA",
+        "network": "US:WA",
+        "ref": "543",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/a/a8/WA-543.svg",
+        "type": "route",
+        "wikidata": "Q122928999"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417824,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 91A (BC) (North)",
+        "network": "CA:BC",
+        "ref": "91A",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/8/8f/BC-91A.svg",
+        "type": "route",
+        "wikidata": "Q919027",
+        "wikipedia": "en:British Columbia Highway 91A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417835,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 28 (BC)",
+        "network": "CA:BC",
+        "ref": "28",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918946"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417852,
+      "tags": {
+        "direction": "west",
+        "is_in:state": "BC",
+        "name": "Highway 7B (BC) (West)",
+        "network": "CA:BC",
+        "ref": "7B",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/a/a2/BC-7B.svg",
+        "type": "route",
+        "wikidata": "Q919014",
+        "wikipedia": "en:British Columbia Highway 7B"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417853,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 9 (BC)",
+        "network": "CA:BC",
+        "ref": "9",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417855,
+      "tags": {
+        "from": "Kamloops",
+        "hgv": "designated",
+        "is_in:state": "BC",
+        "name": "Southern Yellowhead Highway",
+        "network": "CA:BC",
+        "ref": "5",
+        "route": "road",
+        "to": "Tête Jaune Cache",
+        "type": "route",
+        "wikidata": "Q919000",
+        "wikipedia": "en:British Columbia Highway 5"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417859,
+      "tags": {
+        "is_in:province": "BC",
+        "name": "Trans-Canada 16 (BC)",
+        "network": "CA:transcanada",
+        "note": "Highway 16",
+        "ref": "16",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/d/d8/BC-16_%28TCH%29.svg",
+        "type": "route",
+        "wikidata": "Q129818",
+        "wikipedia": "en:British Columbia Highway 16"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417860,
+      "tags": {
+        "name": "Highway 37 (BC) (Kitwanga to Yukon)",
+        "network": "CA:BC",
+        "ref": "37",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918976",
+        "wikipedia": "en:British Columbia Highway 37"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417861,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 27 (BC)",
+        "network": "CA:BC",
+        "ref": "27",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 417862,
+      "tags": {
+        "name": "Highway 37 (BC) (Kitimat to Kitwanga)",
+        "network": "CA:BC",
+        "ref": "37",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918976"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 535397,
+      "tags": {
+        "name": "Alaska Route 7",
+        "network": "US:AK",
+        "ref": "7",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q801928"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 946204,
+      "tags": {
+        "alt_name:en": "Chilcotin Highway",
+        "is_in:state": "BC",
+        "name": "Alexander MacKenzie Highway",
+        "network": "CA:BC",
+        "ref": "20",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 951471,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 3A (BC)",
+        "network": "CA:BC",
+        "ref": "3A",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 957227,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 22 (BC)",
+        "network": "CA:BC",
+        "ref": "22",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 958203,
+      "tags": {
+        "direction": "west",
+        "is_in:province": "AB",
+        "name": "Trans-Canada 16 (AB) (West)",
+        "network": "CA:transcanada",
+        "note": "Highway 16",
+        "ref": "16",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Alberta_Highway_16.svg",
+        "type": "route",
+        "wikidata": "Q2639214",
+        "wikipedia": "en:Alberta Highway 16"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 967746,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 95A (BC)",
+        "network": "CA:BC",
+        "ref": "95A",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q919030"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1014435,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 24 (BC)",
+        "network": "CA:BC",
+        "ref": "24",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1120380,
+      "tags": {
+        "direction": "west",
+        "is_in:province": "AB",
+        "name": "Trans-Canada 1 (AB westbound)",
+        "network": "CA:transcanada",
+        "note": "AB portion",
+        "ref": "1",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/7/74/Alberta_Highway_1.svg",
+        "type": "route",
+        "wikidata": "Q1529215",
+        "wikipedia": "en:Alberta Highway 1"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1308252,
+      "tags": {
+        "direction": "west",
+        "is_in:province": "BC",
+        "name": "Trans-Canada 1 (BC westbound: mainland)",
+        "network": "CA:transcanada",
+        "note": "Mainland Portion",
+        "ref": "1",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/b/b4/BC-1_%28TCH%29.svg",
+        "type": "route",
+        "wikidata": "Q918865",
+        "wikipedia": "en:British Columbia Highway 1"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1308318,
+      "tags": {
+        "direction": "north",
+        "is_in:province": "BC",
+        "name": "Trans-Canada 1 (BC northbound: island)",
+        "network": "CA:transcanada",
+        "note": "Portion on Island",
+        "ref": "1",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/b/b4/BC-1_%28TCH%29.svg",
+        "type": "route",
+        "wikidata": "Q918865",
+        "wikipedia": "en:British Columbia Highway 1"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1319513,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 8 (BC)",
+        "network": "CA:BC",
+        "ref": "8",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1322940,
+      "tags": {
+        "description": "US 95 (ID)",
+        "is_in:state": "ID",
+        "network": "US:US",
+        "old_name": "North & South Highway",
+        "ref": "95",
+        "route": "road",
+        "symbol": "http://upload.wikimedia.org/wikipedia/commons/f/fa/US_95.svg",
+        "type": "route",
+        "was:alt_name": "North and South Highway",
+        "wikidata": "Q843302",
+        "wikipedia": "en:U.S. Route 95 in Idaho"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1504670,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 1A (BC) (Chemainus)",
+        "network": "CA:BC",
+        "ref": "1A",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1724877,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 97A (BC)",
+        "network": "CA:BC",
+        "ref": "97A",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q109080143",
+        "wikipedia": "en:British Columbia Highway 97A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1724878,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 97B (BC)",
+        "network": "CA:BC",
+        "ref": "97B",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q109175110",
+        "wikipedia": "en:British Columbia Highway 97B"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3136687,
+      "tags": {
+        "network": "US:WA",
+        "ref": "21",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3143458,
+      "tags": {
+        "network": "US:WA",
+        "ref": "25",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3145035,
+      "tags": {
+        "modifier": "Spur",
+        "name": "State Route 20 Spur",
+        "network": "US:WA:Spur",
+        "ref": "20",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3225354,
+      "tags": {
+        "direction": "east",
+        "is_in:state": "BC",
+        "name": "Highway 7B (BC) (East)",
+        "network": "CA:BC",
+        "ref": "7B",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/a/a2/BC-7B.svg",
+        "type": "route",
+        "wikidata": "Q919014",
+        "wikipedia": "en:British Columbia Highway 7B"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3254600,
+      "tags": {
+        "is_in:state": "WA",
+        "network": "US:WA",
+        "note": "The City of Bellingham uses Meridian Street. Whatcom County and the City of Lynden call this Guide Meridian Road. WashDOT has been putting up street name blades saying \"Guide Meridian\".",
+        "ref": "539",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/6/62/WA-539.svg",
+        "type": "route",
+        "wikidata": "Q836813",
+        "wikipedia": "en:Washington State Route 539"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3442574,
+      "tags": {
+        "name": "Highway 19 (BC)",
+        "network": "CA:BC",
+        "ref": "19",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918905"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3447559,
+      "tags": {
+        "name": "Highway 4 (BC)",
+        "network": "CA:BC",
+        "ref": "4",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918988"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3681721,
+      "tags": {
+        "name": "Idaho State Route 1",
+        "network": "US:ID",
+        "ref": "1",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3693701,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 14 (BC)",
+        "network": "CA:BC",
+        "ref": "14",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3693706,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 91A (BC) (South)",
+        "network": "CA:BC",
+        "ref": "91A",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/8/8f/BC-91A.svg",
+        "type": "route",
+        "wikidata": "Q919027",
+        "wikipedia": "en:British Columbia Highway 91A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3693787,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 4A (BC)",
+        "network": "CA:BC",
+        "ref": "4A",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918997"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3693800,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 18 (BC)",
+        "network": "CA:BC",
+        "ref": "18",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3693928,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 19A",
+        "network": "CA:BC",
+        "ref": "19A",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918904",
+        "wikipedia": "en:British Columbia Highway 19A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3693984,
+      "tags": {
+        "alt_name": "Nakusp-Mica Creek Highway",
+        "is_in:state": "BC",
+        "name": "Highway 23 (BC)",
+        "network": "CA:BC",
+        "ref": "23",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 3751004,
+      "tags": {
+        "name": "Northern Woods & Water Route",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 4046710,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 3B (BC)",
+        "network": "CA:BC",
+        "ref": "3B",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 4049304,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 5A (BC)",
+        "network": "CA:BC",
+        "ref": "5A",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 4049343,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 6 (BC)",
+        "network": "CA:BC",
+        "ref": "6",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 4049355,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 12 (BC)",
+        "network": "CA:BC",
+        "ref": "12",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 5384706,
+      "tags": {
+        "description": "https://en.wikipedia.org/wiki/Liard_Highway",
+        "name": "Liard Highway",
+        "network": "CA:NT",
+        "ref": "7",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q1646192"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 5384759,
+      "tags": {
+        "colour": "red",
+        "description": "Alaska Highway (Yukon)",
+        "name": "Alaska Highway",
+        "name:ar": "طريق ألاسكا السريع",
+        "name:es": "Autopista Alaska",
+        "name:fr": "Route de l'Alaska",
+        "name:it": "Autostrada dell'Alaska",
+        "name:lt": "Aliaskos Greitkelis",
+        "name:pnb": "الاسکا ہائی وے",
+        "name:pt": "Estrada do Alasca",
+        "name:uk": "Аляскинське Шосе",
+        "name:ur": "الاسکا ہائی وے",
+        "network": "CA:YT",
+        "ref": "1",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q628076",
+        "wikipedia": "en:Alaska Highway"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 5385974,
+      "tags": {
+        "colour": "yellow",
+        "description": "Klondike Highway (YT Section)",
+        "name": "Klondike Highway",
+        "network": "CA:YT",
+        "ref": "2",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q802262"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 5386029,
+      "tags": {
+        "colour": "red",
+        "name": "Atlin Road",
+        "network": "CA:YT",
+        "ref": "7",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q913752"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 5917894,
+      "tags": {
+        "modifier": "Spur",
+        "name": "State Route 9 Spur",
+        "network": "US:WA:Spur",
+        "ref": "9",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 6430124,
+      "tags": {
+        "name": "Rifle Road",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7100438,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 17A (BC) (South)",
+        "network": "CA:BC",
+        "ref": "17A",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/c/cf/BC-17A.svg",
+        "type": "route",
+        "wikidata": "Q918897",
+        "wikipedia": "en:British Columbia Highway 17A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7166559,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 97 (BC)",
+        "network": "CA:BC",
+        "ref": "97",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/a/a1/BC-97.svg",
+        "type": "route",
+        "wikidata": "Q919034",
+        "wikipedia": "en:British Columbia Highway 97"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7328523,
+      "tags": {
+        "name": "Thutade FSR",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8223581,
+      "tags": {
+        "name": "Highway 3 (BC) (Crowsnest Highway)",
+        "network": "CA:BC",
+        "ref": "3",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918953"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8687470,
+      "tags": {
+        "direction": "east",
+        "is_in:province": "AB",
+        "name": "Trans-Canada 1 (AB eastbound)",
+        "network": "CA:transcanada",
+        "note": "Highway 1",
+        "ref": "1",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/7/74/Alberta_Highway_1.svg",
+        "type": "route",
+        "wikidata": "Q1529215",
+        "wikipedia": "en:Alberta Highway 1"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8719319,
+      "tags": {
+        "direction": "east",
+        "is_in:province": "AB",
+        "name": "Trans-Canada 16 (AB) (East)",
+        "network": "CA:transcanada",
+        "note": "Highway 16",
+        "ref": "16",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Alberta_Highway_16.svg",
+        "type": "route",
+        "wikidata": "Q2639214",
+        "wikipedia": "en:Alberta Highway 16"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8725770,
+      "tags": {
+        "name": "Highway 93",
+        "network": "CA:AB:primary",
+        "ref": "93",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q2639216"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743591,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 22A (BC)",
+        "network": "CA:BC",
+        "ref": "22A",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/d/d9/BC-22A.svg",
+        "type": "route",
+        "wikidata": "Q918921",
+        "wikipedia": "en:British Columbia Highway 22A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743592,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 31A (BC)",
+        "network": "CA:BC",
+        "ref": "31A",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918959",
+        "wikipedia": "en:British Columbia Highway 31A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743593,
+      "tags": {
+        "name": "Highway 37A (BC)",
+        "network": "CA:BC",
+        "ref": "37A",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/4/4d/BC-37A.svg",
+        "type": "route",
+        "wikidata": "Q3484164",
+        "wikipedia": "en:British Columbia Highway 37A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743594,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 97D (BC)",
+        "network": "CA:BC",
+        "ref": "97D",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q111333955",
+        "wikipedia": "en:British Columbia Highway 97D"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743595,
+      "tags": {
+        "NHS": "yes",
+        "alt_name": "Sunshine Coast Highway",
+        "is_in:state": "BC",
+        "name": "Highway 101 (BC)",
+        "network": "CA:BC",
+        "ref": "101",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918871"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743596,
+      "tags": {
+        "name": "Nisga'a Highway",
+        "network": "CA:BC",
+        "ref": "113",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743597,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 118 (BC)",
+        "network": "CA:BC",
+        "ref": "118",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743598,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 395 (BC)",
+        "network": "CA:BC",
+        "ref": "395",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/2/23/BC-395.svg",
+        "type": "route",
+        "wikidata": "Q918977",
+        "wikipedia": "en:British Columbia Highway 395"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8743971,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 17A (BC) (North)",
+        "network": "CA:BC",
+        "ref": "17A",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/c/cf/BC-17A.svg",
+        "type": "route",
+        "wikidata": "Q918897",
+        "wikipedia": "en:British Columbia Highway 17A"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746146,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 99 (BC) (South)",
+        "network": "CA:BC",
+        "ref": "99",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/4/4e/BC-99.svg",
+        "type": "route",
+        "wikidata": "Q919039",
+        "wikipedia": "en:British Columbia Highway 99"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746147,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 99 (BC) (North)",
+        "network": "CA:BC",
+        "ref": "99",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/4/4e/BC-99.svg",
+        "type": "route",
+        "wikidata": "Q919039",
+        "wikipedia": "en:British Columbia Highway 99"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746148,
+      "tags": {
+        "direction": "east",
+        "is_in:state": "BC",
+        "name": "Highway 97C (BC) (East)",
+        "network": "CA:BC",
+        "ref": "97C",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/a/a9/BC-97C.svg",
+        "type": "route",
+        "wikidata": "Q3484006",
+        "wikipedia": "en:British Columbia Highway 97C"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746149,
+      "tags": {
+        "direction": "west",
+        "is_in:state": "BC",
+        "name": "Highway 97C (BC) (West)",
+        "network": "CA:BC",
+        "ref": "97C",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/a/a9/BC-97C.svg",
+        "type": "route",
+        "wikidata": "Q3484006",
+        "wikipedia": "en:British Columbia Highway 97C"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746150,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 91 (BC) (South)",
+        "network": "CA:BC",
+        "ref": "91",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/0/04/BC-91.svg",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746151,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 91 (BC) (North)",
+        "network": "CA:BC",
+        "ref": "91",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/0/04/BC-91.svg",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746152,
+      "tags": {
+        "name": "Highway 93 (BC)",
+        "network": "CA:BC",
+        "ref": "93",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/6/63/BC-93.svg",
+        "type": "route",
+        "wikidata": "Q766660",
+        "wikipedia": "en:British Columbia Highway 93"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746153,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 95 (BC)",
+        "network": "CA:BC",
+        "ref": "95",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/9/9f/BC-95.svg",
+        "type": "route",
+        "wikidata": "Q183277",
+        "wikipedia": "en:British Columbia Highway 95"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746190,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 1A (BC) (South) (West Vancouver)",
+        "network": "CA:BC",
+        "ref": "1A",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746191,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 1A (BC) (North) (West Vancouver)",
+        "network": "CA:BC",
+        "ref": "1A",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746192,
+      "tags": {
+        "name": "Highway 39 (BC)",
+        "network": "CA:BC",
+        "ref": "39",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746193,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 41 (BC)",
+        "network": "CA:BC",
+        "ref": "41",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746194,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 43 (BC)",
+        "network": "CA:BC",
+        "ref": "43",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746195,
+      "tags": {
+        "name": "Highway 49 (BC)",
+        "network": "CA:BC",
+        "ref": "49",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746196,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 52E (BC)",
+        "network": "CA:BC",
+        "ref": "52E",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q919003",
+        "wikipedia": "en:British Columbia Highway 52"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746197,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 52N (BC)",
+        "network": "CA:BC",
+        "ref": "52N",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q919003",
+        "wikipedia": "de:British Columbia Highway 52"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746198,
+      "tags": {
+        "name": "Highway 62 (BC)",
+        "network": "CA:BC",
+        "ref": "62",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8746199,
+      "tags": {
+        "name": "Highway 77 (BC)",
+        "network": "CA:BC",
+        "ref": "77",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q1646192"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747035,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 21 (BC)",
+        "network": "CA:BC",
+        "ref": "21",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747036,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 26 (BC)",
+        "network": "CA:BC",
+        "ref": "26",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747037,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 29 (BC)",
+        "network": "CA:BC",
+        "ref": "29",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918944",
+        "wikipedia": "en:British Columbia Highway 29"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747038,
+      "tags": {
+        "name": "Highway 30 (BC)",
+        "network": "CA:BC",
+        "ref": "30",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747039,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 31 (BC)",
+        "network": "CA:BC",
+        "ref": "31",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918957",
+        "wikipedia": "en:British Columbia Highway 31"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747040,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 33 (BC) (North)",
+        "network": "CA:BC",
+        "ref": "33",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q918965",
+        "wikipedia": "de:British Columbia Highway 33"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747041,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 33 (BC) (South)",
+        "network": "CA:BC",
+        "ref": "33",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747042,
+      "tags": {
+        "is_in:state": "BC",
+        "name": "Highway 35 (BC)",
+        "network": "CA:BC",
+        "ref": "35",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747094,
+      "tags": {
+        "direction": "west",
+        "is_in:state": "BC",
+        "name": "Highway 17 (BC) (West)",
+        "network": "CA:BC",
+        "ref": "17",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/7/76/BC-17.svg",
+        "type": "route",
+        "wikidata": "Q918890",
+        "wikipedia": "en:British Columbia Highway 17"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747095,
+      "tags": {
+        "direction": "east",
+        "is_in:state": "BC",
+        "name": "Highway 17 (BC) (East)",
+        "network": "CA:BC",
+        "ref": "17",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/7/76/BC-17.svg",
+        "type": "route",
+        "wikidata": "Q918890",
+        "wikipedia": "en:British Columbia Highway 17"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747096,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 17 (BC) (South)",
+        "network": "CA:BC",
+        "ref": "17",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/7/76/BC-17.svg",
+        "type": "route",
+        "wikidata": "Q918890",
+        "wikipedia": "en:British Columbia Highway 17"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747097,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 17 (BC) (North)",
+        "network": "CA:BC",
+        "ref": "17",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/7/76/BC-17.svg",
+        "type": "route",
+        "wikidata": "Q918890",
+        "wikipedia": "en:British Columbia Highway 17"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747305,
+      "tags": {
+        "direction": "west",
+        "name": "Highway 7 (BC) (West)",
+        "network": "CA:BC",
+        "ref": "7",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747306,
+      "tags": {
+        "direction": "east",
+        "fixme": "Return to routing along Broadway at end of traffic deck removal detour at Cambie St.",
+        "name": "Highway 7 (BC) (East)",
+        "network": "CA:BC",
+        "ref": "7",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747307,
+      "tags": {
+        "direction": "west",
+        "is_in:state": "BC",
+        "name": "Highway 10 (BC) (West)",
+        "network": "CA:BC",
+        "ref": "10",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747308,
+      "tags": {
+        "direction": "east",
+        "is_in:state": "BC",
+        "name": "Highway 10 (BC) (East)",
+        "network": "CA:BC",
+        "ref": "10",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747309,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 11 (BC) (North)",
+        "network": "CA:BC",
+        "ref": "11",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/d/d2/BC-11.svg",
+        "type": "route",
+        "wikidata": "Q427659",
+        "wikipedia": "en:British Columbia Highway 11"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747310,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 11 (BC) (South)",
+        "network": "CA:BC",
+        "ref": "11",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/d/d2/BC-11.svg",
+        "type": "route",
+        "wikidata": "Q427659",
+        "wikipedia": "en:British Columbia Highway 11"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747311,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 13 (BC) (South)",
+        "network": "CA:BC",
+        "ref": "13",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/0/02/BC-13.svg",
+        "type": "route",
+        "wikidata": "Q918879",
+        "wikipedia": "en:British Columbia Highway 13"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747312,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 13 (BC) (North)",
+        "network": "CA:BC",
+        "ref": "13",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/0/02/BC-13.svg",
+        "type": "route",
+        "wikidata": "Q918879",
+        "wikipedia": "en:British Columbia Highway 13"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747313,
+      "tags": {
+        "direction": "south",
+        "is_in:state": "BC",
+        "name": "Highway 15 (BC) (South)",
+        "network": "CA:BC",
+        "ref": "15",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/2/22/BC-15.svg",
+        "type": "route",
+        "wikidata": "Q830692",
+        "wikipedia": "en:British Columbia Highway 15"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747314,
+      "tags": {
+        "direction": "north",
+        "is_in:state": "BC",
+        "name": "Highway 15 (BC) (North)",
+        "network": "CA:BC",
+        "ref": "15",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/2/22/BC-15.svg",
+        "type": "route",
+        "wikidata": "Q830692",
+        "wikipedia": "en:British Columbia Highway 15"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8747347,
+      "tags": {
+        "colour": "yellow",
+        "description": "Klondike Highway (BC section)",
+        "is_in:state": "BC",
+        "name": "Klondike Highway",
+        "network": "CA:YT",
+        "ref": "2",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q802262"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8749075,
+      "tags": {
+        "direction": "south",
+        "is_in:province": "BC",
+        "name": "Trans-Canada 1 (BC southbound: island)",
+        "network": "CA:transcanada",
+        "note": "Portion on Island",
+        "ref": "1",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/b/b4/BC-1_%28TCH%29.svg",
+        "type": "route",
+        "wikidata": "Q918865",
+        "wikipedia": "en:British Columbia Highway 1"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8749076,
+      "tags": {
+        "direction": "east",
+        "is_in:province": "BC",
+        "name": "Trans-Canada 1 (BC eastbound: mainland)",
+        "network": "CA:transcanada",
+        "note": "Mainland Portion",
+        "ref": "1",
+        "route": "road",
+        "symbol": "https://upload.wikimedia.org/wikipedia/commons/b/b4/BC-1_%28TCH%29.svg",
+        "type": "route",
+        "wikidata": "Q918865",
+        "wikipedia": "en:British Columbia Highway 1"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 9740434,
+      "tags": {
+        "name": "Road Route Highway 99A",
+        "network": "CA:BC",
+        "ref": "99A",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 11600043,
+      "tags": {
+        "name": "High Salal Drive",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 12705105,
+      "tags": {
+        "name": "Whipsaw Trail",
+        "route": "road",
+        "type": "route",
+        "website": "https://www.overlandtrailguides.com/post/whipsaw-trail"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 14468488,
+      "tags": {
+        "direction": "east",
+        "name": "Highway 1A (BC) (Surrey and Langley) (East)",
+        "network": "CA:BC",
+        "ref": "1A",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 14468489,
+      "tags": {
+        "direction": "west",
+        "name": "Highway 1A (BC) (Surrey and Langley) (West)",
+        "network": "CA:BC",
+        "ref": "1A",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 15038030,
+      "tags": {
+        "name": "Haines Highway - Valley of the Eagles",
+        "route": "road",
+        "scenic": "yes",
+        "source": "U.S. DEPARTMENT OF TRANSPORTATION Federal Highway Administration",
+        "type": "route",
+        "website": "https://fhwaapps.fhwa.dot.gov/bywaysp/StateMaps/Show/byway/12395"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 16265497,
+      "tags": {
+        "name": "Haines Highway",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q616140",
+        "wikipedia": "en:Haines Highway"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 17067852,
+      "tags": {
+        "name": "Kincolith Highway",
+        "note": "Route is yet to be numbered",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 17067853,
+      "tags": {
+        "name": "Cranberry Connector",
+        "note": "Route is yet to be numbered",
+        "route": "road",
+        "seasonal": "no_snow",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 17143403,
+      "tags": {
+        "alt_name:str": "xʷənitəm siʔem saɬ",
+        "name": "Douglas Street",
+        "name:en": "Douglas Street",
+        "name:str": "xʷənitəm siʔem saɫ",
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 18528888,
+      "tags": {
+        "from": "Ucluelet",
+        "name": "Tofino-Ucluelet Highway",
+        "route": "road",
+        "to": "Tofino",
+        "type": "route",
+        "via": "Pacific Rim National Park Reserve"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 19245301,
+      "tags": {
+        "route": "road",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 19245302,
+      "tags": {
+        "colour": "blue",
+        "name": "Oceanside Route",
+        "network": "CA:BC",
+        "route": "road",
+        "scenic": "yes",
+        "type": "route"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 20056841,
+      "tags": {
+        "direction": "south",
+        "name": "Coquihalla Highway (southbound)",
+        "network": "CA:BC",
+        "ref": "5",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q1131684",
+        "wikipedia": "en:Coquihalla Highway"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 20057078,
+      "tags": {
+        "direction": "north",
+        "name": "Coquihalla Highway (northbound)",
+        "network": "CA:BC",
+        "ref": "5",
+        "route": "road",
+        "type": "route",
+        "wikidata": "Q1131684",
+        "wikipedia": "en:Coquihalla Highway"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21368722,
+      "tags": {
+        "from": "Fort St. John",
+        "name": "Rose Prairie Road (908:1173)",
+        "network": "CA:BC",
+        "route": "road",
+        "to": "Cecil Lake Road",
+        "type": "route",
+        "unsigned_ref": "908:1173"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21368829,
+      "tags": {
+        "from": "Cecil Lake Road",
+        "name": "Rose Prairie Road (908:1174)",
+        "network": "CA:BC",
+        "route": "road",
+        "to": "Rose Prairie",
+        "type": "route",
+        "unsigned_ref": "908:1174"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21368861,
+      "tags": {
+        "name": "Cecil Lake Road",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "908:1189"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21368891,
+      "tags": {
+        "name": "Rolla/Clayhurst Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "908:1106"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21368954,
+      "tags": {
+        "from": "Quesnel",
+        "name": "Blackwater Road (907:1557)",
+        "network": "CA:BC",
+        "route": "road",
+        "to": "Bouchie Lake",
+        "type": "route",
+        "unsigned_ref": "907:1557"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21369041,
+      "tags": {
+        "from": "Bouchie Lake",
+        "name": "Blackwater Road (907:1558)",
+        "network": "CA:BC",
+        "route": "road",
+        "to": "Prince George",
+        "type": "route",
+        "unsigned_ref": "907:1558"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21369222,
+      "tags": {
+        "name": "Nazko Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "907:1559"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21369283,
+      "tags": {
+        "from": "British Columbia Highway 20",
+        "name": "West Fraser Road (907:1555)",
+        "network": "CA:BC",
+        "route": "road",
+        "to": "Buckskin Road",
+        "type": "route",
+        "unsigned_ref": "907:1555"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21369284,
+      "tags": {
+        "from": "Buckskin Road",
+        "name": "West Fraser Road (907:1556)",
+        "network": "CA:BC",
+        "route": "road",
+        "to": "Quesnel",
+        "type": "route",
+        "unsigned_ref": "907:1556"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21377692,
+      "tags": {
+        "name": "Westside Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "905:1292"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21377827,
+      "tags": {
+        "name": "Eastside Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "905:1280"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21377916,
+      "tags": {
+        "name": "Pelmewash Parkway",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "905:1290"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21377940,
+      "tags": {
+        "name": "Salmon River Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "905:1127"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21377982,
+      "tags": {
+        "name": "Chase-Falkland Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "905:1294"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378050,
+      "tags": {
+        "direction": "west",
+        "name": "Halston Connector",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "906:1771"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378051,
+      "tags": {
+        "direction": "east",
+        "name": "Halston Connector",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "906:1771"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378075,
+      "tags": {
+        "name": "Paul Lake Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "906:1777"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378592,
+      "tags": {
+        "name": "Pinantan-Pritchard Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "906:1778"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378634,
+      "tags": {
+        "name": "Heffley-Louis Creek Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "906:1776"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378643,
+      "tags": {
+        "name": "Old North Thompson Highway",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "906:1766"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378662,
+      "tags": {
+        "name": "Lac Le Jeune Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "906:0923"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378686,
+      "tags": {
+        "name": "Cornwall Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "907:0901"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378696,
+      "tags": {
+        "name": "Canim-Hendrix Lake Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "907:1152"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378698,
+      "tags": {
+        "name": "Horse Lake Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "907:1153"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21378720,
+      "tags": {
+        "name": "Likely Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "907:1552"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 21383357,
+      "tags": {
+        "name": "Horsefly Road",
+        "network": "CA:BC",
+        "route": "road",
+        "type": "route",
+        "unsigned_ref": "907:1553"
+      }
+    }
+  ]
+}
