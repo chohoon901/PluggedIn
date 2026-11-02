@@ -4,12 +4,12 @@ from collections.abc import Iterable
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from ..contracts.errors import InputError
 from ..contracts.models import StationSnapshot, VehicleSnapshot
-from ..contracts.evaluation import (
-    CheckStatus, OverallStatus, ReasonCode, Reason, CheckResult, EvaluationResult, EvaluationPolicy,
-)
-from ..membership import Membership
-from ..port import Port
-from ..connector_family import ConnectorFamily
+from ..contracts.evaluation import Reason, CheckResult, EvaluationResult, EvaluationPolicy
+from ..enums.evaluation import CheckStatus, OverallStatus, ReasonCode
+from ca.uvic.ecs.csc501.cmn.domain.membership import Membership
+from ca.uvic.ecs.csc501.cmn.domain.port import Port
+from ca.uvic.ecs.csc501.cmn.enums.connector_family import ConnectorFamily
+from ..enums.vehicle_class import VehicleClass
 
 
 def aggregate_checks(statuses: Iterable[CheckStatus]) -> OverallStatus:
@@ -73,11 +73,14 @@ def check_opening(snapshot: StationSnapshot, arrival_at: datetime) -> CheckResul
 def check_access(snapshot: StationSnapshot, vehicle: VehicleSnapshot) -> CheckResult:
     station = snapshot.station
     restriction = _normalized(station.access_restriction)
-    vehicle_class = _normalized(vehicle.vehicle.vehicle_class)
-    maximum = _normalized(station.max_vehicle_class)
+    vehicle_class = VehicleClass.from_name(vehicle.vehicle.vehicle_class)
+    maximum = VehicleClass.from_name(station.max_vehicle_class)
+    unlimited = _normalized(station.max_vehicle_class) == 'ALL'
     evidence = {'access_restriction': station.access_restriction, 'vehicle_class': vehicle.vehicle.vehicle_class,
                 'max_vehicle_class': station.max_vehicle_class, 'has_truck_parking': station.has_truck_parking,
-                'unconfirmed_fields': list(snapshot.metadata.unconfirmed_fields)}
+                'unconfirmed_fields': list(snapshot.metadata.unconfirmed_fields),
+                'vehicle_class_nlr': vehicle_class.value,
+                'max_vehicle_class_nlr': 'ALL' if unlimited else maximum.value}
     if restriction == 'PUBLIC':
         eligibility = _result(CheckStatus.PASS, ReasonCode.ACCESS_PUBLIC, 'The facility is recorded as open to the public.', evidence)
     elif restriction in ('NO PUBLIC ACCESS', 'CLOSED TO PUBLIC'):
@@ -85,15 +88,14 @@ def check_access(snapshot: StationSnapshot, vehicle: VehicleSnapshot) -> CheckRe
     else:
         eligibility = _result(CheckStatus.UNKNOWN, ReasonCode.ACCESS_RESTRICTED_UNKNOWN,
                               'This information does not confirm eligibility for customer, fleet, or other restricted access.', evidence)
-    order = {'CAR': 0, 'VAN': 1, 'MEDIUM_TRUCK': 2, 'HEAVY_TRUCK': 3}
-    if vehicle_class not in order or maximum not in (*order, 'ALL'):
+    if vehicle_class == VehicleClass.UNKNOWN or (maximum == VehicleClass.UNKNOWN and not unlimited):
         size = _result(CheckStatus.UNKNOWN, ReasonCode.VEHICLE_CLASS_UNKNOWN, 'The vehicle class or facility class limit needs verification.', evidence)
-    elif maximum != 'ALL' and order[vehicle_class] > order[maximum]:
+    elif not unlimited and vehicle_class.rank > maximum.rank:
         size = _result(CheckStatus.FAIL, ReasonCode.VEHICLE_TOO_LARGE, 'The vehicle exceeds the maximum class recorded for the facility.', evidence)
     else:
         size = CheckResult(CheckStatus.PASS, (), evidence)
     checks = [eligibility, size]
-    if vehicle_class in ('MEDIUM_TRUCK','HEAVY_TRUCK'):
+    if vehicle_class.requires_clearance_review:
         checks.append(_result(CheckStatus.UNKNOWN, ReasonCode.TRUCK_CLEARANCE_UNKNOWN,
                               'Recorded truck parking does not guarantee height, turning, or entry clearance at the charging bay.', evidence))
     return _combine(checks, evidence)

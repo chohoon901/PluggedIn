@@ -7,11 +7,12 @@ from typing import Callable
 
 from ..contracts.errors import InputError, NotFoundError
 from ..contracts.repositories import UnitOfWork
-from ..driver import Driver
-from ..membership import Membership
-from ..vehicle import Vehicle
-from ..value_objects.daily_time import DailyTime
+from ca.uvic.ecs.csc501.cmn.domain.driver import Driver
+from ca.uvic.ecs.csc501.cmn.domain.membership import Membership
+from ca.uvic.ecs.csc501.cmn.domain.vehicle import Vehicle
+from ca.uvic.ecs.csc501.cmn.domain.value_objects.daily_time import DailyTime
 from ..services.evaluation import evaluate_station
+from ..enums.vehicle_class import VehicleClass
 
 
 def current_instant() -> str:
@@ -172,7 +173,7 @@ class ApplicationService:
 
     def save_vehicle(self, data: dict, vehicle_id: int | None = None) -> dict:
         vehicle_class = _text(data, "vehicle_class", 30)
-        if vehicle_class and vehicle_class not in {"CAR", "VAN", "MEDIUM_TRUCK", "HEAVY_TRUCK"}:
+        if vehicle_class and not VehicleClass.accepts_input(vehicle_class):
             raise InputError("Select a vehicle class.", {"vehicle_class": "Select a supported vehicle class."})
         accepted = data.get("accepted_connector_ids")
         if not isinstance(accepted, (list, tuple, set)) or not accepted:

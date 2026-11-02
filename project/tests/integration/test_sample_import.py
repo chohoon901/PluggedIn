@@ -57,6 +57,8 @@ def test_sample_initial_search_and_cross_id_aliases(tmp_path, sample_sources):
         result = services.search(1, 1, '2026-11-02T19:00:00Z', bounds)
         compatible = [x for x in result['results'] if x['checks']['connector']['status'] == 'PASS']
         assert compatible
+        assert sum(x['checks']['access']['status'] == 'PASS' for x in result['results']) == 3
+        assert all(x['checks']['access']['evidence']['vehicle_class_nlr'] == 'LD' for x in result['results'])
         assert result['results'][0]['checks']['payment']['status'] == 'PASS'
         visitor = services.detail(1, 2, 1, '2026-11-02T19:00:00Z')
         assert visitor['checks']['payment']['status'] == 'UNKNOWN'
@@ -66,8 +68,10 @@ def test_sample_initial_search_and_cross_id_aliases(tmp_path, sample_sources):
         assert daytime['checks']['opening']['status'] == 'PASS'
         assert night['checks']['opening']['status'] == 'FAIL'
         assert night['overall_status'] == 'UNAVAILABLE'
-        # Raw NLR codes do not become invented facility class allowances.
+        # Raw NLR codes are interpreted, but other missing evidence still matters.
         assert all(x['overall_status'] != 'AVAILABLE' for x in result['results'])
+        j1772 = services.search(1, 2, '2026-11-02T19:00:00Z', bounds)
+        assert any(x['overall_status'] == 'AVAILABLE' for x in j1772['results'])
         original = services.get_vehicle(1)
         chademo = next(x['connector_type_id'] for x in services.catalog()['connectors'] if x['name'] == 'CHADEMO')
         services.save_vehicle({**original, 'accepted_connector_ids': [chademo]}, 1)

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from .validation import validate_entity
-from .contracts.errors import InputError
+from ca.uvic.ecs.csc501.cmn.domain.validation import validate_entity
+from ca.uvic.ecs.csc501.cmn.contracts.errors import InputError
 from decimal import Decimal
 
 
@@ -16,7 +16,7 @@ class Vehicle:
     make: str | None = None
     # 차량 모델 이름입니다. 같은 이름이어도 연식·사양에 따라 충전 조건이 다를 수 있습니다. None이면 등록되지 않은 선택 정보입니다.
     model: str | None = None
-    # 차량 크기·종류의 등급입니다. Python 필드는 vehicle_class이며 원본 DB 컬럼 class에 매핑합니다. None이면 등록되지 않은 선택 정보입니다.
+    # NLR LD/MD/HD 차량 등급이나 기존 원문 값입니다. DB class 컬럼에 매핑하며 None이면 미확인입니다.
     vehicle_class: str | None = None
     # 기록된 주행 가능 거리의 참고값입니다. 단위는 km이며 현재 배터리로 갈 수 있는 거리가 아닙니다. None이면 등록되지 않은 선택 정보입니다.
     range_km: int | None = None

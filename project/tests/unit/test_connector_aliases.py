@@ -3,11 +3,11 @@ from decimal import Decimal
 
 import pytest
 
-from ca.uvic.ecs.csc501.cmn.station import Station
-from ca.uvic.ecs.csc501.cmn.connector_type import ConnectorType
-from ca.uvic.ecs.csc501.cmn.port import Port
+from ca.uvic.ecs.csc501.cmn.domain.station import Station
+from ca.uvic.ecs.csc501.cmn.domain.connector_type import ConnectorType
+from ca.uvic.ecs.csc501.cmn.domain.port import Port
 from ca.uvic.ecs.csc501.cmn.contracts.models import StationSnapshot, StationMetadata, VehicleSnapshot
-from ca.uvic.ecs.csc501.cmn.vehicle import Vehicle
+from ca.uvic.ecs.csc501.cmn.domain.vehicle import Vehicle
 from ca.uvic.ecs.csc501.cmn.services.evaluation import check_connector
 
 
@@ -32,7 +32,7 @@ def test_unknown_station_roles_are_valid_but_invalid_nonnull_ids_are_not():
     ('Unrecognized A', 'Unrecognized B', 'DC', 'UNKNOWN'),
 ])
 def test_source_aliases_match_across_distinct_database_ids(source, accepted, current, expected):
-    from ca.uvic.ecs.csc501.cmn.connector_family import ConnectorFamily
+    from ca.uvic.ecs.csc501.cmn.enums.connector_family import ConnectorFamily
     assert ConnectorFamily.from_name(source) is not None
     station = StationSnapshot(None, (), (), (ConnectorType(10, source),), (), StationMetadata())
     vehicle = VehicleSnapshot(Vehicle(1, 'x'*17), (20,), (accepted,))

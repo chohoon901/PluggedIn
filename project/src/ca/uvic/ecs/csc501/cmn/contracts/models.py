@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from ..vehicle import Vehicle
-from ..station import Station
-from ..port import Port
-from ..operating_period import OperatingPeriod
-from ..connector_type import ConnectorType
-from ..organization import Organization
+from ca.uvic.ecs.csc501.cmn.domain.vehicle import Vehicle
+from ca.uvic.ecs.csc501.cmn.domain.station import Station
+from ca.uvic.ecs.csc501.cmn.domain.port import Port
+from ca.uvic.ecs.csc501.cmn.domain.operating_period import OperatingPeriod
+from ca.uvic.ecs.csc501.cmn.domain.connector_type import ConnectorType
+from ca.uvic.ecs.csc501.cmn.domain.organization import Organization
 
 
 @dataclass(frozen=True)

@@ -1,5 +1,7 @@
 # PluggedIn
 
+> **NLR vehicle classes:** Domain entities now live in `cmn/domain`, enums in `cmn/enums`. Access compares LD/MD/HD without rewriting saved values; unclassified legacy VAN remains UNKNOWN. See [details](docs/nlr-vehicle-class.md).
+
 > **Sunghun_IDNull branch:** The active database is now a separate, ID-matched 20-station NLR–OCM Vancouver sample. Station owner/operator references permit NULL; source connector names are preserved and compared through a domain enum. See [sample20 instructions](docs/sample20.md) for running, provenance, uncertainty and portable files. Existing demo initialization instructions below describe the synthetic demo; do not seed demo rows into the sample database.
 
 운전자·차량·도착 시각을 선택하면 BC 충전소의 **운영시간, 이용·차량 제한, 직접 커넥터, 결제 조건**을 비교하는 학교 프로젝트 MVP입니다. 운전자·차량·수용 커넥터·멤버십을 SQLite에 저장하고 서버에서 결과와 이유를 계산해 HTML로 제공합니다.

@@ -8,7 +8,7 @@ from importlib import import_module
 class DomainTests(unittest.TestCase):
     def module(self, name):
         try:
-            return import_module('ca.uvic.ecs.csc501.cmn.' + name)
+            return import_module('ca.uvic.ecs.csc501.cmn.' + (name if name.startswith('contracts.') else 'domain.' + name))
         except ModuleNotFoundError:
             self.fail('Required domain module has not been implemented: ' + name)
 
@@ -81,13 +81,10 @@ class DomainTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 Vehicle(None, 'x'*17, max_charge_kw=Decimal(value))
 
-    def test_port_current_and_adapter_direction_enforce_schema_constraints(self):
+    def test_port_current_and_number_enforce_schema_constraints(self):
         Port = self.module('port').Port
-        Adapter = self.module('adapter').Adapter
         with self.assertRaises(ValueError):
             Port(None, 1, 1, 1, current_type='XX')
-        with self.assertRaises(ValueError):
-            Adapter(None, 'model', None, None, 1, 1)
         with self.assertRaises(ValueError):
             Port(None, 1, 0, 1)
 

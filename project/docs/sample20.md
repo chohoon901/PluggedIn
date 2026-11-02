@@ -21,9 +21,9 @@ Only DataProviderID=2 OCM records are joined, by their DataProvidersReference to
 
 The database alone contains all 13 tables / 65 columns and all domain profiles. To retain timezone, provenance and UNKNOWN behavior in the app, keep the companion metadata JSON. `config.properties` in the portable sample root demonstrates the relative paths. This keeps the original metadata architecture without introducing a new table.
 
-Source connector text is preserved, not rewritten. `cmn/connector_family.py` provides the equivalent of a shared Java enum/alias registry. Separate IDs such as NLR J1772COMBO and OCM CCS (Type 1) can match; CCS Type 2 does not match CCS Type 1. NACS/TESLA and unknown combinations do not become verified direct connections.
+Source connector text is preserved, not rewritten. `cmn/enums/connector_family.py` provides the equivalent of a shared Java enum/alias registry. Separate IDs such as NLR J1772COMBO and OCM CCS (Type 1) can match; CCS Type 2 does not match CCS Type 1. NACS/TESLA and unknown combinations do not become verified direct connections.
 
-OCM matched connection power values are explicitly estimates: all imported power_kw values are NULL. Raw estimated values remain in the manifest. Quantities are recorded summaries and unconfirmed. Missing guest payment and truck parking booleans use required storage defaults plus unconfirmedFields. Raw NLR LD/MD/HD values are not silently converted to the application's CAR/VAN/TRUCK classification. These decisions intentionally leave NEEDS_REVIEW results; do not fabricate green statuses to make a demo look complete.
+OCM matched connection power values are explicitly estimates: all imported power_kw values are NULL. Raw estimated values remain in the manifest. Quantities are recorded summaries and unconfirmed. Missing guest payment and truck parking booleans use required storage defaults plus unconfirmedFields. Raw NLR LD/MD/HD values are preserved and now interpreted by cmn/enums/vehicle_class.py; CAR is read as LD, while an unclassified VAN stays UNKNOWN. Missing or restricted evidence still leaves NEEDS_REVIEW results; do not fabricate green statuses to make a demo look complete.
 
 ## Check condition changes
 
@@ -40,3 +40,5 @@ OCM matched connection power values are explicitly estimates: all imported power
 ```
 
 An occupied output directory is rejected. The importer never overwrites an existing DB or modifies the source files. To use another output root, change both database_path and metadata_path in the app's DAL config, keeping paths inside DAL.
+
+Vehicle-class interpretation and current package layout: see [NLR vehicle classes](nlr-vehicle-class.md).

@@ -13,20 +13,20 @@ class EvaluationTests(unittest.TestCase):
         except ModuleNotFoundError:
             self.fail('Pure station evaluation has not been implemented')
         from ca.uvic.ecs.csc501.cmn.contracts.models import StationSnapshot, StationMetadata, VehicleSnapshot
-        from ca.uvic.ecs.csc501.cmn.station import Station
-        from ca.uvic.ecs.csc501.cmn.vehicle import Vehicle
-        from ca.uvic.ecs.csc501.cmn.connector_type import ConnectorType
-        from ca.uvic.ecs.csc501.cmn.port import Port
-        from ca.uvic.ecs.csc501.cmn.operating_period import OperatingPeriod
-        from ca.uvic.ecs.csc501.cmn.membership import Membership
-        from ca.uvic.ecs.csc501.cmn.value_objects.daily_time import DailyTime
+        from ca.uvic.ecs.csc501.cmn.domain.station import Station
+        from ca.uvic.ecs.csc501.cmn.domain.vehicle import Vehicle
+        from ca.uvic.ecs.csc501.cmn.domain.connector_type import ConnectorType
+        from ca.uvic.ecs.csc501.cmn.domain.port import Port
+        from ca.uvic.ecs.csc501.cmn.domain.operating_period import OperatingPeriod
+        from ca.uvic.ecs.csc501.cmn.domain.membership import Membership
+        from ca.uvic.ecs.csc501.cmn.domain.value_objects.daily_time import DailyTime
         self.Membership, self.Port, self.Period, self.Time = Membership, Port, OperatingPeriod, DailyTime
-        station = Station(1, Decimal('48.46'), Decimal('-123.31'), 'Test', None, 'Victoria', 'BC', 'ACTIVE', 'public', False, 'VAN', False, 1, 1, 1)
+        station = Station(1, Decimal('48.46'), Decimal('-123.31'), 'Test', None, 'Victoria', 'BC', 'ACTIVE', 'public', False, 'LD', False, 1, 1, 1)
         self.station = StationSnapshot(station, (Port(1, 1, 1, 1, Decimal('150'), 'DC', 1),),
             tuple(OperatingPeriod(i+1, 1, day, DailyTime(0), DailyTime(86400)) for i, day in enumerate(('Mon','Tue','Wed','Thu','Fri','Sat','Sun'))),
             (ConnectorType(1, 'CCS1'), ConnectorType(2, 'CHAdeMO'), ConnectorType(3, 'NACS'), ConnectorType(4, 'J1772')), (),
             StationMetadata('America/Vancouver', 'COMPLETE', 'COMPLETE', 'COMPLETE'))
-        self.vehicle = VehicleSnapshot(Vehicle(1, 'DEMO0000000000001', vehicle_class='VAN', max_charge_kw=Decimal('100')), (1,))
+        self.vehicle = VehicleSnapshot(Vehicle(1, 'DEMO0000000000001', vehicle_class='LD', max_charge_kw=Decimal('100')), (1,))
         self.memberships = [Membership(1, 1, 1, date(2026, 1, 1))]
         self.arrival = datetime(2026, 10, 26, 19, tzinfo=timezone.utc)
 
@@ -106,7 +106,7 @@ class EvaluationTests(unittest.TestCase):
             self.assertEqual(self.evaluate(station=self.changed_station(access_restriction=restriction)).checks['access'].status,'UNKNOWN')
 
     def test_vehicle_size_excess_fails_and_truck_parking_cannot_prove_clearance(self):
-        self.assertEqual(self.evaluate(station=self.changed_station(max_vehicle_class='CAR')).checks['access'].status,'FAIL')
+        self.assertEqual(self.evaluate(station=self.changed_station(max_vehicle_class='LD'), vehicle=replace(self.vehicle, vehicle=replace(self.vehicle.vehicle, vehicle_class='MD'))).checks['access'].status,'FAIL')
         truck = replace(self.vehicle,vehicle=replace(self.vehicle.vehicle,vehicle_class='HEAVY_TRUCK'))
         result = self.evaluate(station=self.changed_station(max_vehicle_class='ALL',has_truck_parking=True),vehicle=truck)
         self.assertEqual(result.checks['access'].status,'UNKNOWN')

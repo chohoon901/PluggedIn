@@ -118,6 +118,10 @@ def test_real_sample_map_and_source_schedule_changes(browser, live_app):
     page.goto(live_app + '/stations/1?driver_id=1&vehicle_id=1&arrival_at=2026-11-02T19%3A00%3A00Z')
     expect(page.locator('body')).to_contain_text('Site owner unknown')
     expect(page.locator('body')).to_contain_text('CCS (Type 1)')
+    page.goto(live_app + '/vehicles/1/edit')
+    expect(page.locator('[name="vehicle_class"]')).to_have_value('CAR')
+    expect(page.locator('#vehicle-classes option')).to_have_count(3)
+    assert page.locator('#vehicle-classes option').evaluate_all('(items) => items.map(item => item.value)') == ['LD', 'MD', 'HD']
     context.close()
     nojs = browser.new_context(java_script_enabled=False)
     page = nojs.new_page()
@@ -131,6 +135,13 @@ def test_real_sample_map_and_source_schedule_changes(browser, live_app):
     card = page.locator('.station-card').filter(has_text='GSPLP TGO 05')
     expect(card).to_contain_text('Unavailable')
     expect(card).to_contain_text('outside the recorded operating hours')
+    page.goto(live_app + '/vehicles/new')
+    page.locator('[name="vin"]').fill('NLR00000000000001')
+    page.locator('[name="vehicle_class"]').fill('LD')
+    page.locator('[name="accepted_connector_ids"]').first.check()
+    page.get_by_role('button', name='Save vehicle').click()
+    expect(page.locator('body')).to_contain_text('NLR00000000000001')
+    expect(page.locator('body')).to_contain_text('LD')
     nojs.close()
 
 

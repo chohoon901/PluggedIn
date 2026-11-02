@@ -100,8 +100,8 @@ def test_search_apis_match_ssr_and_unready_health_is_503(client, tmp_path):
     payload = {'driver_id': 1, 'vehicle_id': 1, 'arrival_at': '2026-10-26T19:00:00Z', 'bbox': {'west': -123.5, 'east': -123.2, 'south': 48.35, 'north': 48.6}}
     result = client.post('/api/v1/stations/search', json=payload)
     assert result.status_code == 200
-    assert result.json()['counts'] == {'AVAILABLE': 3, 'NEEDS_REVIEW': 1, 'UNAVAILABLE': 1}
-    assert client.post('/api/v1/stations/1/evaluate', json={k: v for k, v in payload.items() if k != 'bbox'}).json()['overall_status'] == 'AVAILABLE'
+    assert result.json()['counts'] == {'AVAILABLE': 0, 'NEEDS_REVIEW': 4, 'UNAVAILABLE': 1}
+    assert client.post('/api/v1/stations/1/evaluate', json={k: v for k, v in payload.items() if k != 'bbox'}).json()['overall_status'] == 'NEEDS_REVIEW'
     assert client.get('/stations', params={'driver_id': 'bad', 'vehicle_id': 1}).status_code == 400
     assert client.get('/stations', params={'driver_id': 9999, 'vehicle_id': 1}).status_code == 404
     assert client.get('/api/v1/health').status_code == 200
@@ -150,7 +150,7 @@ def test_status_filter_counts_and_empty_results_preserve_conditions(client):
     response = client.get('/stations', params=query)
     assert response.status_code == 200
     raw = re.search(r'<script type="application/json" id="map-data">(.*?)</script>', response.text, re.S).group(1)
-    assert [item['name'] for item in json.loads(raw)] == ['Demo D']
+    assert [item['name'] for item in json.loads(raw)] == ['Demo A', 'Demo B', 'Demo D', 'Demo E']
     query.update(west='-130', east='-129', south='49', north='50')
     empty = client.get('/stations', params=query)
     assert empty.status_code == 200

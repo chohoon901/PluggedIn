@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import re
 
-from ...cmn.connector_family import ConnectorFamily
+from ca.uvic.ecs.csc501.cmn.enums.connector_family import ConnectorFamily
 from ..database import Database
 from ..settings import Settings
 from ..unit_of_work import SqlAlchemyUnitOfWork

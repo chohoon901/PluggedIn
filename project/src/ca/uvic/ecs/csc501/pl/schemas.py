@@ -38,7 +38,7 @@ class VehicleInput(InputModel):
     make: str | None = Field(default=None, max_length=50)
     # 차량 모델 이름이며 없으면 None입니다.
     model: str | None = Field(default=None, max_length=50)
-    # 차량 등급 문자열입니다. 법정 중량 분류를 대신하지 않습니다.
+    # NLR LD/MD/HD 차량 등급 또는 기존 원문 값입니다. 조회 시 원문을 임의로 바꾸지 않습니다.
     vehicle_class: str | None = Field(default=None, max_length=30)
     # 참고 주행 거리(km)이며 현재 배터리 잔량에 따른 거리가 아닙니다.
     range_km: int | None = Field(default=None, gt=0)

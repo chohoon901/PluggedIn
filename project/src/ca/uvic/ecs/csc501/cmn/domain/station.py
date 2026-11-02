@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from .validation import validate_entity
-from .contracts.errors import InputError
+from ca.uvic.ecs.csc501.cmn.domain.validation import validate_entity
+from ca.uvic.ecs.csc501.cmn.contracts.errors import InputError
 from decimal import Decimal
-from .value_objects.location import Location
+from ca.uvic.ecs.csc501.cmn.domain.value_objects.location import Location
 
 
 @dataclass(frozen=True)
