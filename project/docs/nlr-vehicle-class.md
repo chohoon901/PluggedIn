@@ -12,7 +12,7 @@ Source: https://afdc.energy.gov/data_download/alt_fuel_stations_format
 
 The user explicitly requested CAR -> LD, VAN -> MD, MEDIUM_TRUCK -> MD and HEAVY_TRUCK -> HD for existing project class fields. This is a conservative project migration policy, not a universal legal classification of every real van. These old tokens are rejected by new vehicle input validation. Only LD/MD/HD are accepted; case/spacing normalize to the canonical code. Model names and source free text are unchanged.
 
-Both JSON and SSR vehicle CRUD accept NLR codes. Evaluation evidence includes the raw and interpreted values. Existing installations with old class tokens must run the explicit backed-up class migration below; updated sample files and generators already use canonical codes. Restart the server to load changed application code.
+Both JSON and SSR vehicle CRUD accept NLR codes. The vehicle form uses a native select with LD/MD/HD plus an optional blank unknown choice. The API schema explicitly enumerates only LD/MD/HD; old body-style values are rejected before the use case. Invalid submitted values are escaped and displayed on 400 forms for input preservation. Evaluation evidence includes the raw and interpreted values. Existing installations with old class tokens must run the explicit backed-up class migration below; updated sample files and generators already use canonical codes. Restart the server to load changed application code.
 
 ## Layout
 

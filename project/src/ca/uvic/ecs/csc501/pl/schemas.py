@@ -4,6 +4,7 @@ from decimal import Decimal
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from ca.uvic.ecs.csc501.cmn.enums.vehicle_class import VehicleClass
 
 
 class InputModel(BaseModel):
@@ -39,13 +40,20 @@ class VehicleInput(InputModel):
     # 차량 모델 이름이며 없으면 None입니다.
     model: str | None = Field(default=None, max_length=50)
     # NLR LD/MD/HD 차량 등급입니다. 입력은 서비스의 공통 enum으로 검증합니다.
-    vehicle_class: str | None = Field(default=None, max_length=30)
+    vehicle_class: Literal[VehicleClass.LD, VehicleClass.MD, VehicleClass.HD] | None = None
     # 참고 주행 거리(km)이며 현재 배터리 잔량에 따른 거리가 아닙니다.
     range_km: int | None = Field(default=None, gt=0)
     # 차량 충전 출력 상한(kW)이며 미입력은 출력 미상입니다.
     max_charge_kw: Decimal | None = Field(default=None, gt=0, le=99999.9)
     # 직접 연결을 수용하는 커넥터 규격 번호들로 최소 하나 필요합니다.
     accepted_connector_ids: list[int] = Field(min_length=1)
+
+    @field_validator('vehicle_class', mode='before')
+    @classmethod
+    def canonical_vehicle_class(cls, value):
+        if isinstance(value, str):
+            return value.strip().upper() or None
+        return value
 
     @field_validator('accepted_connector_ids')
     @classmethod

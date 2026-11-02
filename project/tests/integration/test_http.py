@@ -49,6 +49,23 @@ def test_vehicle_api_stores_canonical_nlr_code(client):
     assert response.json()['vehicle_class'] == 'MD'
 
 
+def test_vehicle_form_and_api_schema_expose_only_nlr_classes(client):
+    page = client.get('/vehicles/new')
+    assert '<select id="vehicle_class"' in page.text
+    assert '<datalist id="vehicle-classes"' not in page.text
+    for old in ('CAR', 'VAN', 'MEDIUM_TRUCK', 'HEAVY_TRUCK'):
+        assert f'<option value="{old}"' not in page.text
+    schema = client.get('/openapi.json').json()['components']['schemas']['VehicleInput']['properties']['vehicle_class']
+    assert schema['anyOf'][0]['enum'] == ['LD','MD','HD']
+
+
+def test_invalid_vehicle_class_form_preserves_submitted_value(client):
+    result = client.post('/vehicles', data={'vin':'CLASS000000000001', 'vehicle_class':'VAN',
+                                          'accepted_connector_ids':'1'})
+    assert result.status_code == 400
+    assert 'Unsupported submitted class: VAN' in result.text
+
+
 @pytest.mark.parametrize('path,data', [
     ('drivers', {'licence_number': ''}),
     ('drivers', {'licence_number': 'L', 'driver_id': 100}),

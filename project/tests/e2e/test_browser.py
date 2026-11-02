@@ -69,7 +69,10 @@ def test_no_javascript_crud_search_detail_and_second_browser(browser, live_app):
     expect(page.locator("body")).to_contain_text("수정된 운전자")
     page.goto(live_app + "/vehicles/new")
     for name, value in {"vin": "E2E00000000000001", "licence_plate": "E2E-02", "make": "Demo", "model": "Browser van", "vehicle_class": "MD", "range_km": "250", "max_charge_kw": "100.5"}.items():
-        page.locator(f'[name="{name}"]').fill(value)
+        if name == "vehicle_class":
+            page.locator(f'[name="{name}"]').select_option(value)
+        else:
+            page.locator(f'[name="{name}"]').fill(value)
     page.locator('[name="accepted_connector_ids"][value="1"]').check()
     page.locator('form button[type="submit"]').click()
     expect(page.locator("body")).to_contain_text("Browser van")
@@ -120,8 +123,8 @@ def test_real_sample_map_and_source_schedule_changes(browser, live_app):
     expect(page.locator('body')).to_contain_text('CCS (Type 1)')
     page.goto(live_app + '/vehicles/1/edit')
     expect(page.locator('[name="vehicle_class"]')).to_have_value('LD')
-    expect(page.locator('#vehicle-classes option')).to_have_count(3)
-    assert page.locator('#vehicle-classes option').evaluate_all('(items) => items.map(item => item.value)') == ['LD', 'MD', 'HD']
+    expect(page.locator('#vehicle_class option')).to_have_count(4)
+    assert page.locator('#vehicle_class option').evaluate_all('(items) => items.map(item => item.value).filter(Boolean)') == ['LD', 'MD', 'HD']
     context.close()
     nojs = browser.new_context(java_script_enabled=False)
     page = nojs.new_page()
@@ -137,7 +140,7 @@ def test_real_sample_map_and_source_schedule_changes(browser, live_app):
     expect(card).to_contain_text('outside the recorded operating hours')
     page.goto(live_app + '/vehicles/new')
     page.locator('[name="vin"]').fill('NLR00000000000001')
-    page.locator('[name="vehicle_class"]').fill('LD')
+    page.locator('[name="vehicle_class"]').select_option('LD')
     page.locator('[name="accepted_connector_ids"]').first.check()
     page.get_by_role('button', name='Save vehicle').click()
     expect(page.locator('body')).to_contain_text('NLR00000000000001')

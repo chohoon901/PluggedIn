@@ -51,6 +51,7 @@ def form_page(request, services, kind, values=None, errors=None, item_id=None, s
     if kind == 'vehicles':
         context['connectors'] = services.catalog()['connectors']
         context['vehicle_classes'] = [(value.value, value.label) for value in VehicleClass if value != VehicleClass.UNKNOWN]
+        context['vehicle_class_codes'] = [code for code, _ in context['vehicle_classes']]
     if kind == 'memberships':
         context['drivers'] = services.list_drivers()
         context['networks'] = services.catalog()['networks']
