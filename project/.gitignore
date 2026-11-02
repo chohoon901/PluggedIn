@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.work/
+test-results/
+playwright-report/
+src/ca/uvic/ecs/csc501/dal/data/*.db*
+

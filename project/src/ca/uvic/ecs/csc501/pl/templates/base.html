@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#163d34">
+  <title>{% block title %}PluggedIn · Find your next charge{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/app.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="/" aria-label="PluggedIn home"><span class="brand-mark" aria-hidden="true">ϟ</span>Plugged<span>In</span><small>BC CHARGING COMPANION</small></a>
+  <nav aria-label="Main navigation"><a href="/" {% if request.url.path in ['/', '/stations'] or request.url.path.startswith('/stations/') %}aria-current="page"{% endif %}>Find charging</a><a href="/drivers" {% if request.url.path.startswith('/drivers') %}aria-current="page"{% endif %}>Drivers</a><a href="/vehicles" {% if request.url.path.startswith('/vehicles') %}aria-current="page"{% endif %}>Vehicles</a><a href="/memberships" {% if request.url.path.startswith('/memberships') %}aria-current="page"{% endif %}>Memberships</a></nav>
+  <span class="region-chip">● BRITISH COLUMBIA</span>
+</div></header>
+<main id="main" class="shell">{% block content %}{% endblock %}</main>
+<footer class="site-footer"><div class="shell footer-inner"><a class="footer-brand" href="/">ϟ PluggedIn</a><p>A little more certainty before your next charge.<br><span>EV charging conditions in BC · Student project MVP</span></p><span class="footer-note">{{ disclaimer }}</span></div></footer>
+<script src="{{ url_for('static', path='/js/forms.js') }}" defer></script>
+{% block scripts %}{% endblock %}
+</body></html>
