@@ -1,0 +1,15 @@
+{% macro errors_summary(errors) %}{% if errors %}<div class="error-box" role="alert" tabindex="-1"><strong>Please check your information.</strong><ul>{% for field, message in errors.items() %}<li>{{ message }} <small>({{ field }})</small></li>{% endfor %}</ul></div>{% endif %}{% endmacro %}
+{% macro field(name, label, values, errors, required=false, type='text', help='', maxlength=none, placeholder='') %}
+<div class="field"><label for="{{ name }}">{{ label }}{% if required %}<span class="required"> Required</span>{% endif %}</label><input id="{{ name }}" name="{{ name }}" type="{{ type }}" value="{{ values.get(name) if values.get(name) is not none else '' }}" {% if required %}required{% endif %} {% if maxlength %}maxlength="{{ maxlength }}"{% endif %} {% if type == 'number' %}min="0.1" step="any"{% endif %} placeholder="{{ placeholder }}" aria-describedby="{{ name }}-hint" {% if errors.get(name) %}aria-invalid="true"{% endif %}><small id="{{ name }}-hint" class="{{ 'field-error' if errors.get(name) else 'hint' }}">{{ errors.get(name) or help }}</small></div>
+{% endmacro %}
+{% macro badge(status) %}<span class="badge {{ status|lower }}"><span aria-hidden="true">{{ '✓' if status in ['PASS','AVAILABLE'] else ('!' if status in ['UNKNOWN','NEEDS_REVIEW'] else '−') }}</span> {{ {'AVAILABLE':'Available','NEEDS_REVIEW':'Needs review','UNAVAILABLE':'Unavailable','PASS':'Pass','UNKNOWN':'Needs review','FAIL':'Not met'}.get(status, status) }}</span>{% endmacro %}
+{% macro actions(kind, id) %}<div class="row-actions"><a href="/{{ kind }}/{{ id }}/edit">Edit <span aria-hidden="true">↗</span></a><form method="post" action="/{{ kind }}/{{ id }}/delete"><button type="submit" class="text-danger" data-delete>Delete</button></form></div>{% endmacro %}
+{% macro display_value(value) -%}
+{%- if value is none -%}Unknown
+{%- elif value is sameas true -%}Yes
+{%- elif value is sameas false -%}No
+{%- elif value is string -%}{{ {'CAR':'Car','VAN':'Van','MEDIUM_TRUCK':'Medium truck','HEAVY_TRUCK':'Heavy truck','COMPLETE':'Complete','INCOMPLETE':'Incomplete','PARTIAL':'Partial','UNKNOWN':'Unknown','OPERATIONAL':'Operational','ACTIVE':'Active','CLOSED':'Closed','TEMPORARILY_CLOSED':'Temporarily closed','PLANNED':'Planned','PUBLIC':'Public','PRIVATE':'Private','CUSTOMERS_ONLY':'Customers only','FLEET_ONLY':'Fleet only','public':'Public','private':'Private','customers only':'Customers only','fleet only':'Fleet only','PASS':'Pass','FAIL':'Not met','AVAILABLE':'Available','NEEDS_REVIEW':'Needs review','UNAVAILABLE':'Unavailable'}.get(value, value) }}
+{%- elif value is mapping -%}{% for key, item in value.items() %}{{ key|replace('_', ' ')|capitalize }}: {{ display_value(item) }}{{ '; ' if not loop.last else '' }}{% endfor %}
+{%- elif value is iterable -%}{% for item in value %}{{ display_value(item) }}{{ ', ' if not loop.last else '' }}{% else %}None{% endfor %}
+{%- else -%}{{ value }}{%- endif -%}
+{%- endmacro %}

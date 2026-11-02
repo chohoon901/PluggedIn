@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pluggedin"
+version = "0.1.0"
+description = "DB 기반 운전자·차량 충전소 이용 가능성 판정"
+requires-python = ">=3.12"
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"ca.uvic.ecs.csc501.dal" = ["config.properties", "scripts/schema.sql", "data/*.json"]
+"ca.uvic.ecs.csc501.pl" = ["templates/**/*.html", "static/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+markers = ["e2e: real Chromium browser tests"]
+

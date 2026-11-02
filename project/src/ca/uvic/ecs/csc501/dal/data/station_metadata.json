@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "stations": {
+    "1": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "COMPLETE",
+      "aggregateCompleteness": "COMPLETE",
+      "sourceLabel": "Local project demo data",
+      "sourceUpdatedAt": null,
+      "unconfirmedFields": []
+    },
+    "2": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "COMPLETE",
+      "aggregateCompleteness": "COMPLETE",
+      "sourceLabel": "Local project demo data",
+      "sourceUpdatedAt": null,
+      "unconfirmedFields": []
+    },
+    "3": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "COMPLETE",
+      "aggregateCompleteness": "COMPLETE",
+      "sourceLabel": "Local project demo data",
+      "sourceUpdatedAt": null,
+      "unconfirmedFields": []
+    },
+    "4": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "UNKNOWN",
+      "portsCompleteness": "COMPLETE",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "Local project demo data",
+      "sourceUpdatedAt": null,
+      "unconfirmedFields": []
+    },
+    "5": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "COMPLETE",
+      "aggregateCompleteness": "COMPLETE",
+      "sourceLabel": "Local project demo data",
+      "sourceUpdatedAt": null,
+      "unconfirmedFields": []
+    }
+  }
+}
