@@ -93,11 +93,7 @@ def check_access(snapshot: StationSnapshot, vehicle: VehicleSnapshot) -> CheckRe
         size = _result(CheckStatus.FAIL, ReasonCode.VEHICLE_TOO_LARGE, 'The vehicle exceeds the maximum class recorded for the facility.', evidence)
     else:
         size = CheckResult(CheckStatus.PASS, (), evidence)
-    checks = [eligibility, size]
-    if vehicle_class.requires_clearance_review:
-        checks.append(_result(CheckStatus.UNKNOWN, ReasonCode.TRUCK_CLEARANCE_UNKNOWN,
-                              'Recorded truck parking does not guarantee height, turning, or entry clearance at the charging bay.', evidence))
-    return _combine(checks, evidence)
+    return _combine([eligibility, size], evidence)
 
 
 def check_connector(snapshot: StationSnapshot, vehicle: VehicleSnapshot, port: Port | None) -> CheckResult:

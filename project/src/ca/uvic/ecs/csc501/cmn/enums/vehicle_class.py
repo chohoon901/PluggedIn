@@ -25,10 +25,6 @@ class VehicleClass(StrEnum):
         return {self.LD: 0, self.MD: 1, self.HD: 2}.get(self)
 
     @property
-    def requires_clearance_review(self) -> bool:
-        return self in (self.MD, self.HD)
-
-    @property
     def label(self) -> str:
         return {self.LD: 'Light-duty / passenger vehicles (Class 1-2)',
                 self.MD: 'Medium-duty vehicles (Class 3-6)',

@@ -105,12 +105,19 @@ class EvaluationTests(unittest.TestCase):
         for restriction in ('customers only','fleet only','private',None,'staff approval'):
             self.assertEqual(self.evaluate(station=self.changed_station(access_restriction=restriction)).checks['access'].status,'UNKNOWN')
 
-    def test_vehicle_size_excess_fails_and_truck_parking_cannot_prove_clearance(self):
+    def test_vehicle_class_limit_applies_without_clearance_gating(self):
         self.assertEqual(self.evaluate(station=self.changed_station(max_vehicle_class='LD'), vehicle=replace(self.vehicle, vehicle=replace(self.vehicle.vehicle, vehicle_class='MD'))).checks['access'].status,'FAIL')
         truck = replace(self.vehicle,vehicle=replace(self.vehicle.vehicle,vehicle_class='HD'))
         result = self.evaluate(station=self.changed_station(max_vehicle_class='HD',has_truck_parking=True),vehicle=truck)
-        self.assertEqual(result.checks['access'].status,'UNKNOWN')
-        self.assertIn('TRUCK_CLEARANCE_UNKNOWN',[r.code for r in result.checks['access'].reasons])
+        self.assertEqual(result.checks['access'].status,'PASS')
+        self.assertNotIn('TRUCK_CLEARANCE_UNKNOWN',[r.code for r in result.checks['access'].reasons])
+
+    def test_md_access_still_respects_restricted_eligibility(self):
+        vehicle = replace(self.vehicle, vehicle=replace(self.vehicle.vehicle, vehicle_class='MD'))
+        for restriction, expected in (('private', 'UNKNOWN'), ('employees only', 'UNKNOWN'), ('no public access', 'FAIL')):
+            with self.subTest(restriction=restriction):
+                station = self.changed_station(max_vehicle_class='MD', access_restriction=restriction)
+                self.assertEqual(self.evaluate(station=station, vehicle=vehicle).checks['access'].status, expected)
 
     def test_unknown_vehicle_or_facility_class_requires_review(self):
         self.assertEqual(self.evaluate(station=self.changed_station(max_vehicle_class=None)).checks['access'].status,'UNKNOWN')

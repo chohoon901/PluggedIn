@@ -16,23 +16,23 @@ def test_nlr_vehicle_class_classifies_without_rewriting(raw, expected):
 @pytest.mark.parametrize('vehicle,maximum,expected', [
     ('CAR','LD','UNKNOWN'), ('LD','LD','PASS'), ('LD','MD','PASS'), ('LD','HD','PASS'),
     ('MD','LD','FAIL'), ('HD','MD','FAIL'),
-    ('MD','MD','UNKNOWN'), ('HD','HD','UNKNOWN'),
+    ('MD','MD','PASS'), ('MD','HD','PASS'), ('HD','HD','PASS'),
     ('LD',None,'UNKNOWN'), (None,'LD','UNKNOWN'), ('VAN','LD','UNKNOWN')])
-def test_nlr_access_and_truck_clearance(vehicle, maximum, expected):
+@pytest.mark.parametrize('truck_parking', [False, True])
+def test_nlr_access_uses_class_without_clearance(vehicle, maximum, expected, truck_parking):
     base = 'ca.uvic.ecs.csc501.cmn.'
     Station = import_module(base+'domain.station').Station
     Vehicle = import_module(base+'domain.vehicle').Vehicle
     models = import_module(base+'contracts.models')
     check = import_module(base+'services.evaluation').check_access
     entity = Station(1, Decimal('49.2'), Decimal('-123.1'), None,None,None,'BC',
-                     'ACTIVE','public',False,maximum,True,None,None,None)
+                     'ACTIVE','public',False,maximum,truck_parking,None,None,None)
     snapshot = models.StationSnapshot(entity,(),(),(),(),models.StationMetadata())
     selected = models.VehicleSnapshot(Vehicle(1,'x'*17,vehicle_class=vehicle),())
     assert check(snapshot, selected).status == expected
     assert entity.max_vehicle_class == maximum
     assert selected.vehicle.vehicle_class == vehicle
-    if vehicle in ('MD','HD') and expected == 'UNKNOWN':
-        assert any(r.code == 'TRUCK_CLEARANCE_UNKNOWN' for r in check(snapshot,selected).reasons)
+    assert not any(r.code == 'TRUCK_CLEARANCE_UNKNOWN' for r in check(snapshot,selected).reasons)
 
 
 def test_all_entities_and_enums_live_in_the_requested_packages():

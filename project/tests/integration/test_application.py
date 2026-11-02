@@ -41,12 +41,13 @@ ARRIVAL = "2026-10-26T19:00:00Z"
 def test_demo_and_membership_changes_recompute_from_database(service):
     result = service.search(1, 1, ARRIVAL, BBOX)
     assert [row["overall_status"] for row in result["results"]] == [
-        "NEEDS_REVIEW", "NEEDS_REVIEW", "UNAVAILABLE", "NEEDS_REVIEW", "NEEDS_REVIEW"
+        "AVAILABLE", "AVAILABLE", "UNAVAILABLE", "NEEDS_REVIEW", "AVAILABLE"
     ]
     assert result["results"][0]["power_limit_kw"] == 100
     assert service.detail(1, 2, 1, ARRIVAL)["overall_status"] == "UNAVAILABLE"
     member = service.save_membership({"driver_id": 2, "network_id": 1, "start_date": "2026-01-01"})
     assert service.detail(1, 2, 1, ARRIVAL)["checks"]["payment"]["status"] == "PASS"
+    assert service.detail(1, 2, 1, ARRIVAL)["overall_status"] == "AVAILABLE"
     service.delete_membership(member["membership_id"])
     assert service.detail(1, 2, 1, ARRIVAL)["overall_status"] == "UNAVAILABLE"
 

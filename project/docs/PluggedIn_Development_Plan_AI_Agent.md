@@ -315,7 +315,7 @@ station.status를 ACTIVE/INACTIVE/PLANNED/TEMPORARILY_CLOSED/UNKNOWN으로 정�
 
 access_restriction을 공백·대소문자 정규화한다. public은 자격 PASS, no public access/closed to public은 FAIL, customers only/fleet only/private/빈 값/미해석 조건은 UNKNOWN이다. 운송사 이름만 보고 플릿 승인 여부를 추측하지 않는다.
 
-차량 등급은 NLR의 LD(Class 1-2), MD(Class 3-6), HD(Class 7-8)로 통일하고 LD<MD<HD 순으로 비교한다. 차량과 시설 최대 등급 모두 같은 코드를 사용하며 누락·미지원 값은 UNKNOWN이다. 기존 데이터는 사용자 지정 정책에 따라 CAR→LD, VAN→MD, MEDIUM_TRUCK→MD, HEAVY_TRUCK→HD로 마이그레이션한다. 이는 프로젝트 변환 정책이며 실제 모든 밴의 법정 등급을 확정하는 규칙은 아니다. 새 입력은 LD/MD/HD만 허용한다. 선택 차량이 시설 최대 등급을 초과하면 FAIL이다. MD/HD는 주차 기록이나 최대 등급만으로 충전 베이 진입 여유를 보장하지 않으므로 TRUCK_CLEARANCE_UNKNOWN을 유지한다. access는 이용 자격·차량 등급·필요한 물리 조건의 AND로 평가한다.
+차량 등급은 NLR의 LD(Class 1-2), MD(Class 3-6), HD(Class 7-8)로 통일하고 LD<MD<HD 순으로 비교한다. 차량과 시설 최대 등급 모두 같은 코드를 사용하며 누락·미지원 값은 UNKNOWN이다. 기존 데이터는 사용자 지정 정책에 따라 CAR→LD, VAN→MD, MEDIUM_TRUCK→MD, HEAVY_TRUCK→HD로 마이그레이션한다. 이는 프로젝트 변환 정책이며 실제 모든 밴의 법정 등급을 확정하는 규칙은 아니다. 새 입력은 LD/MD/HD만 허용한다. 선택 차량이 시설 최대 등급을 초과하면 FAIL이다. 현재 MVP에서 충전 베이 진입 여유 평가는 보류한다. LD/MD/HD 모두 공개 이용 자격과 최대 등급 조건을 충족하면 access PASS이며, has_truck_parking 값은 판정에 영향을 주지 않는다. access는 이용 자격과 차량 등급의 AND로 평가한다. 실제 진입 여유를 보장하지는 않는다.
 
 ### 7.4 connector — 직접 연결만
 

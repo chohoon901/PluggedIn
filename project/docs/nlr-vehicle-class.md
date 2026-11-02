@@ -8,7 +8,7 @@ NLR/AFDC `maximum_vehicle_class` defines LD as passenger vehicles (Class 1-2), M
 
 Source: https://afdc.energy.gov/data_download/alt_fuel_stations_format
 
-`cmn/enums/vehicle_class.py` defines LD, MD, HD and UNKNOWN, ranked LD < MD < HD. Public access plus a known vehicle class within the facility maximum passes access for LD vehicles. MD/HD retain the existing truck-clearance review: a maximum or truck-parking flag alone does not prove bay clearance. A vehicle above the maximum fails. Missing/unrecognized values remain UNKNOWN. Only LD/MD/HD are recognized; ALL and old body-style labels are not runtime class values.
+`cmn/enums/vehicle_class.py` defines LD, MD, HD and UNKNOWN, ranked LD < MD < HD. Public access plus a known vehicle class within the facility maximum passes access for LD, MD and HD vehicles. Under the updated MVP policy, charging-bay clearance is deferred and does not gate access. Parking records do not affect this result. A vehicle above the maximum fails. Missing/unrecognized values remain UNKNOWN. Only LD/MD/HD are recognized; ALL and old body-style labels are not runtime class values.
 
 The user explicitly requested CAR -> LD, VAN -> MD, MEDIUM_TRUCK -> MD and HEAVY_TRUCK -> HD for existing project class fields. This is a conservative project migration policy, not a universal legal classification of every real van. These old tokens are rejected by new vehicle input validation. Only LD/MD/HD are accepted; case/spacing normalize to the canonical code. Model names and source free text are unchanged.
 
@@ -28,7 +28,7 @@ Commit 3f331c9 removed the Adapter domain class. The initial package reorganizat
 
 The sample now stores LD for its four synthetic vehicles and retains 7 LD / 13 missing facility maxima. Under the new interpretation, 3 public LD facilities pass access for LD profiles. Other facilities need review for missing maxima or restricted eligibility. Connector, payment and opening checks still independently affect the final status.
 
-The old synthetic demo and its generator now use MD for vehicle and facility limits. A/B/E remain NEEDS_REVIEW because MD/HD charging-bay clearance is not verified; definite failures still take precedence. Missing facility maxima are not filled in. All original schema definitions, other column values and source data were retained during migration.
+The old synthetic demo and its generator now use MD for vehicle and facility limits. A/B/E are AVAILABLE in the recorded daytime demo scenario when opening, connection and payment also pass; charging-bay clearance is outside the current MVP evaluation. Missing facility maxima are not filled in. All original schema definitions, other column values and source data were retained during migration.
 
 ## Updating another existing DB
 
