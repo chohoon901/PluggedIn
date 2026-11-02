@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "stations": {
+    "1": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 404841 + OCM 469092; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 04:56:22 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "2": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 439515 + OCM 469090; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 04:31:56 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "3": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 422669 + OCM 469047; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 03:37:29 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "4": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 434877 + OCM 469066; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-06-18 14:46:21 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "5": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 329666 + OCM 383153; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 03:33:56 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "6": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 388224 + OCM 382987; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 03:36:28 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "7": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 357179 + OCM 383338; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 04:29:56 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "8": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 435946 + OCM 469074; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-04-02 20:03:43 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "9": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "UNKNOWN",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 404546 + OCM 469078; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-04-02 20:03:43 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "10": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "UNKNOWN",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 84990 + OCM 250247; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2024-08-16 19:01:54 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "11": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 437419 + OCM 469075; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-04-02 20:03:43 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "12": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "UNKNOWN",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 436202 + OCM 469073; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-04-02 20:03:43 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "13": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 262617 + OCM 469091; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2024-04-25 20:00:24 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "14": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 428579 + OCM 469086; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 03:37:45 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "15": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 421199 + OCM 469068; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 04:32:02 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "16": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 421009 + OCM 469053; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-09-21 04:32:02 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "17": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "UNKNOWN",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 84137 + OCM 250279; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2021-06-07 17:08:43 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "18": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "COMPLETE",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 208845 + OCM 234285; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2025-08-22 19:25:33 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "19": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "UNKNOWN",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 249441 + OCM 250225; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2026-08-07 20:19:20 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    },
+    "20": {
+      "timezone": "America/Vancouver",
+      "hoursCompleteness": "UNKNOWN",
+      "portsCompleteness": "PARTIAL",
+      "aggregateCompleteness": "INCOMPLETE",
+      "sourceLabel": "NLR/AFDC 84339 + OCM 111974; OCM power is estimated and not used",
+      "sourceUpdatedAt": "2021-06-07 17:08:43 UTC",
+      "unconfirmedFields": [
+        "accepts_guest_payment",
+        "has_truck_parking",
+        "quantity",
+        "power_kw"
+      ]
+    }
+  }
+}

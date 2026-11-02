@@ -9,6 +9,7 @@ from ..contracts.evaluation import (
 )
 from ..membership import Membership
 from ..port import Port
+from ..connector_family import ConnectorFamily
 
 
 def aggregate_checks(statuses: Iterable[CheckStatus]) -> OverallStatus:
@@ -108,12 +109,22 @@ def check_connector(snapshot: StationSnapshot, vehicle: VehicleSnapshot, port: P
         return _result(CheckStatus.UNKNOWN, ReasonCode.PORTS_UNKNOWN, 'The port list is missing or incomplete, so unverified connection options remain.', evidence)
     if not vehicle.accepted_connector_ids:
         return _result(CheckStatus.UNKNOWN, ReasonCode.CONNECTOR_UNKNOWN, 'The vehicle has no recorded accepted connectors.', evidence)
-    if not vehicle.accepts(port.connector_type_id):
-        return _result(CheckStatus.FAIL, ReasonCode.DIRECT_INCOMPATIBLE, 'This port does not directly match a connector registered for the vehicle.', evidence)
     connector = next((c for c in snapshot.connector_types if c.connector_type_id == port.connector_type_id), None)
-    name = _normalized(connector.name if connector else None)
+    family = ConnectorFamily.from_name(connector.name if connector else None)
+    accepted_names = vehicle.accepted_connector_names or tuple(
+        c.name for c in snapshot.connector_types if c.connector_type_id in vehicle.accepted_connector_ids)
+    accepted_families = {ConnectorFamily.from_name(name) for name in accepted_names}
+    matches = vehicle.accepts(port.connector_type_id) or (
+        family != ConnectorFamily.UNKNOWN and family in accepted_families)
     evidence['connector_name'] = connector.name if connector else None
-    expected = {'J1772': 'AC', 'CCS1': 'DC', 'CHADEMO': 'DC'}.get(name)
+    evidence['connector_family'] = family.value
+    evidence['accepted_connector_names'] = list(accepted_names)
+    if not matches and (family == ConnectorFamily.UNKNOWN or ConnectorFamily.UNKNOWN in accepted_families):
+        return _result(CheckStatus.UNKNOWN, ReasonCode.CONNECTOR_UNKNOWN,
+                       'An unrecognized connector name needs verification.', evidence)
+    if not matches:
+        return _result(CheckStatus.FAIL, ReasonCode.DIRECT_INCOMPATIBLE, 'This port does not directly match a connector registered for the vehicle.', evidence)
+    expected = family.verified_current
     if expected is None or port.current_type != expected:
         return _result(CheckStatus.UNKNOWN, ReasonCode.CONNECTOR_UNKNOWN,
                        'The connector matches, but the current type or additional vehicle connection requirements cannot be verified.', evidence)

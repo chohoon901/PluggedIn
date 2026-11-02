@@ -1,5 +1,7 @@
 # PluggedIn
 
+> **Sunghun_IDNull branch:** The active database is now a separate, ID-matched 20-station NLR–OCM Vancouver sample. Station owner/operator references permit NULL; source connector names are preserved and compared through a domain enum. See [sample20 instructions](docs/sample20.md) for running, provenance, uncertainty and portable files. Existing demo initialization instructions below describe the synthetic demo; do not seed demo rows into the sample database.
+
 운전자·차량·도착 시각을 선택하면 BC 충전소의 **운영시간, 이용·차량 제한, 직접 커넥터, 결제 조건**을 비교하는 학교 프로젝트 MVP입니다. 운전자·차량·수용 커넥터·멤버십을 SQLite에 저장하고 서버에서 결과와 이유를 계산해 HTML로 제공합니다.
 
 웹사이트 화면·판정 설명·오류 메시지는 영어입니다. 도착 시각은 달력과 시간 선택란으로 입력하며 기본 시간대는 Pacific time (British Columbia)입니다. UTC를 선택할 수도 있습니다. 서버가 현지 입력을 정확한 시각으로 변환하므로 소비자가 ISO 문자열이나 UTC offset을 직접 입력할 필요가 없습니다. Search now는 JavaScript 없이 현재 시각으로 검색합니다. 기존 aware arrival_at API와 URL은 계속 지원합니다.

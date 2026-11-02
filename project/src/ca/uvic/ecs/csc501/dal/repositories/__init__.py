@@ -74,7 +74,9 @@ class VehicleRepository(EntityRepository):
         ids = tuple(self.session.scalars(select(VehicleAcceptsModel.connector_type_id)
                                         .where(VehicleAcceptsModel.vehicle_id == identifier)
                                         .order_by(VehicleAcceptsModel.connector_type_id)))
-        return VehicleSnapshot(vehicle, ids)
+        names = tuple(self.session.scalars(select(ConnectorTypeModel.name)
+                      .where(ConnectorTypeModel.connector_type_id.in_(ids))))
+        return VehicleSnapshot(vehicle, ids, names)
 
     def list(self):
         return [self.get(identifier) for identifier in self.session.scalars(select(VehicleModel.vehicle_id).order_by(VehicleModel.vehicle_id))]

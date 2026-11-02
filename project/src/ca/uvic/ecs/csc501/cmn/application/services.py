@@ -232,6 +232,18 @@ class ApplicationService:
         with self._uow_factory() as uow:
             return {"connectors": _plain(uow.catalog.connectors()), "networks": _plain(uow.catalog.networks())}
 
+    def search_bounds(self) -> dict:
+        """Initial search area follows registered stations, not a demo-only city."""
+        with self._uow_factory() as uow:
+            stations = [s.station for s in uow.stations.list()]
+        if not stations:
+            return {'west': -123.50, 'south': 48.35, 'east': -123.20, 'north': 48.60}
+        pad = Decimal('0.02')
+        return {'west': float(max(Decimal('-180'), min(s.longitude for s in stations) - pad)),
+                'south': float(max(Decimal('-90'), min(s.latitude for s in stations) - pad)),
+                'east': float(min(Decimal('180'), max(s.longitude for s in stations) + pad)),
+                'north': float(min(Decimal('90'), max(s.latitude for s in stations) + pad))}
+
     def _selected(self, uow, driver_id, vehicle_id):
         driver = _found(uow.drivers.get(_id(driver_id, "driver_id")), "driver")
         vehicle = _found(uow.vehicles.get(_id(vehicle_id, "vehicle_id")), "vehicle")

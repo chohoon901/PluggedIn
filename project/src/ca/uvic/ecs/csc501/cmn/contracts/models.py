@@ -13,6 +13,8 @@ class VehicleSnapshot:
     vehicle: Vehicle
     # 이 차량이 직접 받는다고 등록한 커넥터 규격 번호들입니다.
     accepted_connector_ids: tuple[int, ...]
+    # 차량에 등록한 규격의 원문 이름들입니다. 서로 다른 DB 번호의 별칭을 비교합니다.
+    accepted_connector_names: tuple[str, ...] = ()
 
     def accepts(self, connector_id: int) -> bool:
         return connector_id in self.accepted_connector_ids

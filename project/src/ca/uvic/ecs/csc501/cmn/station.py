@@ -31,10 +31,10 @@ class Station:
     max_vehicle_class: str | None
     # 트럭 주차 공간이 있다고 기록했는지 나타내는 DB 값입니다. 기본 false와 미확인은 다르며 충전 베이 진입을 보장하지 않습니다.
     has_truck_parking: bool
-    # 이 충전소 부지·시설의 소유자 역할을 가리킵니다. site_owner의 조직 번호입니다.
-    owner_id: int
-    # 충전 설비를 실제 운영·관리하는 역할을 가리킵니다. operator의 조직 번호입니다.
-    operator_id: int
+    # 이 충전소 부지·시설의 소유자 역할을 가리킵니다. None이면 소유자를 확인하지 못했습니다.
+    owner_id: int | None
+    # 충전 설비 운영·관리 기관입니다. None이면 운영사를 확인하지 못했습니다.
+    operator_id: int | None
     # 이 충전소에서 사용하는 충전 네트워크의 조직 번호입니다. None이면 연결된 네트워크가 기록되지 않았습니다.
     network_id: int | None
 
