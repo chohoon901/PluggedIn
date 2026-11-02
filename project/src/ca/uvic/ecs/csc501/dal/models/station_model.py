@@ -18,6 +18,6 @@ class StationModel(Base):
     accepts_guest_payment = mapped_column(Boolean, nullable=False, server_default=text('0'))
     max_vehicle_class = mapped_column(String(30), nullable=True)
     has_truck_parking = mapped_column(Boolean, nullable=False, server_default=text('0'))
-    owner_id = mapped_column(Integer, ForeignKey('site_owner.organization_id'), nullable=False)
-    operator_id = mapped_column(Integer, ForeignKey('operator.organization_id'), nullable=False)
+    owner_id = mapped_column(Integer, ForeignKey('site_owner.organization_id'), nullable=True)
+    operator_id = mapped_column(Integer, ForeignKey('operator.organization_id'), nullable=True)
     network_id = mapped_column(Integer, ForeignKey('network.organization_id'), nullable=True)

@@ -7,11 +7,12 @@ from typing import Callable
 
 from ..contracts.errors import InputError, NotFoundError
 from ..contracts.repositories import UnitOfWork
-from ..driver import Driver
-from ..membership import Membership
-from ..vehicle import Vehicle
-from ..value_objects.daily_time import DailyTime
+from ca.uvic.ecs.csc501.cmn.domain.driver import Driver
+from ca.uvic.ecs.csc501.cmn.domain.membership import Membership
+from ca.uvic.ecs.csc501.cmn.domain.vehicle import Vehicle
+from ca.uvic.ecs.csc501.cmn.domain.value_objects.daily_time import DailyTime
 from ..services.evaluation import evaluate_station
+from ..enums.vehicle_class import VehicleClass
 
 
 def current_instant() -> str:
@@ -172,8 +173,10 @@ class ApplicationService:
 
     def save_vehicle(self, data: dict, vehicle_id: int | None = None) -> dict:
         vehicle_class = _text(data, "vehicle_class", 30)
-        if vehicle_class and vehicle_class not in {"CAR", "VAN", "MEDIUM_TRUCK", "HEAVY_TRUCK"}:
+        if vehicle_class and not VehicleClass.accepts_input(vehicle_class):
             raise InputError("Select a vehicle class.", {"vehicle_class": "Select a supported vehicle class."})
+        if vehicle_class:
+            vehicle_class = VehicleClass.from_name(vehicle_class).value
         accepted = data.get("accepted_connector_ids")
         if not isinstance(accepted, (list, tuple, set)) or not accepted:
             raise InputError("Select at least one accepted connector.", {"accepted_connector_ids": "Select at least one connector."})
@@ -231,6 +234,18 @@ class ApplicationService:
     def catalog(self) -> dict:
         with self._uow_factory() as uow:
             return {"connectors": _plain(uow.catalog.connectors()), "networks": _plain(uow.catalog.networks())}
+
+    def search_bounds(self) -> dict:
+        """Initial search area follows registered stations, not a demo-only city."""
+        with self._uow_factory() as uow:
+            stations = [s.station for s in uow.stations.list()]
+        if not stations:
+            return {'west': -123.50, 'south': 48.35, 'east': -123.20, 'north': 48.60}
+        pad = Decimal('0.02')
+        return {'west': float(max(Decimal('-180'), min(s.longitude for s in stations) - pad)),
+                'south': float(max(Decimal('-90'), min(s.latitude for s in stations) - pad)),
+                'east': float(min(Decimal('180'), max(s.longitude for s in stations) + pad)),
+                'north': float(min(Decimal('90'), max(s.latitude for s in stations) + pad))}
 
     def _selected(self, uow, driver_id, vehicle_id):
         driver = _found(uow.drivers.get(_id(driver_id, "driver_id")), "driver")

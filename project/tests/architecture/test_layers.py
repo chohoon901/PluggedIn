@@ -27,15 +27,24 @@ def test_domain_and_presentation_dependencies_stay_inside_boundaries():
                         assert not set(components) & {"dal", "sqlalchemy", "sqlite3"}, (path, name)
 
 
-def test_all_13_domain_entities_match_65_original_orm_columns():
+def test_current_domain_entities_match_the_13_table_65_column_schema():
     from ca.uvic.ecs.csc501.dal.models import Base
     assert len(Base.metadata.tables) == 13
     assert sum(len(table.columns) for table in Base.metadata.tables.values()) == 65
     for table_name in TABLES:
-        module = import_module(f"ca.uvic.ecs.csc501.cmn.{table_name}")
+        module = import_module(f"ca.uvic.ecs.csc501.cmn.domain.{table_name}")
         cls = getattr(module, "".join(part.title() for part in table_name.split("_")))
         names = {field.name for field in fields(cls)}
         if table_name == "vehicle":
             names.remove("vehicle_class")
             names.add("class")
         assert names == set(Base.metadata.tables[table_name].columns.keys()), table_name
+
+
+def test_domain_entities_and_enum_definitions_are_grouped():
+    cmn = ROOT / 'cmn'
+    assert {p.name for p in cmn.glob('*.py')} == {'__init__.py'}
+    for path in cmn.rglob('*.py'):
+        for node in ast.walk(ast.parse(path.read_text(encoding='utf-8-sig'))):
+            if isinstance(node, ast.ClassDef) and any(isinstance(base, ast.Name) and base.id in ('Enum','StrEnum') for base in node.bases):
+                assert path.parent == cmn / 'enums'

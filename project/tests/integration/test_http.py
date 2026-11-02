@@ -35,6 +35,37 @@ def test_api_crud_normalizes_and_rejects_duplicate(client):
     assert client.get(f"/api/v1/drivers/{driver['driver_id']}").status_code == 404
 
 
+@pytest.mark.parametrize('legacy', ['CAR', 'VAN', 'MEDIUM_TRUCK', 'HEAVY_TRUCK', 'ALL'])
+def test_vehicle_api_rejects_old_class_vocabulary(client, legacy):
+    response = client.post('/api/v1/vehicles', json={'vin': 'CLASS000000000001',
+        'vehicle_class': legacy, 'accepted_connector_ids': [1]})
+    assert response.status_code == 400
+
+
+def test_vehicle_api_stores_canonical_nlr_code(client):
+    response = client.post('/api/v1/vehicles', json={'vin': 'CLASS000000000001',
+        'vehicle_class': ' md ', 'accepted_connector_ids': [1]})
+    assert response.status_code == 201
+    assert response.json()['vehicle_class'] == 'MD'
+
+
+def test_vehicle_form_and_api_schema_expose_only_nlr_classes(client):
+    page = client.get('/vehicles/new')
+    assert '<select id="vehicle_class"' in page.text
+    assert '<datalist id="vehicle-classes"' not in page.text
+    for old in ('CAR', 'VAN', 'MEDIUM_TRUCK', 'HEAVY_TRUCK'):
+        assert f'<option value="{old}"' not in page.text
+    schema = client.get('/openapi.json').json()['components']['schemas']['VehicleInput']['properties']['vehicle_class']
+    assert schema['anyOf'][0]['enum'] == ['LD','MD','HD']
+
+
+def test_invalid_vehicle_class_form_preserves_submitted_value(client):
+    result = client.post('/vehicles', data={'vin':'CLASS000000000001', 'vehicle_class':'VAN',
+                                          'accepted_connector_ids':'1'})
+    assert result.status_code == 400
+    assert 'Unsupported submitted class: VAN' in result.text
+
+
 @pytest.mark.parametrize('path,data', [
     ('drivers', {'licence_number': ''}),
     ('drivers', {'licence_number': 'L', 'driver_id': 100}),
@@ -101,7 +132,11 @@ def test_search_apis_match_ssr_and_unready_health_is_503(client, tmp_path):
     result = client.post('/api/v1/stations/search', json=payload)
     assert result.status_code == 200
     assert result.json()['counts'] == {'AVAILABLE': 3, 'NEEDS_REVIEW': 1, 'UNAVAILABLE': 1}
-    assert client.post('/api/v1/stations/1/evaluate', json={k: v for k, v in payload.items() if k != 'bbox'}).json()['overall_status'] == 'AVAILABLE'
+    evaluation = client.post('/api/v1/stations/1/evaluate', json={k: v for k, v in payload.items() if k != 'bbox'}).json()
+    assert evaluation['overall_status'] == 'AVAILABLE'
+    assert evaluation['checks']['access']['status'] == 'PASS'
+    assert evaluation['checks']['access']['evidence']['vehicle_class_nlr'] == 'MD'
+    assert not any(r['code'] == 'TRUCK_CLEARANCE_UNKNOWN' for r in evaluation['checks']['access']['reasons'])
     assert client.get('/stations', params={'driver_id': 'bad', 'vehicle_id': 1}).status_code == 400
     assert client.get('/stations', params={'driver_id': 9999, 'vehicle_id': 1}).status_code == 404
     assert client.get('/api/v1/health').status_code == 200

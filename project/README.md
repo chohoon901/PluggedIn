@@ -1,5 +1,9 @@
 # PluggedIn
 
+> **NLR vehicle classes:** Domain entities now live in `cmn/domain`, enums in `cmn/enums`. Vehicle grades use LD/MD/HD only. Existing CAR values were migrated to LD and VAN to MD under the project policy; legacy class inputs are rejected. See [details](docs/nlr-vehicle-class.md).
+
+> **Sunghun_IDNull branch:** The active database is now a separate, ID-matched 20-station NLR–OCM Vancouver sample. Station owner/operator references permit NULL; source connector names are preserved and compared through a domain enum. See [sample20 instructions](docs/sample20.md) for running, provenance, uncertainty and portable files. Existing demo initialization instructions below describe the synthetic demo; do not seed demo rows into the sample database.
+
 운전자·차량·도착 시각을 선택하면 BC 충전소의 **운영시간, 이용·차량 제한, 직접 커넥터, 결제 조건**을 비교하는 학교 프로젝트 MVP입니다. 운전자·차량·수용 커넥터·멤버십을 SQLite에 저장하고 서버에서 결과와 이유를 계산해 HTML로 제공합니다.
 
 웹사이트 화면·판정 설명·오류 메시지는 영어입니다. 도착 시각은 달력과 시간 선택란으로 입력하며 기본 시간대는 Pacific time (British Columbia)입니다. UTC를 선택할 수도 있습니다. 서버가 현지 입력을 정확한 시각으로 변환하므로 소비자가 ISO 문자열이나 UTC offset을 직접 입력할 필요가 없습니다. Search now는 JavaScript 없이 현재 시각으로 검색합니다. 기존 aware arrival_at API와 URL은 계속 지원합니다.
@@ -46,9 +50,9 @@ venv/bin/python -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8
 충전소와 운전자·차량은 **합성 demo 자료**입니다. 실제 시설 현황을 나타내지 않습니다.
 
 1. 첫 화면에서 Mina와 Demo Van을 각각 선택합니다. 두 목록은 독립적이며 차량 소유 관계를 뜻하지 않습니다.
-2. 도착 시각을 `2026-10-26T19:00:00Z`로 검색합니다. A·B·E는 이용 가능, C는 이용 어려움, D는 확인 필요입니다. [동일 조건으로 열기](http://127.0.0.1:8000/stations?driver_id=1&vehicle_id=1&arrival_at=2026-10-26T19%3A00%3A00Z).
+2. 도착 시각을 `2026-10-26T19:00:00Z`로 검색합니다. A·B·E는 이용 가능, C는 이용 어려움, D는 확인 필요입니다. MVP의 접근 판정은 공개 이용 조건과 차량 등급을 비교하며 충전 베이 진입 여유는 평가하지 않습니다. [동일 조건으로 열기](http://127.0.0.1:8000/stations?driver_id=1&vehicle_id=1&arrival_at=2026-10-26T19%3A00%3A00Z).
 3. `2026-10-27T05:00:00Z`로 검색하면 B는 영업시간 밖입니다.
-4. Jin으로 바꾸면 A의 결제 조건은 미충족, E는 게스트 결제로 통과합니다. Jin에게 Demo Charging Company 멤버십을 추가하면 A가 이용 가능으로 바뀌며 삭제하면 원래 판정으로 돌아갑니다.
+4. Jin으로 바꾸면 A의 결제 조건은 미충족, E는 게스트 결제로 통과합니다. Jin에게 Demo Charging Company 멤버십을 추가하면 A가 이용 가능으로 바뀌며 삭제하면 원래 결제 판정으로 돌아갑니다.
 5. 차량의 수용 커넥터를 CHAdeMO만으로 수정하면 C는 직접 연결 통과, A는 직접 연결 미충족입니다.
 
 운전자·차량·멤버십 메뉴에서 등록·조회·수정·삭제합니다. 선택 필드도 입력하면 모두 DB에 저장됩니다. JS를 꺼도 같은 흐름을 수행할 수 있습니다. 지도 타일이 실패해도 목록·판정·상세·길찾기 링크는 사용할 수 있습니다.
@@ -79,7 +83,7 @@ init_db는 기존 DB를 교체하지 않고 스키마를 확인합니다. seed_d
 도착 시각에 Z 또는 UTC offset을 명시합니다. 목록→상세에서 같은 instant를 유지하고 시설 IANA 시간대로 변환합니다. 운영시간은 개점 포함·폐점 제외이며 `24:00:00`은 폐점에만 사용합니다. Vancouver의 2026년 11월/12월 UTC−07 적용을 tzdata 2026.5로 검증합니다.
 
 - 직접 규격·전류 조합만 판정합니다. adapter 테이블·모델은 원본 보존용이며 보유·선택·추천·변환 API는 없습니다.
-- 중·대형 트럭의 물리적 진입 여유는 주차 기록만으로 확정하지 않습니다.
+- 충전 베이의 물리적 진입 여유는 MVP 접근 판정에서 제외합니다. 기록된 이용 자격과 LD/MD/HD 등급만 비교합니다.
 - 출력은 포트와 차량 상한의 최소값이며 하나라도 미상이면 출력 미상입니다.
 - 실시간 고장·점유·대기, 실제 잔액·결제 인증, 로밍, 도로 통행·높이·축중·회전 반경, SoC 도달성은 평가하지 않습니다.
 - 로그인·멀티유저 권한·사용자별 소유 관계·실제 결제·배포는 범위 밖입니다.

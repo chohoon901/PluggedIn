@@ -8,6 +8,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import ValidationError
 
 from ca.uvic.ecs.csc501.cmn.contracts.errors import AppError, InputError
+from ca.uvic.ecs.csc501.cmn.enums.vehicle_class import VehicleClass
 from .arrival import ARRIVAL_TIMEZONES, DEFAULT_ARRIVAL_TIMEZONE, friendly_datetime
 
 templates = Jinja2Templates(directory=str(Path(__file__).parent / 'templates'))
@@ -49,6 +50,8 @@ def form_page(request, services, kind, values=None, errors=None, item_id=None, s
     context = {'values': values or {}, 'errors': errors or {}, 'item_id': item_id, 'kind': kind}
     if kind == 'vehicles':
         context['connectors'] = services.catalog()['connectors']
+        context['vehicle_classes'] = [(value.value, value.label) for value in VehicleClass if value != VehicleClass.UNKNOWN]
+        context['vehicle_class_codes'] = [code for code, _ in context['vehicle_classes']]
     if kind == 'memberships':
         context['drivers'] = services.list_drivers()
         context['networks'] = services.catalog()['networks']

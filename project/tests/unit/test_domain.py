@@ -8,7 +8,7 @@ from importlib import import_module
 class DomainTests(unittest.TestCase):
     def module(self, name):
         try:
-            return import_module('ca.uvic.ecs.csc501.cmn.' + name)
+            return import_module('ca.uvic.ecs.csc501.cmn.' + (name if name.startswith('contracts.') else 'domain.' + name))
         except ModuleNotFoundError:
             self.fail('Required domain module has not been implemented: ' + name)
 
@@ -81,15 +81,23 @@ class DomainTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 Vehicle(None, 'x'*17, max_charge_kw=Decimal(value))
 
-    def test_port_current_and_adapter_direction_enforce_schema_constraints(self):
+    def test_port_current_and_number_enforce_schema_constraints(self):
         Port = self.module('port').Port
-        Adapter = self.module('adapter').Adapter
         with self.assertRaises(ValueError):
             Port(None, 1, 1, 1, current_type='XX')
         with self.assertRaises(ValueError):
-            Adapter(None, 'model', None, None, 1, 1)
-        with self.assertRaises(ValueError):
             Port(None, 1, 0, 1)
+
+    def test_adapter_domain_preserves_schema_fields_and_validation(self):
+        Adapter = self.module('adapter').Adapter
+        value = Adapter(None, 'Reference model', None, Decimal('100'), 1, 2)
+        self.assertEqual(value.from_connector_type_id, 1)
+        self.assertEqual(value.to_connector_type_id, 2)
+        for model, power, from_id, to_id in ((' ', None, 1, 2),
+                ('Model', None, 1, 1), ('Model', None, None, 2), ('Model', Decimal('-1'), 1, 2)):
+            with self.subTest(model=model, power=power, from_id=from_id, to_id=to_id):
+                with self.assertRaises(ValueError):
+                    Adapter(None, model, None, power, from_id, to_id)
 
     def test_repository_protocols_import_without_executing_database_code(self):
         module = self.module('contracts.repositories')

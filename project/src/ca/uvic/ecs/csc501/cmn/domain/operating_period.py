@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from .validation import validate_entity
-from .contracts.errors import InputError
+from ca.uvic.ecs.csc501.cmn.domain.validation import validate_entity
+from ca.uvic.ecs.csc501.cmn.contracts.errors import InputError
 from datetime import datetime
-from .value_objects.daily_time import DailyTime
+from ca.uvic.ecs.csc501.cmn.domain.value_objects.daily_time import DailyTime
 
 
 @dataclass(frozen=True)

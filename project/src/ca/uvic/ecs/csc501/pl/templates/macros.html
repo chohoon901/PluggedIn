@@ -8,7 +8,7 @@
 {%- if value is none -%}Unknown
 {%- elif value is sameas true -%}Yes
 {%- elif value is sameas false -%}No
-{%- elif value is string -%}{{ {'CAR':'Car','VAN':'Van','MEDIUM_TRUCK':'Medium truck','HEAVY_TRUCK':'Heavy truck','COMPLETE':'Complete','INCOMPLETE':'Incomplete','PARTIAL':'Partial','UNKNOWN':'Unknown','OPERATIONAL':'Operational','ACTIVE':'Active','CLOSED':'Closed','TEMPORARILY_CLOSED':'Temporarily closed','PLANNED':'Planned','PUBLIC':'Public','PRIVATE':'Private','CUSTOMERS_ONLY':'Customers only','FLEET_ONLY':'Fleet only','public':'Public','private':'Private','customers only':'Customers only','fleet only':'Fleet only','PASS':'Pass','FAIL':'Not met','AVAILABLE':'Available','NEEDS_REVIEW':'Needs review','UNAVAILABLE':'Unavailable'}.get(value, value) }}
+{%- elif value is string -%}{{ {'LD':'Light-duty (LD)','MD':'Medium-duty (MD)','HD':'Heavy-duty (HD)','COMPLETE':'Complete','INCOMPLETE':'Incomplete','PARTIAL':'Partial','UNKNOWN':'Unknown','OPERATIONAL':'Operational','ACTIVE':'Active','CLOSED':'Closed','TEMPORARILY_CLOSED':'Temporarily closed','PLANNED':'Planned','PUBLIC':'Public','PRIVATE':'Private','CUSTOMERS_ONLY':'Customers only','FLEET_ONLY':'Fleet only','public':'Public','private':'Private','customers only':'Customers only','fleet only':'Fleet only','PASS':'Pass','FAIL':'Not met','AVAILABLE':'Available','NEEDS_REVIEW':'Needs review','UNAVAILABLE':'Unavailable'}.get(value, value) }}
 {%- elif value is mapping -%}{% for key, item in value.items() %}{{ key|replace('_', ' ')|capitalize }}: {{ display_value(item) }}{{ '; ' if not loop.last else '' }}{% endfor %}
 {%- elif value is iterable -%}{% for item in value %}{{ display_value(item) }}{{ ', ' if not loop.last else '' }}{% else %}None{% endfor %}
 {%- else -%}{{ value }}{%- endif -%}

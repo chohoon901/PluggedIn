@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
-from ..contracts.errors import InputError
+from ca.uvic.ecs.csc501.cmn.contracts.errors import InputError
 
 
 def decimal_value(value, field: str, *, low=None, high=None, positive=False, places='0.1'):
