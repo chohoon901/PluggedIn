@@ -315,7 +315,7 @@ station.status를 ACTIVE/INACTIVE/PLANNED/TEMPORARILY_CLOSED/UNKNOWN으로 정�
 
 access_restriction을 공백·대소문자 정규화한다. public은 자격 PASS, no public access/closed to public은 FAIL, customers only/fleet only/private/빈 값/미해석 조건은 UNKNOWN이다. 운송사 이름만 보고 플릿 승인 여부를 추측하지 않는다.
 
-차량 분류는 CAR, VAN, MEDIUM_TRUCK, HEAVY_TRUCK으로 한다. station.max_vehicle_class는 같은 네 값 또는 ALL만 지원한다. UI 분류의 허용 순서는 CAR<VAN<MEDIUM_TRUCK<HEAVY_TRUCK으로 명시하며 법정 중량 등급 비교라고 주장하지 않는다. ALL은 명시 제한 없음이다. 선택 차량 class가 제한을 초과하면 FAIL, 비교값이 없거나 미지원이면 UNKNOWN이다. 중대형 트럭은 has_truck_parking=true만으로 충전 진입을 확정하지 않으므로 추가 물리 정보가 없는 현재 모델에서는 물리 조건을 UNKNOWN으로 평가한다. access는 자격·등급·해당 차량에 필요한 물리 조건의 AND다. 따라서 다른 조건을 통과해도 중대형 트럭의 access는 UNKNOWN이며 TRUCK_CLEARANCE_UNKNOWN을 표시한다. CAR/VAN은 명시된 등급 범위까지만 평가하고 전체 실제 여유 공간을 보장하지 않는다.
+차량 등급은 NLR의 LD(Class 1-2), MD(Class 3-6), HD(Class 7-8)로 통일하고 LD<MD<HD 순으로 비교한다. 차량과 시설 최대 등급 모두 같은 코드를 사용하며 누락·미지원 값은 UNKNOWN이다. 기존 데이터는 사용자 지정 정책에 따라 CAR→LD, VAN→MD, MEDIUM_TRUCK→MD, HEAVY_TRUCK→HD로 마이그레이션한다. 이는 프로젝트 변환 정책이며 실제 모든 밴의 법정 등급을 확정하는 규칙은 아니다. 새 입력은 LD/MD/HD만 허용한다. 선택 차량이 시설 최대 등급을 초과하면 FAIL이다. MD/HD는 주차 기록이나 최대 등급만으로 충전 베이 진입 여유를 보장하지 않으므로 TRUCK_CLEARANCE_UNKNOWN을 유지한다. access는 이용 자격·차량 등급·필요한 물리 조건의 AND로 평가한다.
 
 ### 7.4 connector — 직접 연결만
 
@@ -387,12 +387,12 @@ arrival_at=null/생략이면 요청 시 현재, 명시 시 그대로 사용. bbo
 | connector_type 1/2 | CCS1/CHAdeMO, max_power_kw=null |
 | driver 1 | licence_number=DEMO-LIC-001, name=Mina, carrier_name=Demo Delivery |
 | driver 2 | licence_number=DEMO-LIC-002, name=Jin, carrier_name=null |
-| vehicle 1 | vin=DEMO0000000000001 (17자), licence_plate=DEMO-01, make=Demo, model=Van, class=VAN, range_km=250, max_charge_kw=100 |
+| vehicle 1 | vin=DEMO0000000000001 (17자), licence_plate=DEMO-01, make=Demo, model=Van, class=MD, range_km=250, max_charge_kw=100 |
 | vehicle_accepts 1 | vehicle_id=1,connector_type_id=1 |
 | membership 1 | driver_id=1,network_id=1,start_date=2026-01-01,end_date=null |
 | membership 2 | driver_id=2,network_id=2,start_date=2026-01-01,end_date=null |
 
-모든 시설 owner_id/operator_id/network_id=1, city=Victoria, province=BC, status=ACTIVE, access_restriction=public, max_vehicle_class=VAN, has_truck_parking=false, guest=false를 기본값으로 둔다. 각 시설에 number=1/quantity=1/current_type=DC/power_kw=150 포트를 하나씩 만든다.
+모든 시설 owner_id/operator_id/network_id=1, city=Victoria, province=BC, status=ACTIVE, access_restriction=public, max_vehicle_class=MD, has_truck_parking=false, guest=false를 기본값으로 둔다. 각 시설에 number=1/quantity=1/current_type=DC/power_kw=150 포트를 하나씩 만든다.
 
 | station_id | 이름·좌표 | 변경 조건 | 운영시간 |
 |---|---|---|---|

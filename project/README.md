@@ -1,6 +1,6 @@
 # PluggedIn
 
-> **NLR vehicle classes:** Domain entities now live in `cmn/domain`, enums in `cmn/enums`. Access compares LD/MD/HD without rewriting saved values; unclassified legacy VAN remains UNKNOWN. See [details](docs/nlr-vehicle-class.md).
+> **NLR vehicle classes:** Domain entities now live in `cmn/domain`, enums in `cmn/enums`. Vehicle grades use LD/MD/HD only. Existing CAR values were migrated to LD and VAN to MD under the project policy; legacy class inputs are rejected. See [details](docs/nlr-vehicle-class.md).
 
 > **Sunghun_IDNull branch:** The active database is now a separate, ID-matched 20-station NLR–OCM Vancouver sample. Station owner/operator references permit NULL; source connector names are preserved and compared through a domain enum. See [sample20 instructions](docs/sample20.md) for running, provenance, uncertainty and portable files. Existing demo initialization instructions below describe the synthetic demo; do not seed demo rows into the sample database.
 
@@ -50,9 +50,9 @@ venv/bin/python -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8
 충전소와 운전자·차량은 **합성 demo 자료**입니다. 실제 시설 현황을 나타내지 않습니다.
 
 1. 첫 화면에서 Mina와 Demo Van을 각각 선택합니다. 두 목록은 독립적이며 차량 소유 관계를 뜻하지 않습니다.
-2. 도착 시각을 `2026-10-26T19:00:00Z`로 검색합니다. A·B·E는 이용 가능, C는 이용 어려움, D는 확인 필요입니다. [동일 조건으로 열기](http://127.0.0.1:8000/stations?driver_id=1&vehicle_id=1&arrival_at=2026-10-26T19%3A00%3A00Z).
+2. 도착 시각을 `2026-10-26T19:00:00Z`로 검색합니다. A·B·D·E는 확인 필요, C는 이용 어려움입니다. 합성 MD 차량은 충전 베이 진입 여유를 추가로 확인해야 합니다. [동일 조건으로 열기](http://127.0.0.1:8000/stations?driver_id=1&vehicle_id=1&arrival_at=2026-10-26T19%3A00%3A00Z).
 3. `2026-10-27T05:00:00Z`로 검색하면 B는 영업시간 밖입니다.
-4. Jin으로 바꾸면 A의 결제 조건은 미충족, E는 게스트 결제로 통과합니다. Jin에게 Demo Charging Company 멤버십을 추가하면 A가 이용 가능으로 바뀌며 삭제하면 원래 판정으로 돌아갑니다.
+4. Jin으로 바꾸면 A의 결제 조건은 미충족, E는 게스트 결제로 통과합니다. Jin에게 Demo Charging Company 멤버십을 추가하면 A의 결제 조건이 통과로 바뀌며, MD 진입 여유는 확인 필요로 남습니다. 삭제하면 원래 결제 판정으로 돌아갑니다.
 5. 차량의 수용 커넥터를 CHAdeMO만으로 수정하면 C는 직접 연결 통과, A는 직접 연결 미충족입니다.
 
 운전자·차량·멤버십 메뉴에서 등록·조회·수정·삭제합니다. 선택 필드도 입력하면 모두 DB에 저장됩니다. JS를 꺼도 같은 흐름을 수행할 수 있습니다. 지도 타일이 실패해도 목록·판정·상세·길찾기 링크는 사용할 수 있습니다.

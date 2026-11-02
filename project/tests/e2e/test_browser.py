@@ -68,7 +68,7 @@ def test_no_javascript_crud_search_detail_and_second_browser(browser, live_app):
     page.locator('form button[type="submit"]').click()
     expect(page.locator("body")).to_contain_text("수정된 운전자")
     page.goto(live_app + "/vehicles/new")
-    for name, value in {"vin": "E2E00000000000001", "licence_plate": "E2E-02", "make": "Demo", "model": "Browser van", "vehicle_class": "VAN", "range_km": "250", "max_charge_kw": "100.5"}.items():
+    for name, value in {"vin": "E2E00000000000001", "licence_plate": "E2E-02", "make": "Demo", "model": "Browser van", "vehicle_class": "MD", "range_km": "250", "max_charge_kw": "100.5"}.items():
         page.locator(f'[name="{name}"]').fill(value)
     page.locator('[name="accepted_connector_ids"][value="1"]').check()
     page.locator('form button[type="submit"]').click()
@@ -119,7 +119,7 @@ def test_real_sample_map_and_source_schedule_changes(browser, live_app):
     expect(page.locator('body')).to_contain_text('Site owner unknown')
     expect(page.locator('body')).to_contain_text('CCS (Type 1)')
     page.goto(live_app + '/vehicles/1/edit')
-    expect(page.locator('[name="vehicle_class"]')).to_have_value('CAR')
+    expect(page.locator('[name="vehicle_class"]')).to_have_value('LD')
     expect(page.locator('#vehicle-classes option')).to_have_count(3)
     assert page.locator('#vehicle-classes option').evaluate_all('(items) => items.map(item => item.value)') == ['LD', 'MD', 'HD']
     context.close()

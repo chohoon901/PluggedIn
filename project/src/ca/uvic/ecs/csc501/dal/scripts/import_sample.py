@@ -166,7 +166,7 @@ def build_sample(dal_root: Path, csv_path: Path, ocm_path: Path):
             for identifier, name in ((1, 'Sample member (synthetic)'), (2, 'Sample visitor (synthetic)')):
                 work.session.add(DriverModel(driver_id=identifier, licence_number=f'SAMPLE-LIC-{identifier}', name=name, carrier_name='Synthetic test profile'))
             for identifier, name in enumerate(('J1772COMBO', 'J1772', 'CHADEMO', 'TESLA'), 1):
-                work.session.add(VehicleModel(vehicle_id=identifier, vin=f'SAMPLE{identifier:011d}', make='Sample', model=f'{name} test car (synthetic)', vehicle_class='CAR', max_charge_kw=Decimal('100')))
+                work.session.add(VehicleModel(vehicle_id=identifier, vin=f'SAMPLE{identifier:011d}', make='Sample', model=f'{name} test car (synthetic)', vehicle_class='LD', max_charge_kw=Decimal('100')))
                 work.session.flush()
                 work.session.add(VehicleAcceptsModel(vehicle_id=identifier, connector_type_id=connector(name)))
             work.session.flush()

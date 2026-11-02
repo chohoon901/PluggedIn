@@ -75,12 +75,11 @@ def check_access(snapshot: StationSnapshot, vehicle: VehicleSnapshot) -> CheckRe
     restriction = _normalized(station.access_restriction)
     vehicle_class = VehicleClass.from_name(vehicle.vehicle.vehicle_class)
     maximum = VehicleClass.from_name(station.max_vehicle_class)
-    unlimited = _normalized(station.max_vehicle_class) == 'ALL'
     evidence = {'access_restriction': station.access_restriction, 'vehicle_class': vehicle.vehicle.vehicle_class,
                 'max_vehicle_class': station.max_vehicle_class, 'has_truck_parking': station.has_truck_parking,
                 'unconfirmed_fields': list(snapshot.metadata.unconfirmed_fields),
                 'vehicle_class_nlr': vehicle_class.value,
-                'max_vehicle_class_nlr': 'ALL' if unlimited else maximum.value}
+                'max_vehicle_class_nlr': maximum.value}
     if restriction == 'PUBLIC':
         eligibility = _result(CheckStatus.PASS, ReasonCode.ACCESS_PUBLIC, 'The facility is recorded as open to the public.', evidence)
     elif restriction in ('NO PUBLIC ACCESS', 'CLOSED TO PUBLIC'):
@@ -88,9 +87,9 @@ def check_access(snapshot: StationSnapshot, vehicle: VehicleSnapshot) -> CheckRe
     else:
         eligibility = _result(CheckStatus.UNKNOWN, ReasonCode.ACCESS_RESTRICTED_UNKNOWN,
                               'This information does not confirm eligibility for customer, fleet, or other restricted access.', evidence)
-    if vehicle_class == VehicleClass.UNKNOWN or (maximum == VehicleClass.UNKNOWN and not unlimited):
+    if vehicle_class == VehicleClass.UNKNOWN or maximum == VehicleClass.UNKNOWN:
         size = _result(CheckStatus.UNKNOWN, ReasonCode.VEHICLE_CLASS_UNKNOWN, 'The vehicle class or facility class limit needs verification.', evidence)
-    elif not unlimited and vehicle_class.rank > maximum.rank:
+    elif vehicle_class.rank > maximum.rank:
         size = _result(CheckStatus.FAIL, ReasonCode.VEHICLE_TOO_LARGE, 'The vehicle exceeds the maximum class recorded for the facility.', evidence)
     else:
         size = CheckResult(CheckStatus.PASS, (), evidence)

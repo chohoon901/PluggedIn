@@ -6,7 +6,7 @@ import pytest
 
 
 @pytest.mark.parametrize('raw,expected', [('LD','LD'),(' md ','MD'),('hd','HD'),
-    ('CAR','LD'),('MEDIUM_TRUCK','MD'),('HEAVY_TRUCK','HD'),
+    ('CAR','UNKNOWN'),('MEDIUM_TRUCK','UNKNOWN'),('HEAVY_TRUCK','UNKNOWN'),
     ('VAN','UNKNOWN'),('ALL','UNKNOWN'),('', 'UNKNOWN'),(None,'UNKNOWN'),('BUS','UNKNOWN')])
 def test_nlr_vehicle_class_classifies_without_rewriting(raw, expected):
     cls = import_module('ca.uvic.ecs.csc501.cmn.enums.vehicle_class').VehicleClass
@@ -14,7 +14,7 @@ def test_nlr_vehicle_class_classifies_without_rewriting(raw, expected):
 
 
 @pytest.mark.parametrize('vehicle,maximum,expected', [
-    ('CAR','LD','PASS'), ('LD','LD','PASS'), ('LD','MD','PASS'), ('LD','HD','PASS'),
+    ('CAR','LD','UNKNOWN'), ('LD','LD','PASS'), ('LD','MD','PASS'), ('LD','HD','PASS'),
     ('MD','LD','FAIL'), ('HD','MD','FAIL'),
     ('MD','MD','UNKNOWN'), ('HD','HD','UNKNOWN'),
     ('LD',None,'UNKNOWN'), (None,'LD','UNKNOWN'), ('VAN','LD','UNKNOWN')])
@@ -42,3 +42,9 @@ def test_all_entities_and_enums_live_in_the_requested_packages():
         assert import_module(base+'domain.'+name)
     assert import_module(base+'enums.connector_family').ConnectorFamily.from_name('J1772COMBO').value == 'CCS1'
     assert import_module(base+'enums.evaluation').CheckStatus.PASS.value == 'PASS'
+
+
+@pytest.mark.parametrize('value', ['CAR','VAN','MEDIUM_TRUCK','HEAVY_TRUCK','ALL','UNKNOWN'])
+def test_legacy_class_inputs_are_rejected(value):
+    cls = import_module('ca.uvic.ecs.csc501.cmn.enums.vehicle_class').VehicleClass
+    assert not cls.accepts_input(value)

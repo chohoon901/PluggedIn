@@ -1,6 +1,6 @@
 # NLR vehicle-class access and package organization
 
-This implements the user's request to interpret NLR vehicle classes without changing stored data or schema.
+This implements the user's request to interpret NLR vehicle classes with the user-authorized class-only data migration; schema is unchanged.
 
 ## Source and comparison
 
@@ -8,11 +8,11 @@ NLR/AFDC `maximum_vehicle_class` defines LD as passenger vehicles (Class 1-2), M
 
 Source: https://afdc.energy.gov/data_download/alt_fuel_stations_format
 
-`cmn/enums/vehicle_class.py` defines LD, MD, HD and UNKNOWN, ranked LD < MD < HD. Public access plus a known vehicle class within the facility maximum passes access for LD vehicles. MD/HD retain the existing truck-clearance review: a maximum or truck-parking flag alone does not prove bay clearance. A vehicle above the maximum fails. Missing/unrecognized values remain UNKNOWN. ALL is retained only as an explicitly recorded legacy station allowance.
+`cmn/enums/vehicle_class.py` defines LD, MD, HD and UNKNOWN, ranked LD < MD < HD. Public access plus a known vehicle class within the facility maximum passes access for LD vehicles. MD/HD retain the existing truck-clearance review: a maximum or truck-parking flag alone does not prove bay clearance. A vehicle above the maximum fails. Missing/unrecognized values remain UNKNOWN. Only LD/MD/HD are recognized; ALL and old body-style labels are not runtime class values.
 
-Legacy CAR is interpreted as LD; MEDIUM_TRUCK as MD; HEAVY_TRUCK as HD. VAN is a body style, not a verified NLR class, and remains UNKNOWN. Interpretation does not rewrite saved values. Original values stay visible and can be saved unchanged. The form suggests LD/MD/HD for new or explicitly corrected entries; users must verify their actual vehicle class.
+The user explicitly requested CAR -> LD, VAN -> MD, MEDIUM_TRUCK -> MD and HEAVY_TRUCK -> HD for existing project class fields. This is a conservative project migration policy, not a universal legal classification of every real van. These old tokens are rejected by new vehicle input validation. Only LD/MD/HD are accepted; case/spacing normalize to the canonical code. Model names and source free text are unchanged.
 
-Both JSON and SSR vehicle CRUD accept NLR codes. Evaluation evidence includes the raw and interpreted values. No database migration or importer rerun is required. Restart the server to load changed application code.
+Both JSON and SSR vehicle CRUD accept NLR codes. Evaluation evidence includes the raw and interpreted values. Existing installations with old class tokens must run the explicit backed-up class migration below; updated sample files and generators already use canonical codes. Restart the server to load changed application code.
 
 ## Layout
 
@@ -26,6 +26,16 @@ Commit 3f331c9 removed the Adapter domain class. The initial package reorganizat
 
 ## Existing data
 
-The sample retains its original CAR vehicles and 7 LD / 13 missing facility maxima. Under the new interpretation, 3 public LD facilities pass access for CAR profiles. Other facilities need review for missing maxima or restricted eligibility. Connector, payment and opening checks still independently affect the final status.
+The sample now stores LD for its four synthetic vehicles and retains 7 LD / 13 missing facility maxima. Under the new interpretation, 3 public LD facilities pass access for LD profiles. Other facilities need review for missing maxima or restricted eligibility. Connector, payment and opening checks still independently affect the final status.
 
-The old synthetic demo stores VAN for vehicle and facility limits. It is no longer a verified LD example: A/B/E become NEEDS_REVIEW where access is unknown; definite failures still take precedence. Neither the seed script nor its stored data is changed. Known-pass unit scenarios explicitly use LD in temporary fixtures.
+The old synthetic demo and its generator now use MD for vehicle and facility limits. A/B/E remain NEEDS_REVIEW because MD/HD charging-bay clearance is not verified; definite failures still take precedence. Missing facility maxima are not filled in. All original schema definitions, other column values and source data were retained during migration.
+
+## Updating another existing DB
+
+Stop the app first. From the project directory run, substituting the actual database path:
+
+```powershell
+.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.migrate_vehicle_classes --database "src/ca/uvic/ecs/csc501/dal/data/pluggedin.db" --backup ".work/class-backups/previous.sqlite-backup"
+```
+
+This ORM migration changes only vehicle.class and station.max_vehicle_class, makes a consistent SQLite backup before changes, refuses to overwrite backups, and is idempotent. It also works on the older NOT NULL owner/operator schema without modifying that schema. NULL and unrecognized source values are retained as unknown evidence. Model names such as Van are not class values and are preserved. Do not use seed_demo to migrate an existing database.

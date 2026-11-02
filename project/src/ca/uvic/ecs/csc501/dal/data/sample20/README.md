@@ -15,15 +15,15 @@ The branch config selects `dal/data/sample20/data/nlr_ocm_sample20.db` and its `
 
 ## Contents and evidence
 
-20 source facilities around Vancouver; 2 clearly synthetic drivers, 4 synthetic CAR vehicle profiles and synthetic memberships. Driver 1 has memberships valid from 2026-01-01 through 2026-12-31; driver 2 has none. Vehicles 1/2/3/4 accept raw NLR names J1772COMBO/J1772/CHADEMO/TESLA respectively. No driver–vehicle ownership is implied.
+20 source facilities around Vancouver; 2 clearly synthetic drivers, 4 synthetic LD vehicle profiles and synthetic memberships. Driver 1 has memberships valid from 2026-01-01 through 2026-12-31; driver 2 has none. Vehicles 1/2/3/4 accept raw NLR names J1772COMBO/J1772/CHADEMO/TESLA respectively. No driver–vehicle ownership is implied.
 
 Only DataProviderID=2 OCM records are joined, by their DataProvidersReference to NLR.ID. `source_manifest.json` contains each entire original row, mappings, decisions and source-file hashes. Source inputs are the user-supplied NLR CSV and ocm_bc.json; no OSM rows are imported. Importer selection is fixed and reproducible. OCM operator is not treated as the site owner. All 20 owners are NULL.
 
 The database alone contains all 13 tables / 65 columns and all domain profiles. To retain timezone, provenance and UNKNOWN behavior in the app, keep the companion metadata JSON. `config.properties` in the portable sample root demonstrates the relative paths. This keeps the original metadata architecture without introducing a new table.
 
-Source connector text is preserved, not rewritten. `cmn/connector_family.py` provides the equivalent of a shared Java enum/alias registry. Separate IDs such as NLR J1772COMBO and OCM CCS (Type 1) can match; CCS Type 2 does not match CCS Type 1. NACS/TESLA and unknown combinations do not become verified direct connections.
+Source connector text is preserved, not rewritten. `cmn/enums/connector_family.py` provides the equivalent of a shared Java enum/alias registry. Separate IDs such as NLR J1772COMBO and OCM CCS (Type 1) can match; CCS Type 2 does not match CCS Type 1. NACS/TESLA and unknown combinations do not become verified direct connections.
 
-OCM matched connection power values are explicitly estimates: all imported power_kw values are NULL. Raw estimated values remain in the manifest. Quantities are recorded summaries and unconfirmed. Missing guest payment and truck parking booleans use required storage defaults plus unconfirmedFields. Raw NLR LD/MD/HD values are not silently converted to the application's CAR/VAN/TRUCK classification. These decisions intentionally leave NEEDS_REVIEW results; do not fabricate green statuses to make a demo look complete.
+OCM matched connection power values are explicitly estimates: all imported power_kw values are NULL. Raw estimated values remain in the manifest. Quantities are recorded summaries and unconfirmed. Missing guest payment and truck parking booleans use required storage defaults plus unconfirmedFields. Raw NLR LD/MD/HD values are preserved and now interpreted by cmn/enums/vehicle_class.py; all saved vehicle class values have been migrated to LD/MD/HD; old class labels are rejected by vehicle forms and the API. Missing or restricted evidence still leaves NEEDS_REVIEW results; do not fabricate green statuses to make a demo look complete.
 
 ## Check condition changes
 
@@ -40,3 +40,5 @@ OCM matched connection power values are explicitly estimates: all imported power
 ```
 
 An occupied output directory is rejected. The importer never overwrites an existing DB or modifies the source files. To use another output root, change both database_path and metadata_path in the app's DAL config, keeping paths inside DAL.
+
+Vehicle-class interpretation and current package layout: see [NLR vehicle classes](nlr-vehicle-class.md).

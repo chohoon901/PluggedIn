@@ -175,6 +175,8 @@ class ApplicationService:
         vehicle_class = _text(data, "vehicle_class", 30)
         if vehicle_class and not VehicleClass.accepts_input(vehicle_class):
             raise InputError("Select a vehicle class.", {"vehicle_class": "Select a supported vehicle class."})
+        if vehicle_class:
+            vehicle_class = VehicleClass.from_name(vehicle_class).value
         accepted = data.get("accepted_connector_ids")
         if not isinstance(accepted, (list, tuple, set)) or not accepted:
             raise InputError("Select at least one accepted connector.", {"accepted_connector_ids": "Select at least one connector."})

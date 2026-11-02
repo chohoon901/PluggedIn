@@ -35,6 +35,20 @@ def test_api_crud_normalizes_and_rejects_duplicate(client):
     assert client.get(f"/api/v1/drivers/{driver['driver_id']}").status_code == 404
 
 
+@pytest.mark.parametrize('legacy', ['CAR', 'VAN', 'MEDIUM_TRUCK', 'HEAVY_TRUCK', 'ALL'])
+def test_vehicle_api_rejects_old_class_vocabulary(client, legacy):
+    response = client.post('/api/v1/vehicles', json={'vin': 'CLASS000000000001',
+        'vehicle_class': legacy, 'accepted_connector_ids': [1]})
+    assert response.status_code == 400
+
+
+def test_vehicle_api_stores_canonical_nlr_code(client):
+    response = client.post('/api/v1/vehicles', json={'vin': 'CLASS000000000001',
+        'vehicle_class': ' md ', 'accepted_connector_ids': [1]})
+    assert response.status_code == 201
+    assert response.json()['vehicle_class'] == 'MD'
+
+
 @pytest.mark.parametrize('path,data', [
     ('drivers', {'licence_number': ''}),
     ('drivers', {'licence_number': 'L', 'driver_id': 100}),

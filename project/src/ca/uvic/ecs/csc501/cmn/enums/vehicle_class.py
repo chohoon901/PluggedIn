@@ -14,12 +14,11 @@ class VehicleClass(StrEnum):
 
     @classmethod
     def from_name(cls, name: str | None) -> 'VehicleClass':
-        return _ALIASES.get(' '.join((name or '').upper().split()), cls.UNKNOWN)
+        return _CODES.get(' '.join((name or '').upper().split()), cls.UNKNOWN)
 
     @classmethod
     def accepts_input(cls, name: str) -> bool:
-        """Preserve editable legacy VAN values without inventing a weight class."""
-        return ' '.join(name.upper().split()) in (*_ALIASES, 'VAN')
+        return cls.from_name(name) != cls.UNKNOWN
 
     @property
     def rank(self) -> int | None:
@@ -37,9 +36,6 @@ class VehicleClass(StrEnum):
                 self.UNKNOWN: 'Vehicle class unknown'}[self]
 
 
-_ALIASES = {
+_CODES = {
     'LD': VehicleClass.LD, 'MD': VehicleClass.MD, 'HD': VehicleClass.HD,
-    'CAR': VehicleClass.LD,
-    'MEDIUM_TRUCK': VehicleClass.MD,
-    'HEAVY_TRUCK': VehicleClass.HD,
 }

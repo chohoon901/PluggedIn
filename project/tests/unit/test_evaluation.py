@@ -107,8 +107,8 @@ class EvaluationTests(unittest.TestCase):
 
     def test_vehicle_size_excess_fails_and_truck_parking_cannot_prove_clearance(self):
         self.assertEqual(self.evaluate(station=self.changed_station(max_vehicle_class='LD'), vehicle=replace(self.vehicle, vehicle=replace(self.vehicle.vehicle, vehicle_class='MD'))).checks['access'].status,'FAIL')
-        truck = replace(self.vehicle,vehicle=replace(self.vehicle.vehicle,vehicle_class='HEAVY_TRUCK'))
-        result = self.evaluate(station=self.changed_station(max_vehicle_class='ALL',has_truck_parking=True),vehicle=truck)
+        truck = replace(self.vehicle,vehicle=replace(self.vehicle.vehicle,vehicle_class='HD'))
+        result = self.evaluate(station=self.changed_station(max_vehicle_class='HD',has_truck_parking=True),vehicle=truck)
         self.assertEqual(result.checks['access'].status,'UNKNOWN')
         self.assertIn('TRUCK_CLEARANCE_UNKNOWN',[r.code for r in result.checks['access'].reasons])
 
