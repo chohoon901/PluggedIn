@@ -9,8 +9,12 @@ router = APIRouter()
 
 
 @router.get('/stations')
-def stations(request: Request, driver_id: str = '', vehicle_id: str = '', arrival_at: str = '', west: str = '-123.50', south: str = '48.35', east: str = '-123.20', north: str = '48.60', status: str = 'ALL', arrival_date: str = '', arrival_time: str = '', arrival_timezone: str = DEFAULT_ARRIVAL_TIMEZONE, search_now: str = '', services=Depends(get_services)):
+def stations(request: Request, driver_id: str = '', vehicle_id: str = '', arrival_at: str = '', west: str | None = None, south: str | None = None, east: str | None = None, north: str | None = None, status: str = 'ALL', arrival_date: str = '', arrival_time: str = '', arrival_timezone: str = DEFAULT_ARRIVAL_TIMEZONE, search_now: str = '', services=Depends(get_services)):
     filters = {key: value for key, value in locals().items() if key not in ('request', 'services')}
+    bounds = services.search_bounds()
+    for key in DEFAULT_BBOX:
+        if filters[key] is None:
+            filters[key] = str(bounds[key])
     context = {**selection_context(services), 'filters': filters, 'results': [], 'counts': {}, 'map_data': []}
     try:
         resolved = resolve_arrival(arrival_at, arrival_date, arrival_time, arrival_timezone, search_now)

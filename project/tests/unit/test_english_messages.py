@@ -8,29 +8,29 @@ from types import SimpleNamespace
 import pytest
 
 from ca.uvic.ecs.csc501.cmn.application.services import ApplicationService, parse_arrival
-from ca.uvic.ecs.csc501.cmn.connector_type import ConnectorType
+from ca.uvic.ecs.csc501.cmn.domain.connector_type import ConnectorType
 from ca.uvic.ecs.csc501.cmn.contracts.errors import AppError
 from ca.uvic.ecs.csc501.cmn.contracts.models import StationMetadata, StationSnapshot, VehicleSnapshot
-from ca.uvic.ecs.csc501.cmn.driver import Driver
-from ca.uvic.ecs.csc501.cmn.membership import Membership
-from ca.uvic.ecs.csc501.cmn.operating_period import OperatingPeriod
-from ca.uvic.ecs.csc501.cmn.port import Port
+from ca.uvic.ecs.csc501.cmn.domain.driver import Driver
+from ca.uvic.ecs.csc501.cmn.domain.membership import Membership
+from ca.uvic.ecs.csc501.cmn.domain.operating_period import OperatingPeriod
+from ca.uvic.ecs.csc501.cmn.domain.port import Port
 from ca.uvic.ecs.csc501.cmn.services import evaluation
-from ca.uvic.ecs.csc501.cmn.station import Station
-from ca.uvic.ecs.csc501.cmn.value_objects.daily_time import DailyTime
-from ca.uvic.ecs.csc501.cmn.vehicle import Vehicle
+from ca.uvic.ecs.csc501.cmn.domain.station import Station
+from ca.uvic.ecs.csc501.cmn.domain.value_objects.daily_time import DailyTime
+from ca.uvic.ecs.csc501.cmn.domain.vehicle import Vehicle
 from ca.uvic.ecs.csc501.dal.metadata import normalize_stations
 
 
 @pytest.fixture
 def scenario():
     station = Station(1, Decimal('48.46'), Decimal('-123.31'), 'Station', None, 'Victoria', 'BC',
-                      'ACTIVE', 'public', False, 'VAN', False, 1, 1, 1)
+                      'ACTIVE', 'public', False, 'LD', False, 1, 1, 1)
     snapshot = StationSnapshot(station, (Port(1, 1, 1, 1, Decimal('150'), 'DC', 1),),
                                (OperatingPeriod(1, 1, 'Mon', DailyTime(0), DailyTime(86400)),),
                                (ConnectorType(1, 'CCS1'),), (),
                                StationMetadata('America/Vancouver', 'COMPLETE', 'COMPLETE', 'COMPLETE'))
-    vehicle = VehicleSnapshot(Vehicle(1, 'DEMO0000000000001', vehicle_class='VAN',
+    vehicle = VehicleSnapshot(Vehicle(1, 'DEMO0000000000001', vehicle_class='LD',
                                       max_charge_kw=Decimal('100')), (1,))
     memberships = [Membership(1, 1, 1, date(2026, 1, 1))]
     return snapshot, vehicle, memberships, datetime(2026, 10, 26, 19, tzinfo=timezone.utc)
@@ -56,9 +56,9 @@ def test_real_evaluation_paths_explain_pass_failure_and_uncertainty_in_english(s
         evaluation.check_access(changed(access_restriction='no public access'), vehicle),
         evaluation.check_access(changed(access_restriction='customers only'), vehicle),
         evaluation.check_access(changed(max_vehicle_class=None), vehicle),
-        evaluation.check_access(changed(max_vehicle_class='CAR'), vehicle),
-        evaluation.check_access(changed(max_vehicle_class='ALL'),
-                                replace(vehicle, vehicle=replace(vehicle.vehicle, vehicle_class='HEAVY_TRUCK'))),
+        evaluation.check_access(changed(max_vehicle_class='LD'), vehicle),
+        evaluation.check_access(changed(max_vehicle_class='HD'),
+                                replace(vehicle, vehicle=replace(vehicle.vehicle, vehicle_class='HD'))),
         evaluation.check_connector(snapshot, vehicle, None),
         evaluation.check_connector(snapshot, replace(vehicle, accepted_connector_ids=()), snapshot.ports[0]),
         evaluation.check_connector(snapshot, replace(vehicle, accepted_connector_ids=(2,)), snapshot.ports[0]),

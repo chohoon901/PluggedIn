@@ -1,6 +1,6 @@
 """Shared pure input normalization for the original schema's fields."""
-from .contracts.errors import InputError
-from .value_objects.location import decimal_value
+from ca.uvic.ecs.csc501.cmn.contracts.errors import InputError
+from ca.uvic.ecs.csc501.cmn.domain.value_objects.location import decimal_value
 from dataclasses import fields
 from decimal import Decimal
 

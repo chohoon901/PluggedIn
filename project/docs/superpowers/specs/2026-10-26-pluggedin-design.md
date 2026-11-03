@@ -65,7 +65,7 @@ Organization은 최소 하나의 owner/operator/network 역할을 가져야 한�
 각 포트 후보에서 opening/access/connector/payment를 함께 평가한다. 네 항목 AND는 FAIL 우선, 다음 UNKNOWN, 모두 PASS이면 AVAILABLE이다. 포트 후보 OR는 AVAILABLE 우선, 다음 NEEDS_REVIEW, 모두 실패하면 UNAVAILABLE이다. 서로 다른 포트의 장점을 합치지 않는다.
 
 - opening: 시설 상태와 현지 시간표를 함께 평가한다. 개점 포함·폐점 제외이며 야간은 날짜별 두 행을 사용한다. 시간표가 완전할 때만 없는 요일을 휴무로 확정한다.
-- access: public·명시 이용 금지·미해석 제한을 구별한다. 차량 등급 순서는 CAR<VAN<MEDIUM_TRUCK<HEAVY_TRUCK이다. 중대형 트럭은 주차 기록만으로 물리 진입을 확정하지 않고 UNKNOWN을 유지한다.
+- access: public·명시 이용 금지·미해석 제한을 구별한다. 차량 등급은 LD<MD<HD로 비교한다. 사용자 변경에 따라 MVP에서는 물리적 진입 여유 평가를 보류하며, 공개 이용 자격과 등급 조건을 충족하면 PASS다.
 - connector: 수용 규격 ID와 일치하고 검증된 J1772/AC·CCS1/DC·CHAdeMO/DC 조합만 직접 호환 PASS로 확정한다. NACS/TESLA·전류 미상은 UNKNOWN이다. adapter를 조회하지 않는다.
 - payment: 선택 운전자의 같은 네트워크 멤버십을 현지 날짜로 검사하며 시작일·종료일 모두 포함한다. 확인된 guest=true도 PASS다. 네트워크 미상·원본 bool 미확인은 UNKNOWN 정책을 적용한다.
 

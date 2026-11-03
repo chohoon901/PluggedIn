@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from typing import Protocol
-from ..driver import Driver
-from ..vehicle import Vehicle
-from ..membership import Membership
-from ..organization import Organization
-from ..connector_type import ConnectorType
+from ca.uvic.ecs.csc501.cmn.domain.driver import Driver
+from ca.uvic.ecs.csc501.cmn.domain.vehicle import Vehicle
+from ca.uvic.ecs.csc501.cmn.domain.membership import Membership
+from ca.uvic.ecs.csc501.cmn.domain.organization import Organization
+from ca.uvic.ecs.csc501.cmn.domain.connector_type import ConnectorType
 from .models import VehicleSnapshot, StationSnapshot
 
 

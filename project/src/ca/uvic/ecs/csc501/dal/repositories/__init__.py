@@ -1,12 +1,12 @@
 from sqlalchemy import select, delete
-from ca.uvic.ecs.csc501.cmn.driver import Driver
-from ca.uvic.ecs.csc501.cmn.vehicle import Vehicle
-from ca.uvic.ecs.csc501.cmn.membership import Membership
-from ca.uvic.ecs.csc501.cmn.organization import Organization
-from ca.uvic.ecs.csc501.cmn.station import Station
-from ca.uvic.ecs.csc501.cmn.port import Port
-from ca.uvic.ecs.csc501.cmn.operating_period import OperatingPeriod
-from ca.uvic.ecs.csc501.cmn.connector_type import ConnectorType
+from ca.uvic.ecs.csc501.cmn.domain.driver import Driver
+from ca.uvic.ecs.csc501.cmn.domain.vehicle import Vehicle
+from ca.uvic.ecs.csc501.cmn.domain.membership import Membership
+from ca.uvic.ecs.csc501.cmn.domain.organization import Organization
+from ca.uvic.ecs.csc501.cmn.domain.station import Station
+from ca.uvic.ecs.csc501.cmn.domain.port import Port
+from ca.uvic.ecs.csc501.cmn.domain.operating_period import OperatingPeriod
+from ca.uvic.ecs.csc501.cmn.domain.connector_type import ConnectorType
 from ca.uvic.ecs.csc501.cmn.contracts.models import VehicleSnapshot, StationSnapshot
 from ca.uvic.ecs.csc501.cmn.contracts.errors import InputError, NotFoundError
 from ..models import *
@@ -74,7 +74,9 @@ class VehicleRepository(EntityRepository):
         ids = tuple(self.session.scalars(select(VehicleAcceptsModel.connector_type_id)
                                         .where(VehicleAcceptsModel.vehicle_id == identifier)
                                         .order_by(VehicleAcceptsModel.connector_type_id)))
-        return VehicleSnapshot(vehicle, ids)
+        names = tuple(self.session.scalars(select(ConnectorTypeModel.name)
+                      .where(ConnectorTypeModel.connector_type_id.in_(ids))))
+        return VehicleSnapshot(vehicle, ids, names)
 
     def list(self):
         return [self.get(identifier) for identifier in self.session.scalars(select(VehicleModel.vehicle_id).order_by(VehicleModel.vehicle_id))]

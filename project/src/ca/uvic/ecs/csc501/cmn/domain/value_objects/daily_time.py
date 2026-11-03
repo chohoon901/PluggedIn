@@ -1,7 +1,7 @@
 """A local clock value, including the exclusive end-of-day boundary."""
 from dataclasses import dataclass
 import re
-from ..contracts.errors import InputError
+from ca.uvic.ecs.csc501.cmn.contracts.errors import InputError
 
 
 @dataclass(frozen=True, order=True)

@@ -8,4 +8,4 @@ router = APIRouter()
 
 @router.get('/')
 def index(request: Request, services=Depends(get_services)):
-    return render(request, 'index.html', {**selection_context(services), 'filters': {**DEFAULT_BBOX, **arrival_form_values(now_string()), 'status': 'ALL'}})
+    return render(request, 'index.html', {**selection_context(services), 'filters': {**services.search_bounds(), **arrival_form_values(now_string()), 'status': 'ALL'}})
