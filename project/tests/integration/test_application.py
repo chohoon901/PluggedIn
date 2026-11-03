@@ -46,6 +46,7 @@ def test_demo_and_membership_changes_recompute_from_database(service):
     assert result["results"][0]["power_limit_kw"] == 100
     assert service.detail(1, 2, 1, ARRIVAL)["overall_status"] == "UNAVAILABLE"
     member = service.save_membership({"driver_id": 2, "network_id": 1, "start_date": "2026-01-01"})
+    assert service.detail(1, 2, 1, ARRIVAL)["checks"]["payment"]["status"] == "PASS"
     assert service.detail(1, 2, 1, ARRIVAL)["overall_status"] == "AVAILABLE"
     service.delete_membership(member["membership_id"])
     assert service.detail(1, 2, 1, ARRIVAL)["overall_status"] == "UNAVAILABLE"

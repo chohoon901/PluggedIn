@@ -21,7 +21,7 @@ def _demo_rows():
         ConnectorTypeModel(connector_type_id=2, name='CHAdeMO', max_power_kw=None),
         DriverModel(driver_id=1, licence_number='DEMO-LIC-001', name='Mina', carrier_name='Demo Delivery'),
         DriverModel(driver_id=2, licence_number='DEMO-LIC-002', name='Jin', carrier_name=None),
-        VehicleModel(vehicle_id=1, vin='DEMO0000000000001', licence_plate='DEMO-01', make='Demo', model='Van', vehicle_class='VAN', range_km=250, max_charge_kw=Decimal('100.0')),
+        VehicleModel(vehicle_id=1, vin='DEMO0000000000001', licence_plate='DEMO-01', make='Demo', model='Van', vehicle_class='MD', range_km=250, max_charge_kw=Decimal('100.0')),
         VehicleAcceptsModel(vehicle_accepts_id=1, vehicle_id=1, connector_type_id=1),
         MembershipModel(membership_id=1, driver_id=1, network_id=1, start_date=date(2026,1,1), end_date=None),
         MembershipModel(membership_id=2, driver_id=2, network_id=2, start_date=date(2026,1,1), end_date=None),
@@ -31,7 +31,7 @@ def _demo_rows():
         rows.append(StationModel(station_id=identifier, latitude=Decimal('48.45') + Decimal(identifier)/100,
                                  longitude=Decimal('-123.30') - Decimal(identifier)/100, name=f'Demo {chr(64+identifier)}',
                                  street=None, city='Victoria', province='BC', status='ACTIVE', access_restriction='public',
-                                 accepts_guest_payment=identifier == 5, max_vehicle_class='VAN', has_truck_parking=False,
+                                 accepts_guest_payment=identifier == 5, max_vehicle_class='MD', has_truck_parking=False,
                                  owner_id=1, operator_id=1, network_id=1))
         rows.append(PortModel(port_id=identifier, station_id=identifier, number=1, connector_type_id=2 if identifier==3 else 1,
                               power_kw=Decimal('150.0'), current_type='DC', quantity=1))

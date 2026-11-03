@@ -54,8 +54,8 @@ CREATE TABLE station (
     accepts_guest_payment INTEGER NOT NULL DEFAULT 0 CHECK (accepts_guest_payment IN (0,1)),
     max_vehicle_class     VARCHAR(30),
     has_truck_parking     INTEGER NOT NULL DEFAULT 0 CHECK (has_truck_parking IN (0,1)),
-    owner_id              INTEGER NOT NULL REFERENCES site_owner (organization_id),  -- OwnedBy  (1,1)
-    operator_id           INTEGER NOT NULL REFERENCES operator   (organization_id),  -- OperatedBy (1,1)
+    owner_id              INTEGER REFERENCES site_owner (organization_id),  -- NULL = unverified owner
+    operator_id           INTEGER REFERENCES operator   (organization_id),  -- NULL = unverified operator
     network_id            INTEGER          REFERENCES network    (organization_id),  -- ServedBy (0,1)
     CONSTRAINT ak_station_location UNIQUE (latitude, longitude)   -- ERD key: Location
 );

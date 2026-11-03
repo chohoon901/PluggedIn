@@ -9,7 +9,7 @@ class Settings:
         config = ConfigParser()
         config.read(self.dal_root / 'config.properties', encoding='utf-8')
         self.database_path = self._within(config.get('sqlite', 'database_path', fallback='data/pluggedin.db'))
-        self.metadata_path = self._within('data/station_metadata.json')
+        self.metadata_path = self._within(config.get('sqlite', 'metadata_path', fallback='data/station_metadata.json'))
         self.busy_timeout_ms = config.getint('sqlite', 'busy_timeout_ms', fallback=5000)
         if self.busy_timeout_ms < 0:
             raise ValueError('busy_timeout_ms must not be negative')

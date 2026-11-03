@@ -1,6 +1,6 @@
 """Explicit ORM-to-domain boundary; no live ORM instances leave repositories."""
 from dataclasses import fields
-from ca.uvic.ecs.csc501.cmn.value_objects.daily_time import DailyTime
+from ca.uvic.ecs.csc501.cmn.domain.value_objects.daily_time import DailyTime
 
 
 def to_domain(entity_class, model):

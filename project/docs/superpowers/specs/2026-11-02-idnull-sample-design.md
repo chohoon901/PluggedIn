@@ -1,0 +1,13 @@
+# Sunghun_IDNull: user-authorized schema and real sample amendment
+
+The user's 2026-11-02 request explicitly changes station.owner_id and station.operator_id to nullable foreign keys throughout the schema, ORM and domain. Other schema constraints remain; 13 tables and 65 columns are retained. NULL means unverified, never a synthetic owner/operator. Existing organization role checks still apply to organizations that actually exist.
+
+Connector names are source data. Keep NLR tokens and OCM titles as distinct connector_type rows. A pure ConnectorFamily enum maps documented aliases for comparison across IDs. The enum does not claim verified NACS or NEMA compatibility; only J1772/AC, CCS1/DC and CHAdeMO/DC can PASS. Unknown names stay UNKNOWN. Vehicle repository snapshots include the selected source names, so HTTP and SSR use identical logic.
+
+Build exactly 20 Vancouver-area facilities by joining NLR.ID to OCM.DataProvidersReference only where DataProviderID=2, validating province/fuel/geography and coordinate agreement. Do not import OSM. Preserve raw source rows and SHA-256 hashes in a manifest. Keep original source connector names. NLR provides station fields and schedules; OCM provides connection summaries and explicitly recorded operator roles. Owner is NULL. Estimated OCM power is not a confirmed station rating and remains NULL in port.power_kw. Counts remain unconfirmed summary counts; port completeness is PARTIAL. Missing guest/truck values are unconfirmed, not negative evidence. Raw LD/MD/HD class codes are preserved and remain UNKNOWN under the existing reference classification.
+
+Use a new DAL-local sample DB and configurable metadata path. Leave the original pluggedin.db intact. The DB contains all domain/user/profile/membership rows; existing source/timezone/completeness evidence remains in its required companion JSON rather than adding a table or overloading schema fields. Include a portable bundle with config, DB, metadata, and source manifest. Synthetic driver/vehicle/membership rows are visibly labeled and distinct from source stations.
+
+Initial SSR search bounds follow registered stations; explicit user bounds and API behavior are preserved. The existing map consumes the same server result JSON, including statuses. Null organizations are explained in English on detail pages. Preserve no-JS functionality, arrival input, error codes, CRUD and UNKNOWN policy.
+
+Verification covers nullable roundtrip/foreign-key rejection, aliases across IDs, partial and unknown evidence, importer refusal to overwrite, exact source joins, map markers/coordinates, time and driver/vehicle changes, CRUD and existing suites. Real snapshots are not guaranteed AVAILABLE: missing class/payment/complete port evidence remains visible.

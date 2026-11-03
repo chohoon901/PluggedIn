@@ -4,11 +4,12 @@ from collections.abc import Iterable
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from ..contracts.errors import InputError
 from ..contracts.models import StationSnapshot, VehicleSnapshot
-from ..contracts.evaluation import (
-    CheckStatus, OverallStatus, ReasonCode, Reason, CheckResult, EvaluationResult, EvaluationPolicy,
-)
-from ..membership import Membership
-from ..port import Port
+from ..contracts.evaluation import Reason, CheckResult, EvaluationResult, EvaluationPolicy
+from ..enums.evaluation import CheckStatus, OverallStatus, ReasonCode
+from ca.uvic.ecs.csc501.cmn.domain.membership import Membership
+from ca.uvic.ecs.csc501.cmn.domain.port import Port
+from ca.uvic.ecs.csc501.cmn.enums.connector_family import ConnectorFamily
+from ..enums.vehicle_class import VehicleClass
 
 
 def aggregate_checks(statuses: Iterable[CheckStatus]) -> OverallStatus:
@@ -72,11 +73,13 @@ def check_opening(snapshot: StationSnapshot, arrival_at: datetime) -> CheckResul
 def check_access(snapshot: StationSnapshot, vehicle: VehicleSnapshot) -> CheckResult:
     station = snapshot.station
     restriction = _normalized(station.access_restriction)
-    vehicle_class = _normalized(vehicle.vehicle.vehicle_class)
-    maximum = _normalized(station.max_vehicle_class)
+    vehicle_class = VehicleClass.from_name(vehicle.vehicle.vehicle_class)
+    maximum = VehicleClass.from_name(station.max_vehicle_class)
     evidence = {'access_restriction': station.access_restriction, 'vehicle_class': vehicle.vehicle.vehicle_class,
                 'max_vehicle_class': station.max_vehicle_class, 'has_truck_parking': station.has_truck_parking,
-                'unconfirmed_fields': list(snapshot.metadata.unconfirmed_fields)}
+                'unconfirmed_fields': list(snapshot.metadata.unconfirmed_fields),
+                'vehicle_class_nlr': vehicle_class.value,
+                'max_vehicle_class_nlr': maximum.value}
     if restriction == 'PUBLIC':
         eligibility = _result(CheckStatus.PASS, ReasonCode.ACCESS_PUBLIC, 'The facility is recorded as open to the public.', evidence)
     elif restriction in ('NO PUBLIC ACCESS', 'CLOSED TO PUBLIC'):
@@ -84,18 +87,13 @@ def check_access(snapshot: StationSnapshot, vehicle: VehicleSnapshot) -> CheckRe
     else:
         eligibility = _result(CheckStatus.UNKNOWN, ReasonCode.ACCESS_RESTRICTED_UNKNOWN,
                               'This information does not confirm eligibility for customer, fleet, or other restricted access.', evidence)
-    order = {'CAR': 0, 'VAN': 1, 'MEDIUM_TRUCK': 2, 'HEAVY_TRUCK': 3}
-    if vehicle_class not in order or maximum not in (*order, 'ALL'):
+    if vehicle_class == VehicleClass.UNKNOWN or maximum == VehicleClass.UNKNOWN:
         size = _result(CheckStatus.UNKNOWN, ReasonCode.VEHICLE_CLASS_UNKNOWN, 'The vehicle class or facility class limit needs verification.', evidence)
-    elif maximum != 'ALL' and order[vehicle_class] > order[maximum]:
+    elif vehicle_class.rank > maximum.rank:
         size = _result(CheckStatus.FAIL, ReasonCode.VEHICLE_TOO_LARGE, 'The vehicle exceeds the maximum class recorded for the facility.', evidence)
     else:
         size = CheckResult(CheckStatus.PASS, (), evidence)
-    checks = [eligibility, size]
-    if vehicle_class in ('MEDIUM_TRUCK','HEAVY_TRUCK'):
-        checks.append(_result(CheckStatus.UNKNOWN, ReasonCode.TRUCK_CLEARANCE_UNKNOWN,
-                              'Recorded truck parking does not guarantee height, turning, or entry clearance at the charging bay.', evidence))
-    return _combine(checks, evidence)
+    return _combine([eligibility, size], evidence)
 
 
 def check_connector(snapshot: StationSnapshot, vehicle: VehicleSnapshot, port: Port | None) -> CheckResult:
@@ -108,12 +106,22 @@ def check_connector(snapshot: StationSnapshot, vehicle: VehicleSnapshot, port: P
         return _result(CheckStatus.UNKNOWN, ReasonCode.PORTS_UNKNOWN, 'The port list is missing or incomplete, so unverified connection options remain.', evidence)
     if not vehicle.accepted_connector_ids:
         return _result(CheckStatus.UNKNOWN, ReasonCode.CONNECTOR_UNKNOWN, 'The vehicle has no recorded accepted connectors.', evidence)
-    if not vehicle.accepts(port.connector_type_id):
-        return _result(CheckStatus.FAIL, ReasonCode.DIRECT_INCOMPATIBLE, 'This port does not directly match a connector registered for the vehicle.', evidence)
     connector = next((c for c in snapshot.connector_types if c.connector_type_id == port.connector_type_id), None)
-    name = _normalized(connector.name if connector else None)
+    family = ConnectorFamily.from_name(connector.name if connector else None)
+    accepted_names = vehicle.accepted_connector_names or tuple(
+        c.name for c in snapshot.connector_types if c.connector_type_id in vehicle.accepted_connector_ids)
+    accepted_families = {ConnectorFamily.from_name(name) for name in accepted_names}
+    matches = vehicle.accepts(port.connector_type_id) or (
+        family != ConnectorFamily.UNKNOWN and family in accepted_families)
     evidence['connector_name'] = connector.name if connector else None
-    expected = {'J1772': 'AC', 'CCS1': 'DC', 'CHADEMO': 'DC'}.get(name)
+    evidence['connector_family'] = family.value
+    evidence['accepted_connector_names'] = list(accepted_names)
+    if not matches and (family == ConnectorFamily.UNKNOWN or ConnectorFamily.UNKNOWN in accepted_families):
+        return _result(CheckStatus.UNKNOWN, ReasonCode.CONNECTOR_UNKNOWN,
+                       'An unrecognized connector name needs verification.', evidence)
+    if not matches:
+        return _result(CheckStatus.FAIL, ReasonCode.DIRECT_INCOMPATIBLE, 'This port does not directly match a connector registered for the vehicle.', evidence)
+    expected = family.verified_current
     if expected is None or port.current_type != expected:
         return _result(CheckStatus.UNKNOWN, ReasonCode.CONNECTOR_UNKNOWN,
                        'The connector matches, but the current type or additional vehicle connection requirements cannot be verified.', evidence)

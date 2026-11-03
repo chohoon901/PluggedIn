@@ -9,15 +9,21 @@ from playwright.sync_api import expect
 
 
 @pytest.fixture
-def live_app(tmp_path):
+def live_app(tmp_path, request):
     from ca.uvic.ecs.csc501.dal.database import Database
     from ca.uvic.ecs.csc501.dal.settings import Settings
     from ca.uvic.ecs.csc501.dal.scripts.init_db import init_database
     from ca.uvic.ecs.csc501.dal.scripts.seed_demo import seed_demo
     from ca.uvic.ecs.csc501.main import create_app
     database = Database(Settings(dal_root=tmp_path / "dal"))
-    init_database(database)
-    seed_demo(database)
+    if getattr(request, 'param', None) == 'sample':
+        from ca.uvic.ecs.csc501.dal.scripts.import_sample import build_sample
+        build_sample(database.settings.dal_root, *request.getfixturevalue('sample_sources'))
+        database.engine.dispose()
+        database = Database(Settings(dal_root=tmp_path / 'dal'))
+    else:
+        init_database(database)
+        seed_demo(database)
     with socket.socket() as probe:
         probe.bind(("127.0.0.1", 0))
         port = probe.getsockname()[1]
@@ -62,8 +68,11 @@ def test_no_javascript_crud_search_detail_and_second_browser(browser, live_app):
     page.locator('form button[type="submit"]').click()
     expect(page.locator("body")).to_contain_text("수정된 운전자")
     page.goto(live_app + "/vehicles/new")
-    for name, value in {"vin": "E2E00000000000001", "licence_plate": "E2E-02", "make": "Demo", "model": "Browser van", "vehicle_class": "VAN", "range_km": "250", "max_charge_kw": "100.5"}.items():
-        page.locator(f'[name="{name}"]').fill(value)
+    for name, value in {"vin": "E2E00000000000001", "licence_plate": "E2E-02", "make": "Demo", "model": "Browser van", "vehicle_class": "MD", "range_km": "250", "max_charge_kw": "100.5"}.items():
+        if name == "vehicle_class":
+            page.locator(f'[name="{name}"]').select_option(value)
+        else:
+            page.locator(f'[name="{name}"]').fill(value)
     page.locator('[name="accepted_connector_ids"][value="1"]').check()
     page.locator('form button[type="submit"]').click()
     expect(page.locator("body")).to_contain_text("Browser van")
@@ -93,6 +102,50 @@ def test_no_javascript_crud_search_detail_and_second_browser(browser, live_app):
     expect(page.locator("body")).not_to_contain_text("수정된 운전자")
     second.close()
     context.close()
+
+
+@pytest.mark.e2e
+@pytest.mark.parametrize('live_app', ['sample'], indirect=True)
+def test_real_sample_map_and_source_schedule_changes(browser, live_app):
+    import json
+    context = browser.new_context()
+    context.route('**/*tile.openstreetmap.org/**', lambda route: route.abort())
+    page = context.new_page()
+    errors = []
+    page.on('pageerror', lambda error: errors.append(str(error)))
+    page.goto(live_app + '/stations?driver_id=1&vehicle_id=1&arrival_at=2026-11-02T19%3A00%3A00Z')
+    expect(page.locator('.leaflet-overlay-pane path')).to_have_count(20)
+    markers = json.loads(page.locator('#map-data').text_content())
+    assert all(49.15 <= float(m['latitude']) <= 49.35 for m in markers)
+    assert not errors
+    page.goto(live_app + '/stations/1?driver_id=1&vehicle_id=1&arrival_at=2026-11-02T19%3A00%3A00Z')
+    expect(page.locator('body')).to_contain_text('Site owner unknown')
+    expect(page.locator('body')).to_contain_text('CCS (Type 1)')
+    page.goto(live_app + '/vehicles/1/edit')
+    expect(page.locator('[name="vehicle_class"]')).to_have_value('LD')
+    expect(page.locator('#vehicle_class option')).to_have_count(4)
+    assert page.locator('#vehicle_class option').evaluate_all('(items) => items.map(item => item.value).filter(Boolean)') == ['LD', 'MD', 'HD']
+    context.close()
+    nojs = browser.new_context(java_script_enabled=False)
+    page = nojs.new_page()
+    page.goto(live_app + '/')
+    page.get_by_label('Driver', exact=False).select_option('1')
+    page.get_by_label('Vehicle', exact=False).select_option('2')
+    page.get_by_label('Date', exact=True).fill('2026-11-02')
+    page.get_by_label('Time', exact=True).fill('23:00')
+    page.get_by_role('button', name='Find stations').click()
+    expect(page.locator('body')).to_contain_text('GSPLP TGO 05')
+    card = page.locator('.station-card').filter(has_text='GSPLP TGO 05')
+    expect(card).to_contain_text('Unavailable')
+    expect(card).to_contain_text('outside the recorded operating hours')
+    page.goto(live_app + '/vehicles/new')
+    page.locator('[name="vin"]').fill('NLR00000000000001')
+    page.locator('[name="vehicle_class"]').select_option('LD')
+    page.locator('[name="accepted_connector_ids"]').first.check()
+    page.get_by_role('button', name='Save vehicle').click()
+    expect(page.locator('body')).to_contain_text('NLR00000000000001')
+    expect(page.locator('body')).to_contain_text('LD')
+    nojs.close()
 
 
 @pytest.mark.e2e
