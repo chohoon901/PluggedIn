@@ -74,8 +74,15 @@ def selection_context(services):
     return {'drivers': services.list_drivers(), 'vehicles': services.list_vehicles()}
 
 
-def result_context(result, driver_id, vehicle_id, arrival_at, arrival_timezone=DEFAULT_ARRIVAL_TIMEZONE):
-    query = urlencode({'driver_id': driver_id, 'vehicle_id': vehicle_id, 'arrival_at': arrival_at, 'arrival_timezone': arrival_timezone})
+def search_query(driver_id, vehicle_id, arrival_at, arrival_timezone, filters=None):
+    # Carry only search conditions, using the resolved instant rather than Search now.
+    query = {key: value for key, value in (filters or {}).items() if key in (*DEFAULT_BBOX, 'status')}
+    query.update(driver_id=driver_id, vehicle_id=vehicle_id, arrival_at=arrival_at, arrival_timezone=arrival_timezone)
+    return urlencode(query)
+
+
+def result_context(result, driver_id, vehicle_id, arrival_at, arrival_timezone=DEFAULT_ARRIVAL_TIMEZONE, filters=None):
+    query = search_query(driver_id, vehicle_id, arrival_at, arrival_timezone, filters)
     station = result['station']
     return {**result, 'arrival_timezone': arrival_timezone, 'detail_url': f"/stations/{result['station_id']}?{query}",
             'directions_url': 'https://www.google.com/maps/dir/?' + urlencode({'api': 1, 'destination': f"{station['latitude']},{station['longitude']}"})}

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Request
 from ca.uvic.ecs.csc501.cmn.contracts.errors import AppError
 from ..dependencies import get_services
 from ..schemas import EvaluationInput, SearchInput
-from ..views import DEFAULT_BBOX, render, result_context, selection_context, validated
+from ..views import DEFAULT_BBOX, render, result_context, search_query, selection_context, validated
 from ..arrival import DEFAULT_ARRIVAL_TIMEZONE, arrival_form_values, resolve_arrival
 
 router = APIRouter()
@@ -27,20 +27,24 @@ def stations(request: Request, driver_id: str = '', vehicle_id: str = '', arriva
     instant = result['arrival_at']
     filters['arrival_at'] = instant
     filters.update(arrival_form_values(instant, arrival_timezone))
-    results = [result_context(item, data['driver_id'], data['vehicle_id'], instant, arrival_timezone) for item in result['results']]
+    results = [result_context(item, data['driver_id'], data['vehicle_id'], instant, arrival_timezone, filters) for item in result['results']]
     map_data = [{'latitude': item['station']['latitude'], 'longitude': item['station']['longitude'], 'name': item['station'].get('name') or 'Unnamed station', 'status': item['overall_status'], 'url': item['detail_url']} for item in results]
     return render(request, 'stations/list.html', {**context, **result, 'filters': filters, 'results': results, 'map_data': map_data,
         'arrival_timezone': arrival_timezone, 'selected_driver': services.get_driver(data['driver_id']), 'selected_vehicle': services.get_vehicle(data['vehicle_id'])})
 
 
 @router.get('/stations/{station_id}')
-def detail(station_id: int, request: Request, driver_id: str = '', vehicle_id: str = '', arrival_at: str = '', arrival_timezone: str = DEFAULT_ARRIVAL_TIMEZONE, services=Depends(get_services)):
+def detail(station_id: int, request: Request, driver_id: str = '', vehicle_id: str = '', arrival_at: str = '', arrival_timezone: str = DEFAULT_ARRIVAL_TIMEZONE, west: str | None = None, south: str | None = None, east: str | None = None, north: str | None = None, status: str = 'ALL', services=Depends(get_services)):
     resolve_arrival(arrival_timezone=arrival_timezone)
     data = validated(EvaluationInput, {'driver_id': driver_id, 'vehicle_id': vehicle_id, 'arrival_at': arrival_at})
+    bounds = services.search_bounds()
+    supplied = {'west': west, 'south': south, 'east': east, 'north': north}
+    filters = {key: str(bounds[key]) if value is None else value for key, value in supplied.items()}
+    filters['status'] = status
+    validated(SearchInput, {**data, 'bbox': {key: filters[key] for key in DEFAULT_BBOX}, 'status': status})
     result = services.detail(station_id, **data)
     context = result_context(result, data['driver_id'], data['vehicle_id'], result['arrival_at'], arrival_timezone)
-    from urllib.parse import urlencode
-    context['back_url'] = '/stations?' + urlencode({'driver_id': data['driver_id'], 'vehicle_id': data['vehicle_id'], 'arrival_at': result['arrival_at'], 'arrival_timezone': arrival_timezone})
+    context['back_url'] = '/stations?' + search_query(data['driver_id'], data['vehicle_id'], result['arrival_at'], arrival_timezone, filters)
     context['selected_driver'] = services.get_driver(data['driver_id'])
     context['selected_vehicle'] = services.get_vehicle(data['vehicle_id'])
     return render(request, 'stations/detail.html', context)
