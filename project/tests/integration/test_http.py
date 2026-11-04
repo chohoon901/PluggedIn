@@ -151,6 +151,36 @@ def test_search_apis_match_ssr_and_unready_health_is_503(client, tmp_path):
     db.engine.dispose()
 
 
+def test_unknown_connector_check_and_explanation_are_visible_on_both_pages(client):
+    from ca.uvic.ecs.csc501.dal.models.port_model import PortModel
+
+    # Only the isolated test database changes: CCS with AC cannot be verified.
+    with client.app.state.services._uow_factory() as work:
+        work.session.get(PortModel, 1).current_type = 'AC'
+        work.commit()
+
+    query = {'driver_id': 1, 'vehicle_id': 1, 'arrival_at': '2026-10-26T19:00:00Z'}
+    evaluation = client.post('/api/v1/stations/1/evaluate', json=query).json()
+    connector = evaluation['checks']['connector']
+    assert connector['status'] == 'UNKNOWN'
+    reason = connector['reasons'][0]
+    assert reason['code'] == 'CONNECTOR_UNKNOWN'
+
+    results = client.get('/stations', params=query)
+    assert results.status_code == 200
+    card = re.search(r'<article class="station-card panel">(.*?)</article>', results.text, re.S).group(1)
+    detail = client.get('/stations/1', params=query)
+    assert detail.status_code == 200
+    check = next(block for block in re.findall(r'<article class="panel check-detail">(.*?)</article>', detail.text, re.S)
+                 if 'Direct connection' in block)
+    for html in (card, check):
+        assert 'Direct connection' in html
+        assert re.search(r'class="badge unknown"[^>]*>.*?Needs review', html, re.S)
+        assert reason['message'] in html
+        assert reason['code'] in html
+    assert 'Information used for this check' in check
+
+
 @pytest.mark.parametrize('path', ['/', '/drivers', '/drivers/new', '/drivers/1/edit', '/vehicles', '/vehicles/new', '/vehicles/1/edit', '/memberships', '/memberships?driver_id=', '/memberships/new', '/memberships/1/edit'])
 def test_all_ssr_pages_render_without_script_execution(client, path):
     response = client.get(path)
