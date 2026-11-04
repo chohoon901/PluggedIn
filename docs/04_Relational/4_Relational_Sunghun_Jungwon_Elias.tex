@@ -78,86 +78,69 @@ One-to-many relationships employ foreign keys on the many side. Business candida
 
 \section{Relational Operations}
 \subsection{Creating and Populating Relations}
-The PluggedIn relational database is implemented in SQLite with 13 tables representing charging stations, vehicles, drivers, organizations, and their relationships. The schema defines primary keys, foreign keys, uniqueness constraints, and domain checks. Foreign-key enforcement is enabled using \texttt{PRAGMA foreign\_keys = ON}.
+PluggedIn implements 13 relational tables in SQLite, with primary keys, foreign keys, uniqueness constraints, and domain checks. Foreign key enforcement is enabled using \texttt{PRAGMA foreign\_keys = ON}. The following SQL defines the \textbf{Port} relation:
 
-For example, consider the \textbf{Port} relation, which represents the charging ports belonging to a station. The following SQL statement creates the relation:
-
+{\footnotesize
 \begin{verbatim}
 CREATE TABLE port (
     port_id INTEGER PRIMARY KEY,
     station_id INTEGER NOT NULL
-        REFERENCES station(station_id)
-        ON DELETE CASCADE,
-    number SMALLINT NOT NULL CHECK(number > 0),
+        REFERENCES station (station_id) ON DELETE CASCADE,
+    number SMALLINT NOT NULL CHECK (number > 0),
     connector_type_id INTEGER NOT NULL
-        REFERENCES connector_type(connector_type_id),
-    power_kw NUMERIC(6,1) CHECK(power_kw > 0),
+        REFERENCES connector_type (connector_type_id),
+    power_kw NUMERIC(6,1) CHECK (power_kw > 0),
     current_type VARCHAR(5)
-        CHECK(current_type IN ('AC','DC')),
+        CHECK (current_type IN ('AC', 'DC')),
     quantity SMALLINT NOT NULL DEFAULT 1
-        CHECK(quantity > 0),
-    UNIQUE(station_id, number)
-    );
+        CHECK (quantity > 0),
+    CONSTRAINT ak_port UNIQUE (station_id, number)
+);
 \end{verbatim}
+}
 
-Here, \texttt{}{port\_id} serves as the primary key, while \texttt{station\_id} references the Station relation. The \texttt{UNIQUE(station\_id, number)} constraint ensures that port numbers are unique within each station, preserving the identifying relationship from the ERD. Additionally, \texttt{ON DELETE CASCADE} removes associated ports when their station is deleted.
+The foreign keys link each port to a station and connector type, while \texttt{UNIQUE (station\_id, number)} prevents duplicate port numbers within a station. Deleting a station cascades to its ports.
 
-To populate the database, sample records are inserted into the corresponding relations. The dataset includes five charging stations, their associated ports and operating periods, two drivers, one vehicle, and two network memberships. Before inserting new records, the system checks whether they already exist to prevent duplicate insertions and conflicting data.
+Sample data is populated using SQLAlchemy ORM, with duplicate checks to maintain data integrity.
 
 \subsection{SELECT Queries}
-Suppose we want to retrieve all charging ports belonging to a particular station. The following query selects the ports associated with Station 1 and sorts them in ascending order by \texttt{port\_id}.
+The following query identifies stations with ports directly compatible with Vehicle 1 by joining \textbf{Port} and \textbf{VehicleAccepts} on \texttt{connector\_type\_id}.
 
+{\footnotesize
 \begin{verbatim}
-SELECT *
-FROM port
-WHERE station_id = 1
-ORDER BY port_id;
+SELECT DISTINCT p.station_id
+FROM port AS p JOIN vehicle_accepts AS va
+    ON p.connector_type_id = va.connector_type_id
+WHERE va.vehicle_id = 1;
 \end{verbatim}
+}
 
-Another example is retrieving organizations that serve as charging networks. Since \textbf{Network} is a subclass of \textbf{Organization}, the two relations can be joined using \texttt{organization\_id}.
+The next query counts compatible port records per station using \texttt{COUNT(*)} and \texttt{GROUP BY}.
 
+{\footnotesize
 \begin{verbatim}
-SELECT o.*
-FROM organization AS o
-JOIN network AS n
-    ON o.organization_id = n.organization_id
-ORDER BY o.organization_id;
+SELECT p.station_id, COUNT(*) AS compatible_port_count
+FROM port AS p JOIN vehicle_accepts AS va
+    ON p.connector_type_id = va.connector_type_id
+WHERE va.vehicle_id = 1 GROUP BY p.station_id;
 \end{verbatim}
+}
 
-This query retrieves only organizations with a corresponding record in the Network relation, demonstrating how an ISA relationship can be queried through a relational JOIN.
+These queries demonstrate direct connector-type matching; the application's full accessibility evaluation considers additional conditions.
 
 \subsection{INSERT, UPDATE, and DELETE Operations}
-A vehicle is registered with a supported connector type. The following statement inserts a new association into the \textbf{VehicleAccepts} relation:
+The following examples demonstrate how vehicle connector associations and charging port information can be maintained.
 
+{\footnotesize
 \begin{verbatim}
-INSERT INTO vehicle_accepts
-    (vehicle_id, connector_type_id)
-VALUES (1, 1);
-\end{verbatim}
-
-If the vehicle's accepted connector types change, the existing associations can be deleted and replaced with the updated set.
-
-\begin{verbatim}
-DELETE FROM vehicle_accepts
-WHERE vehicle_id = 1;
-
-INSERT INTO vehicle_accepts
-    (vehicle_id, connector_type_id)
+INSERT INTO vehicle_accepts (vehicle_id, connector_type_id)
 VALUES (1, 2);
+UPDATE port SET power_kw = 120.0 WHERE port_id = 1;
+DELETE FROM vehicle_accepts WHERE vehicle_id = 1 AND connector_type_id = 2;
 \end{verbatim}
+}
 
-This approach updates the many-to-many relationship between \textbf{Vehicle} and \textbf{ConnectorType} without deleting the vehicle itself. At least one connector type must be selected to maintain a valid set of vehicle-connector associations.
-
-Other attributes can be modified using an \texttt{UPDATE} statement. For example, the following query changes the charging power of \texttt{Port 1}:
-
-\begin{verbatim}
-UPDATE port
-SET power_kw = 120.0
-WHERE port_id = 1;
-\end{verbatim}
-
-The \texttt{WHERE} clause ensures that only the specified port is modified. Foreign-key and domain constraints help maintain data integrity during these operations.
-
+The \texttt{INSERT} statement adds a connector type accepted by Vehicle 1, while the \texttt{UPDATE} statement modifies the charging power of Port 1. The \texttt{DELETE} statement removes the specified vehicle–connector association without deleting the vehicle or connector type itself. These operations maintain the relationships and attributes stored in the relational database.
 
 \section{Architecture and User Interface}
 
@@ -173,7 +156,7 @@ In a virtual environment, install the dependencies from \path{requirements-dev.t
 
 The repository records 170 passing tests, including browser tests, and 91 subtests on 27 October 2026. Team-authored code uses the MIT License; bundled Leaflet 1.9.4 uses BSD 2-Clause, with its full license text included in the repository.
 
-\noindent\textbf{Contributions.} Sunghun Cho: [TODO]; Jungwon Youn: [TODO]; Elias Dockal: [TODO].
+\noindent\textbf{Contributions.} Sunghun Cho: [TODO]; Jungwon Youn: SQL query design, UI improvements, system architecture diagram, and documentation; Elias Dockal: [TODO].
 
 \noindent\textbf{AI assistance.} OpenAI Codex followed the development plan using a test-first approach. Review identified integer overflow, metadata exceptions, and mobile layout issues, reproduced with failing tests and fixed.
 
