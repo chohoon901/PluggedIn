@@ -110,6 +110,26 @@ SELECT * FROM membership WHERE membership_id = :membership_id;
 SELECT * FROM membership ORDER BY membership_id;
 SELECT * FROM membership WHERE driver_id = :driver_id ORDER BY membership_id;
 
+-- 2.4 Stations with directly compatible connector types (exact connector ID match).
+--     These reference queries do not perform the application's full compatibility
+--     evaluation: connector aliases, current type, and other eligibility checks
+--     are handled by application logic.
+SELECT DISTINCT p.station_id
+FROM port AS p
+JOIN vehicle_accepts AS va
+    ON p.connector_type_id = va.connector_type_id
+WHERE va.vehicle_id = 1;
+
+-- 2.5 Number of directly compatible port records per station.
+--     COUNT(*) counts matched port rows, not physical connectors or SUM(quantity).
+--     The unique vehicle/connector association prevents duplicate matches per port.
+SELECT p.station_id, COUNT(*) AS compatible_port_count
+FROM port AS p
+JOIN vehicle_accepts AS va
+    ON p.connector_type_id = va.connector_type_id
+WHERE va.vehicle_id = 1
+GROUP BY p.station_id;
+
 -- ============================================================================
 -- 3. DATA RETRIEVAL: CHARGING STATIONS AND REFERENCE CATALOGS
 -- ============================================================================
