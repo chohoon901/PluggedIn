@@ -235,7 +235,9 @@ def test_website_renders_english_navigation_labels_and_help(client, path):
     response = client.get(path)
     assert response.status_code in (200, 404)
     assert '<html lang="en">' in response.text
-    assert all(label in response.text for label in ['Find charging', 'Drivers', 'Vehicles', 'Memberships'])
+    navigation = re.search(r'<nav aria-label="Main navigation">(.*?)</nav>', response.text, re.S).group(1)
+    assert 'Find charging' in navigation
+    assert re.findall(r'href="([^"]+)"', navigation) == ['/']
     assert not re.search(r'[\uac00-\ud7a3]', response.text)
 
 
