@@ -4,11 +4,11 @@
 
 PluggedIn helps drivers and fleet operators answer: **Can this driver and vehicle use this charging station at the selected arrival time?** It combines opening hours, site and vehicle access, direct connector compatibility, and payment conditions. Each check is `PASS`, `FAIL`, or `UNKNOWN`; the overall result is `AVAILABLE`, `UNAVAILABLE`, or `NEEDS_REVIEW`. Missing evidence remains unknown rather than being treated as permission to charge.
 
-This draft describes the **20-station NLR-OCM Vancouver sample**, not the older five-station synthetic demo. The team should confirm that this version and its data files are published on the shared `Sunghun` branch before distributing these instructions. If a different release branch is supplied, use that branch instead.
+This README describes the **20-station NLR-OCM Vancouver sample**. The older five-station synthetic demo uses a different dataset. The team should confirm that this version and its data files are published on the shared `Sunghun` branch before distributing these instructions. If a different release branch is supplied, use that branch instead.
 
 ## Example and supported features
 
-![PluggedIn station search and map](docs/images/search-results-sample20.png)
+![PluggedIn station search and map](project/docs/images/search-results.png)
 
 The screenshot illustrates the fixed-date sample below. It is not a live availability report.
 
@@ -34,12 +34,20 @@ For a visible operating-hours change, inspect station `5` (**GSPLP TGO 05**): it
 
 - Python **3.12 or later**; the checked environment uses **3.12.14**.
 - Git to clone the repository; VS Code is optional.
-- Runtime packages pinned in [requirements.txt](requirements.txt), including FastAPI 0.162.0 and SQLAlchemy 2.0.55.
+- Runtime packages pinned in [requirements.txt](project/requirements.txt), including FastAPI 0.162.0 and SQLAlchemy 2.0.55.
 - Internet access for package installation and optional map tiles/fonts. No separate database server, Node build, or API key is needed to run the included sample.
 
-Detailed Windows instructions: [setup guide](docs/PluggedIn_Windows_Guide_English.md) and [updated PDF](docs/PluggedIn_Windows_Guide_English_Updated.pdf).
+Windows setup: run [quickstart.ps1](project/quickstart.ps1) using the [Quickstart guide](project/docs/QUICKSTART.md). The script prepares the environment, validates the selected sample, and starts the application.
 
 ## Installation and quickstart
+
+After obtaining the sample20 release, run this from the repository root for automatic Windows setup and startup:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\project\quickstart.ps1
+```
+
+Use `-CheckOnly` to validate an existing installation without starting a server, or `-SkipInstall` for later runs. Manual installation commands follow.
 
 Obtain the version containing the 20-station sample. For a new checkout after it is published on `Sunghun`:
 
@@ -74,7 +82,7 @@ venv/bin/python -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8
 
 ## Data, schema, and architecture
 
-The [SQLite DDL](src/ca/uvic/ecs/csc501/dal/scripts/schema.sql) defines **13 tables and 65 columns**:
+The [SQLite DDL](project/src/ca/uvic/ecs/csc501/dal/scripts/schema.sql) defines **13 tables and 65 columns**:
 
 - Organizations and roles: `organization`, `site_owner`, `operator`, `network`.
 - Charging facilities: `station`, `connector_type`, `port`, `operating_period`, `adapter`
@@ -82,7 +90,7 @@ The [SQLite DDL](src/ca/uvic/ecs/csc501/dal/scripts/schema.sql) defines **13 tab
 
 Stations reference organizational roles; ports and opening periods reference stations. Vehicles accept connector types, while memberships connect drivers to networks over a date range. Driver licence numbers, VINs, station coordinates, and other candidate keys have uniqueness constraints. Station owner/operator/network references may be NULL. Foreign keys are enabled on every application DB connection; deletion follows the schema's cascade and restriction rules.
 
-![Simplified PluggedIn architecture](docs/images/architecture-compact.jpg)
+![Simplified PluggedIn architecture](project/docs/images/architecture-compact.jpg)
 
 - `cmn/domain` and `cmn/enums`: domain entities, value objects, and canonical connector/vehicle classifications.
 - `cmn/application`, `cmn/services`, and `cmn/contracts`: use cases, evaluation, repository interfaces, and result types.
@@ -92,7 +100,7 @@ Stations reference organizational roles; ports and opening periods reference sta
 
 ### Active dataset and provenance
 
-[DAL configuration](src/ca/uvic/ecs/csc501/dal/config.properties) currently selects:
+[DAL configuration](project/src/ca/uvic/ecs/csc501/dal/config.properties) currently selects:
 
 ```ini
 [sqlite]
@@ -137,7 +145,7 @@ Then run `validate_db` and restart uvicorn using the commands above. For the ori
 
 ## Run the relational examples
 
-For assessment, [relational_examples.sql](docs/sql/relational_examples.sql) demonstrates SELECT, JOIN, aggregation, INSERT, UPDATE, and DELETE. Use the newly rebuilt DB rather than your user-edited active DB. Python 3.12 includes a SQLite command shell:
+For assessment, [relational_examples.sql](project/docs/sql/relational_examples.sql) demonstrates SELECT, JOIN, aggregation, INSERT, UPDATE, and DELETE. Use the newly rebuilt DB rather than your user-edited active DB. Python 3.12 includes a SQLite command shell:
 
 ```powershell
 .\venv\Scripts\python.exe -X utf8 -m sqlite3 "src/ca/uvic/ecs/csc501/dal/data/readme-rebuild/data/nlr_ocm_sample20.db"
@@ -145,7 +153,7 @@ For assessment, [relational_examples.sql](docs/sql/relational_examples.sql) demo
 
 Paste the SQL statements from the examples file into that shell. It prints the results of queries. The write demonstration uses `BEGIN` and ends with `ROLLBACK`, so the demonstration driver is not retained. Enter `.quit` to exit. Do not replace `ROLLBACK` with `COMMIT` when reproducing the example.
 
-The initial queries show 20 stations and 26 port records, list ports per station through a JOIN/GROUP BY, and join memberships to drivers and network organizations. Normal users perform CRUD through the web forms; direct SQL is a separate, disposable demonstration and bypasses application-level business checks.
+The first two report-style queries use vehicle 2 and return station 1 with one exact-ID matching port. Additional queries show 20 stations and 26 port records, aggregate ports per station, and join memberships to drivers and network organizations. The SQL examples compare stored IDs; full application evaluation also interprets connector aliases. Normal users perform CRUD through the web forms; direct SQL is a separate, disposable demonstration and bypasses application-level business checks.
 
 ## Validation and tests
 
@@ -158,7 +166,7 @@ The initial queries show 20 stations and 26 port records, list ports per station
 .\venv\Scripts\python.exe -m pytest tests/e2e --browser chromium
 ```
 
-The fixed-date example and a fresh source rebuild were checked for this draft. Historical suite results are in [verification.md](docs/verification.md) and the implementation records below; they describe their recorded versions and are not a claim that every suite was rerun for this documentation-only change.
+The fixed-date example and a fresh source rebuild were checked when preparing these instructions. Historical suite results are in [verification.md](project/docs/verification.md) and the implementation records below; they describe their recorded versions and are not a claim that every suite was rerun for this documentation-only change.
 
 ## Scope and limitations
 
@@ -166,12 +174,12 @@ Results describe recorded conditions, not real-time occupancy, faults, queues, r
 
 ## More documentation
 
-- [Windows setup guide](docs/PluggedIn_Windows_Guide_English.md)
-- [Sample construction and provenance](docs/sample20.md)
-- [NLR vehicle classes and package structure](docs/nlr-vehicle-class.md)
-- [Development plan](docs/PluggedIn_Development_Plan_AI_Agent.md)
-- [Original approved architecture](docs/superpowers/specs/2026-10-26-pluggedin-design.md) and [sample20 design update](docs/superpowers/specs/2026-11-02-idnull-sample-design.md)
-- [Current MVP access-policy record](docs/superpowers/plans/2026-11-02-mvp-class-only-access.md)
+- [Windows Quickstart guide](project/docs/QUICKSTART.md) and [executable setup script](project/quickstart.ps1)
+- [Sample construction and provenance](project/docs/sample20.md)
+- [NLR vehicle classes and package structure](project/docs/nlr-vehicle-class.md)
+- [Development plan](project/docs/PluggedIn_Development_Plan_AI_Agent.md)
+- [Original approved architecture](project/docs/superpowers/specs/2026-10-26-pluggedin-design.md) and [sample20 design update](project/docs/superpowers/specs/2026-11-02-idnull-sample-design.md)
+- [Current MVP access-policy record](project/docs/superpowers/plans/2026-11-02-mvp-class-only-access.md)
 
 ## Citation
 
@@ -179,6 +187,6 @@ When referring to this course project, cite Jungwon Youn, Sunghun Cho, and Elias
 
 ## License
 
-The team-authored PluggedIn source code is licensed under the [MIT License](LICENSE). Copyright (c) 2026 Jungwon Youn, Sunghun Cho, and Elias Dockal.
+The team-authored PluggedIn source code is licensed under the [MIT License](project/LICENSE). Copyright (c) 2026 Jungwon Youn, Sunghun Cho, and Elias Dockal.
 
-Bundled Leaflet 1.9.4 retains its separate [BSD 2-Clause license](src/ca/uvic/ecs/csc501/pl/static/vendor/LEAFLET-LICENSE.txt); map attribution credits OpenStreetMap contributors. External datasets retain their providers' terms.
+Bundled Leaflet 1.9.4 retains its separate [BSD 2-Clause license](project/src/ca/uvic/ecs/csc501/pl/static/vendor/LEAFLET-LICENSE.txt); map attribution credits OpenStreetMap contributors. External datasets retain their providers' terms.
