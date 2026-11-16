@@ -1,0 +1,318 @@
+\begin{filecontents}{bibliography.bib}
+@article{foaf,
+  author = {Dan Brickley and Libby Miller},
+  title = {FOAF Vocabulary Specification 0.99},
+  year = {2014},
+  url = {http://xmlns.com/foaf/spec/}
+}
+@inproceedings{event,
+  author = {Yves Raimond and Samer Abdallah},
+  title = {The Event Ontology},
+  booktitle = {Developer Day, International Semantic Web Conference (ISWC)},
+  year = {2007}
+}
+@techreport{time,
+  author = {W3C},
+  title = {Time Ontology in OWL},
+  institution = {W3C Recommendation},
+  year = {2017},
+  url = {https://www.w3.org/TR/owl-time/}
+}
+@article{musen2015,
+  author = {Mark A. Musen},
+  title = {The Protégé Project: A Look Back and a Look Forward},
+  journal = {AI Matters},
+  volume = {1},
+  number = {4},
+  pages = {4--12},
+  year = {2015}
+}
+@techreport{harris2013,
+  author = {Steve Harris and Andy Seaborne},
+  title = {SPARQL 1.1 Query Language},
+  institution = {W3C Recommendation},
+  year = {2013},
+  url = {https://www.w3.org/TR/sparql11-query/}
+}
+@techreport{owl2,
+  author = {W3C OWL Working Group},
+  title = {OWL 2 Web Ontology Language Document Overview (Second Edition)},
+  institution = {W3C Recommendation},
+  year = {2012},
+  url = {https://www.w3.org/TR/owl2-overview/}
+}
+\end{filecontents}
+
+\documentclass[sigconf]{acmart}
+
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\pagestyle{plain}
+\settopmatter{printacmref=false, printfolios=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\setcopyright{none}
+
+\setlength{\parskip}{0pt}
+\linespread{0.93}
+
+\lstdefinelanguage{sparql}{
+  keywords={PREFIX, SELECT, WHERE, GRAPH, INSERT, DATA, FILTER, GROUP, BY, ORDER, DESC, HAVING},
+  keywordstyle=\color{blue}\bfseries,
+  basicstyle=\ttfamily\tiny,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!5},
+  showstringspaces=false
+}
+
+\begin{document}
+
+\title{PluggedIn: A Semantic Web Approach to Electric Vehicle Charging Accessibility}
+
+\author{Jungwon Youn}
+\affiliation{
+  \institution{University of Victoria}
+  \city{Victoria}
+  \state{Canada}
+}
+\email{jungwonyoun@uvic.ca}
+
+\author{Sunghun Cho}
+\affiliation{
+  \institution{University of Victoria}
+  \city{Victoria}
+  \country{Canada}
+}
+\email{shcho980901@uvic.ca}
+
+\author{Elias Dockal}
+\affiliation{
+  \institution{University of Victoria}
+  \country{Canada}
+}
+\email{eliasdockal@uvic.ca}
+
+\begin{abstract}
+Electric vehicle (EV) charging infrastructure information is often distributed across fragmented data sources with disparate structures, making it difficult to answer practical queries such as ``which stations offer DC fast charging above $100\text{ kW}$ for a specific vehicle model?'' or ``which operators manage these locations?''. We propose the PluggedIn ontology, a lightweight OWL 2 ontology describing charging stations, ports, connectors, vehicles, and operators. PluggedIn reuses established vocabularies including FOAF, WGS84 Geo, and OWL-Time. We demonstrate how new charging stations and instances are added to the knowledge graph, how triples are updated, and how complex multi-hop competency questions are answered using SPARQL 1.1 queries and reasoner inferences over an OpenLink Virtuoso triplestore. The codebase, installation instructions, and software artifacts are available at \url{https://github.com/chohoon901/PluggedIn}.
+\end{abstract}
+
+\keywords{Semantic Web, Ontology, OWL 2, SPARQL, Knowledge Graph, EV Charging Infrastructure}
+
+\maketitle
+
+% ===============================================================
+\section{Problem Definition}
+% ===============================================================
+Our goal is to build a comprehensive knowledge graph of electric vehicle charging infrastructure and accessibility in British Columbia. Existing data sources store station records with network names as flat strings and operating hours as free text, making it difficult for automated systems or drivers to check cross-network compatibility, port power thresholds, or adapter requirements.
+
+We want a shared, machine-readable model so that drivers, fleet operators, and web applications can query integrated charging data seamlessly. Formally, given a set of station records $R=\{r_{1},...,r_{n}\}$, we want to build an RDF graph $G$ of triples $(s, p, o)$ governed by an ontology $O$, such that the following competency questions (CQs) can be answered via SPARQL queries over $G$:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \item \textbf{CQ1:} Which stations are operated by a specific network (e.g., BC Hydro EV Network), and what are their geographic coordinates?
+    \item \textbf{CQ2:} Which stations offer DC fast charging ports above $100\text{ kW}$, and what connector types do they use?
+    \item \textbf{CQ3:} Which registered vehicles are compatible with specific connector types available at local stations?
+    \item \textbf{CQ4:} Which stations require specific adapter types to bridge incompatible vehicle inlets and charging ports?
+\end{itemize}
+
+% ===============================================================
+\section{Proposed Ontology (TBox)}
+% ===============================================================
+We build the PluggedIn ontology in Protégé \cite{musen2015} using OWL 2 \cite{owl2} and store it in Turtle syntax within the named graph \texttt{https://github.com/chohoon901/PluggedIn/graph/}. Instead of defining every domain concept from scratch, we reuse existing Semantic Web vocabularies (Table~\ref{tab:namespaces}). An infrastructure entity inherits properties from standard foundational ontologies. Figure~\ref{fig:class_hierarchy} illustrates the complete asserted class hierarchy covering our 13 core domain entities and organizational subclasses.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Namespaces used in the PluggedIn Ontology.}
+\label{tab:namespaces}
+\begin{tabular}{ll}
+\toprule
+\textbf{Prefix} & \textbf{Vocabulary / Namespace URI} \\
+\midrule
+\texttt{plug:} & Our ontology, \url{https://github.com/chohoon901/PluggedIn/ontology\#} \\
+\texttt{event:} & Event Ontology \cite{event} \\
+\texttt{time:} & OWL-Time \cite{time} \\
+\texttt{foaf:} & Friend of a Friend \cite{foaf} \\
+\texttt{geo:} & W3C WGS84 Geo Positioning \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{OWL_Class_Hierachy tree.png}
+\caption{Asserted class hierarchy of the PluggedIn ontology featuring all 13 core domain classes and organizational sub-entities.}
+\label{fig:class_hierarchy}
+\end{figure}
+
+\subsection{First Main Entity Set: Station, Port, and Hardware}
+The core class of our ontology is \texttt{plug:Station}, defined as a physical facility providing electric vehicle supply equipment (EVSE). Subclasses and associated hardware include \texttt{plug:Port}, \texttt{plug:ConnectorType}, and \texttt{plug:Adapter}. Datatype properties such as \texttt{plug:powerKw} (functional, in kilowatts), \texttt{plug:currentType} (AC or DC), and \texttt{plug:portNumber} characterize individual ports.
+
+To handle real-world interoperability, we model adapter-mediated compatibility explicitly. An \texttt{plug:Adapter} connects two connector standards via \texttt{plug:fromConnector} and \texttt{plug:toConnector}, with a \texttt{plug:connectorMaxPowerKw} constraint. Listing 1 shows an excerpt of the TBox definitions for this primary hardware set.
+
+\begin{lstlisting}[language=sparql, caption={Definition of core station and hardware classes and properties (excerpt).}]
+plug:Station a owl:Class .
+plug:Port a owl:Class .
+plug:ConnectorType a owl:Class .
+plug:Adapter a owl:Class .
+
+plug:hasPort a owl:ObjectProperty ;
+  rdfs:domain plug:Station ;
+  rdfs:range plug:Port .
+
+plug:hasConnectorType a owl:ObjectProperty ;
+  rdfs:domain plug:Port ;
+  rdfs:range plug:ConnectorType .
+
+plug:HighPowerDCStation a owl:Class ;
+  owl:equivalentClass [ a owl:Restriction ;
+    owl:onProperty plug:hasPort ;
+    owl:someValuesFrom [ a owl:Restriction ;
+      owl:onProperty plug:powerKw ;
+      owl:minInclusive "100.0"^^xsd:decimal ] ] .
+\end{lstlisting}
+
+\subsection{Second Main Entity Set: Operator, Network, and Driver}
+The second main entity set models organizational actors and users. \texttt{plug:Organization} serves as a generalized superclass with specialized subclasses: \texttt{plug:Network}, \texttt{plug:Operator}, and \texttt{plug:SiteOwner}. A station is linked to its network operator via \texttt{plug:isOperatedBy} (a sub-property of organizational association). 
+
+Furthermore, drivers and their network memberships are modeled via \texttt{plug:Driver} and \texttt{plug:Membership}, connecting users to networks to determine payment eligibility. Descriptive attributes like \texttt{plug:operatorName} and \texttt{plug:paymentMethod} capture operational details.
+
+\subsection{Third Main Entity Set: Location and Time}
+Because charging stations exist physically and operate on schedules, the third main entity set models spatial coordinates and temporal constraints. \texttt{plug:Location} is a subclass of \texttt{geo:SpatialThing}, providing an \texttt{rdfs:label}, \texttt{geo:lat}, and \texttt{geo:long} for map rendering. Operating schedules are separated into \texttt{plug:OperatingPeriod} entities with properties for days and hours, avoiding ambiguous free text. Time instants utilize \texttt{time:Instant} from OWL-Time \cite{time}. Table~\ref{tab:properties} summarizes the primary object and datatype properties across these entity sets.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Main PluggedIn properties (O: object property, D: datatype property).}
+\label{tab:properties}
+\begin{tabular}{llll}
+\toprule
+\textbf{Property} & \textbf{Type} & \textbf{Domain} & \textbf{Range} \\
+\midrule
+\texttt{isOperatedBy} & O & Station & Operator \\
+\texttt{hasPort} & O & Station & Port \\
+\texttt{hasConnectorType} & O & Port & ConnectorType \\
+\texttt{vehicleAccepts} & O & Vehicle & ConnectorType \\
+\texttt{powerKw} & D & Port & xsd:decimal \\
+\texttt{stationName} & D & Station & xsd:string \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ===============================================================
+\section{Main SPARQL Statements}
+% ===============================================================
+All statements conform to SPARQL 1.1 \cite{harris2013} and were executed on our Virtuoso knowledge graph using standard prefixes:
+\begin{lstlisting}[language=sparql]
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX plug: <https://github.com/chohoon901/PluggedIn/ontology#>
+\end{lstlisting}
+
+\subsection{New Triples and ABox Population}
+When new station records arrive, triples are inserted via \texttt{INSERT DATA}. Listing 3 populates ABox instances representing Victoria charging infrastructure into the named graph.
+
+\begin{lstlisting}[language=sparql, caption={Adding a new charging station instance (Listing 3).}]
+INSERT DATA {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    plug:operatorBCHydro a plug:Operator ;
+      plug:operatorName "BC Hydro EV Network" .
+    plug:station001 a plug:Station ;
+      plug:stationName "Uptown EV Hub" ;
+      plug:latitude "48.4500"^^xsd:decimal ;
+      plug:longitude "-123.3800"^^xsd:decimal ;
+      plug:isOperatedBy plug:operatorBCHydro .
+  }
+}
+\end{lstlisting}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\columnwidth]{ABox Population&Execution_Result.png}
+\caption{Virtuoso ISQL execution confirmation for ABox triple insertion.}
+\label{fig:abox_result}
+\end{figure}
+
+\subsection{Updates to Triples}
+SPARQL updates combine \texttt{DELETE} and \texttt{INSERT} blocks. Listing 4 updates an operator name or network association across matching station instances.
+
+\begin{lstlisting}[language=sparql, caption={Updating station network associations (Listing 4).}]
+DELETE { ?s plug:isOperatedBy plug:oldOp }
+INSERT { ?s plug:isOperatedBy plug:newOp }
+WHERE  { ?s plug:isOperatedBy plug:oldOp .
+         ?oldOp plug:operatorName "Old Network Name" }
+\end{lstlisting}
+
+\subsection{Querying the Knowledge Graph}
+We answer each competency question with a SPARQL \texttt{SELECT} query. Listing 6 answers CQ1, retrieving stations operated by the BC Hydro EV Network along with their coordinates.
+
+\begin{lstlisting}[language=sparql, caption={CQ1: Stations and coordinates by operator (Listing 6).}]
+SELECT ?stationName ?opName ?lat ?lon WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?station a plug:Station ;
+             plug:stationName ?stationName ;
+             plug:latitude ?lat ;
+             plug:longitude ?lon ;
+             plug:isOperatedBy ?op .
+    ?op plug:operatorName ?opName .
+    FILTER (?opName = "BC Hydro EV Network")
+  }
+} ORDER BY ?stationName
+\end{lstlisting}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\columnwidth]{CQ1_Result.png}
+\caption{Result of CQ1 query executed in Virtuoso ISQL.}
+\label{fig:cq1_result}
+\end{figure}
+
+Listings 7 and 8 utilize aggregation functions to analyze station density and connector distribution across regions.
+
+\begin{lstlisting}[language=sparql, caption={CQ2: Number of high-power ports per station (Listing 7).}]
+SELECT ?stationName (COUNT(?port) AS ?dcPorts) WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?station plug:stationName ?stationName ;
+             plug:hasPort ?port .
+    ?port plug:currentType "DC" .
+  }
+} GROUP BY ?stationName ORDER BY DESC(?dcPorts)
+\end{lstlisting}
+
+\begin{lstlisting}[language=sparql, caption={CQ3: Vehicle and connector compatibility (Listing 8).}]
+SELECT ?vehicleModel ?connName WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?v a plug:Vehicle ;
+       plug:vehicleModel ?vehicleModel ;
+       plug:vehicleAccepts ?conn .
+    ?conn plug:connectorName ?connName .
+  }
+} ORDER BY ?vehicleModel
+\end{lstlisting}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\columnwidth]{CQ3_Result.png}
+\caption{Result of CQ3 query matching vehicles to connector types.}
+\label{fig:cq3_result}
+\end{figure}
+
+Reasoning engines can also evaluate class expressions automatically; with an OWL 2 reasoner enabled, querying instances of \texttt{plug:HighPowerDCStation} identifies stations satisfying power thresholds without manual filter clauses.
+
+% ===============================================================
+\section{Conclusion}
+% ===============================================================
+Migrating the PluggedIn data model to an OWL 2 knowledge graph hosted on an OpenLink Virtuoso triplestore demonstrates significant advantages over traditional relational storage. By modeling chargers, connectors, operators, and vehicles as interconnected RDF triples, complex multi-hop queries regarding power capacities, network memberships, and vehicle compatibility can be executed declaratively in SPARQL. Future work will incorporate OWL reasoning rules for automated adapter-based compatibility inference and link the triplestore endpoint directly to a web-based mapping and navigation interface.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliography}
+
+\end{document}
