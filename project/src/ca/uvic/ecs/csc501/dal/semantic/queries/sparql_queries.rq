@@ -1,0 +1,46 @@
+# ==========================================
+# PluggedIn Project - SPARQL Queries & ABox
+# ==========================================
+
+PREFIX plug: <https://github.com/chohoon901/PluggedIn/ontology#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# --- CQ1: Stations and Operators ---
+SELECT ?stationName ?operatorName ?lat ?lon
+WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?station a plug:Station ;
+             plug:stationName ?stationName ;
+             plug:latitude ?lat ;
+             plug:longitude ?lon ;
+             plug:isOperatedBy ?op .
+    ?op plug:operatorName ?operatorName .
+  }
+};
+
+# --- CQ2: DC Fast Chargers (>100kW) ---
+SELECT ?stationName ?powerKw ?connectorName
+WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?station a plug:Station ;
+             plug:stationName ?stationName ;
+             plug:hasPort ?port .
+    ?port plug:powerKw ?powerKw ;
+          plug:currentType "DC" ;
+          plug:hasConnectorType ?conn .
+    ?conn plug:connectorName ?connectorName .
+    FILTER (?powerKw >= 100.0)
+  }
+};
+
+# --- CQ3: Vehicle & Connector Compatibility ---
+SELECT ?vehicleModel ?licencePlate ?connectorName
+WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?vehicle a plug:Vehicle ;
+             plug:vehicleModel ?vehicleModel ;
+             plug:licencePlate ?licencePlate ;
+             plug:vehicleAccepts ?conn .
+    ?conn plug:connectorName ?connectorName .
+  }
+};
