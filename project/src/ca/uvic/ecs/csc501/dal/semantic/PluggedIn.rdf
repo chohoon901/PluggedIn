@@ -35,6 +35,7 @@
     <!-- https://github.com/chohoon901/PluggedIn/ontology/fromConnector -->
 
     <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/fromConnector">
+        <rdfs:comment>The connector type on the charging station side of the adapter.</rdfs:comment>
         <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Adapter"/>
         <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
     </owl:ObjectProperty>
@@ -107,6 +108,7 @@
     <!-- https://github.com/chohoon901/PluggedIn/ontology/toConnector -->
 
     <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/toConnector">
+        <rdfs:comment>The connector type on the vehicle side of the adapter.</rdfs:comment>
         <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Adapter"/>
         <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
     </owl:ObjectProperty>
