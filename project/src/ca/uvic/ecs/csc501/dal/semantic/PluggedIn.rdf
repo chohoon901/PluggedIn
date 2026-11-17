@@ -142,9 +142,9 @@
     
 
 
-    <!-- https://github.com/chohoon901/PluggedIn/ontology/acessRestriction -->
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/accessRestriction -->
 
-    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/acessRestriction">
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/accessRestriction">
         <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
