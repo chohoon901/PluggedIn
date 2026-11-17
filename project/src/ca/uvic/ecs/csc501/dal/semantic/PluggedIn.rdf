@@ -461,7 +461,10 @@
 
     <!-- https://github.com/chohoon901/PluggedIn/ontology/vehicleMaxChargeKw -->
 
-    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/vehicleMaxChargeKw"/>
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/vehicleMaxChargeKw">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
     
 
 
