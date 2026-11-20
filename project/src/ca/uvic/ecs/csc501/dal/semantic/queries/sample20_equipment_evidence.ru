@@ -3,8 +3,9 @@
 # Connector families follow cmn/enums/connector_family.py for the sample's raw names.
 # On 2026-11-19, Tesla Canada's location 13658 listed 16 Superchargers at 2710 Kaslo St
 # with an advertised maximum of 250 kW for the charging group. Ford Canada's SKU
-# VRK9Z10E826A lists NACS DC charging into a CCS1 vehicle inlet. The adapter entry
-# records connector direction and current for catalog queries.
+# VRK9Z10E826A lists NACS DC charging into a CCS1 vehicle inlet.
+# The other catalog entries use A2Z EV's Stellar Pro and Legacy (CCS1 variant)
+# specifications and Tesla Canada's SAE J1772 adapter specifications.
 PREFIX plug: <https://github.com/chohoon901/PluggedIn/ontology/>
 PREFIX migration: <https://github.com/chohoon901/PluggedIn/migration/>
 PREFIX station: <https://github.com/chohoon901/PluggedIn/data/sample20/Station/>
@@ -22,13 +23,13 @@ INSERT {
       migration:powerEvidenceScope "Charging group maximum advertised by operator" ;
       migration:powerEvidenceCheckedOn "2026-11-19"^^xsd:date .
 
-    ?fordAdapter a plug:Adapter ;
-      plug:adapterModel "Ford Fast Charging Adapter (NACS) (VRK9Z10E826A)" ;
-      plug:manufacturer "Ford" ;
-      plug:fromConnector connector:6 ;
-      plug:toConnector connector:2 ;
-      migration:adapterCurrentType "DC" ;
-      migration:adapterEvidence <https://www.ford.ca/product/ford-fast-charging-adapter-nacs-p2999073032> .
+    ?adapter a plug:Adapter ;
+      plug:adapterModel ?model ;
+      plug:manufacturer ?manufacturer ;
+      plug:fromConnector ?from ;
+      plug:toConnector ?to ;
+      migration:adapterCurrentType ?currentType ;
+      migration:adapterEvidence ?evidence .
   }
 }
 WHERE {
@@ -61,11 +62,24 @@ WHERE {
   }
   UNION
   {
-    GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
-      connector:6 a plug:ConnectorType ; plug:connectorName ?fromName .
-      connector:2 a plug:ConnectorType ; plug:connectorName ?toName .
-      FILTER (STR(?fromName) = "NACS / Tesla Supercharger" && STR(?toName) = "J1772COMBO")
+    VALUES (?adapter ?model ?manufacturer ?from ?fromName ?to ?toName ?currentType ?evidence) {
+      (catalog:ford-vrk9z10e826a "Ford Fast Charging Adapter (NACS) (VRK9Z10E826A)" "Ford"
+       connector:6 "NACS / Tesla Supercharger" connector:2 "J1772COMBO" "DC"
+       <https://www.ford.ca/product/ford-fast-charging-adapter-nacs-p2999073032>)
+      (catalog:a2z-stellar-pro "A2Z EV Stellar Pro" "A2Z EV"
+       connector:4 "Tesla (Model S/X)" connector:1 "J1772" "AC"
+       <https://a2zev.com/products/nacs-j1772>)
+      (catalog:a2z-legacy-ccs1 "A2Z EV Legacy (CCS1)" "A2Z EV"
+       connector:2 "J1772COMBO" connector:7 "CHADEMO" "DC"
+       <https://a2zev.com/products/ccs1-to-chademo>)
+      (catalog:tesla-sae-j1772 "Tesla SAE J1772 Charging Adapter" "Tesla"
+       connector:1 "J1772" connector:3 "TESLA" "AC"
+       <https://shop.tesla.com/en_ca/product/sae-j1772-charging-adapter>)
     }
-    BIND (catalog:ford-vrk9z10e826a AS ?fordAdapter)
+    GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+      ?from a plug:ConnectorType ; plug:connectorName ?storedFromName .
+      ?to a plug:ConnectorType ; plug:connectorName ?storedToName .
+    }
+    FILTER (STR(?storedFromName) = ?fromName && STR(?storedToName) = ?toName)
   }
 }

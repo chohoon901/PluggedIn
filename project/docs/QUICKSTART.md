@@ -53,11 +53,15 @@ Start Virtuoso and load the [PluggedIn ontology](../src/ca/uvic/ecs/csc501/dal/s
 and the exported sample data into the named graph
 `https://github.com/chohoon901/PluggedIn/graph/`. Then run the
 [equipment evidence update](../src/ca/uvic/ecs/csc501/dal/semantic/queries/sample20_equipment_evidence.ru)
-to add the published Kaslo rating and adapter catalogue entry.
+to add the published Kaslo rating and four manufacturer-sourced adapter entries.
+Re-run this update on an existing sample20 graph to add the new entries. The
+update inserts triples without deleting any existing data.
 
-Launch the app and open **Charging queries** in the main navigation. **CQ2** shows
-Kaslo's operator-published maximum of 250 kW and its source. For **CQ4**, choose the
-J1772COMBO sample vehicle to see connector-based NACS-to-CCS1 adapter candidates.
+In **Fast Charging** (CQ2), enter a minimum power in kW and search. Try 250 kW
+to see Kaslo's operator-published group maximum and 251 kW to see the empty result
+with the current sample20 ratings. In **Adapter Finder** (CQ4), select any of the
+four sample vehicles to see matching ports, addresses and adapter product links.
+Use the vehicle and network eligibility information before charging.
 If your Virtuoso address or graph differs, set `sparql_endpoint` and `graph_iri` in
 the `[semantic]` section of [config.properties](../src/ca/uvic/ecs/csc501/dal/config.properties).
 

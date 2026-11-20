@@ -45,10 +45,14 @@ class AdapterCandidate:
     source_url: str | None
     # 어댑터가 지원한다고 기록된 전류 유형입니다. 미확인이면 None입니다.
     adapter_current: str | None = None
+    # 후보 충전소의 도로명 주소입니다. 출처에 없으면 None입니다.
+    station_street: str | None = None
+    # 후보 충전소가 있는 도시 이름입니다. 출처에 없으면 None입니다.
+    station_city: str | None = None
 
 
 class SemanticRepository(Protocol):
-    def fast_chargers(self) -> list[HighPowerPort]: ...
+    def fast_chargers(self, min_power_kw: Decimal) -> list[HighPowerPort]: ...
 
     def vehicles(self) -> list[SemanticVehicle]: ...
 

@@ -16,6 +16,7 @@ from ca.uvic.ecs.csc501.cmn.contracts.semantic import AdapterCandidate, HighPowe
 _RESULT_FORMAT = 'application/sparql-results+json'
 _TIMEOUT_SECONDS = 3
 _BASE_GRAPH_PATTERN = 'GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {'
+_CQ2_DEFAULT_MINIMUM = 'VALUES ?minimumPowerKw { 100 }'
 _CQ_HEADING = re.compile(r'^# --- (CQ[0-9]+): [^\r\n]+ ---$', re.MULTILINE)
 _IRI_SCHEME = re.compile(r'^[A-Za-z][A-Za-z0-9+.-]*:')
 _IRI_FORBIDDEN = re.compile(r'[\x00-\x20\x7f<>"{}|^`\\\ud800-\udfff]|%(?![0-9A-Fa-f]{2})')
@@ -127,7 +128,11 @@ class VirtuosoSemanticRepository:
             raise NotReadyError(_BAD_RESULTS)
         return rows
 
-    def fast_chargers(self) -> list[HighPowerPort]:
+    def fast_chargers(self, min_power_kw: Decimal) -> list[HighPowerPort]:
+        query = self._question('CQ2')
+        if _CQ2_DEFAULT_MINIMUM not in query:
+            raise NotReadyError(_UNAVAILABLE)
+        query = query.replace(_CQ2_DEFAULT_MINIMUM, f'VALUES ?minimumPowerKw {{ {min_power_kw:f} }}', 1)
         return [
             HighPowerPort(
                 station_name=_optional_binding(row, 'stationName'),
@@ -137,7 +142,7 @@ class VirtuosoSemanticRepository:
                 source_url=_web_url(_optional_binding(row, 'powerEvidenceSource', _EVIDENCE)),
                 checked_on=_optional_binding(row, 'powerEvidenceCheckedOn'),
             )
-            for row in self._select(self._question('CQ2'))
+            for row in self._select(query)
         ]
 
     def vehicles(self) -> list[SemanticVehicle]:
@@ -172,5 +177,7 @@ ORDER BY ?model ?vehicle'''
                 port_current=_optional_binding(row, 'portCurrent'),
                 source_url=_web_url(_optional_binding(row, 'adapterSource', _EVIDENCE)),
                 adapter_current=_optional_binding(row, 'adapterCurrent'),
+                station_street=_optional_binding(row, 'stationStreet'),
+                station_city=_optional_binding(row, 'stationCity'),
             ))
         return candidates

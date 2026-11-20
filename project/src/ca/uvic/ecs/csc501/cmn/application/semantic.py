@@ -1,15 +1,25 @@
-"""Read the charging query results and validate the selected graph vehicle."""
+"""Validate charging search inputs and read the matching graph results."""
+
+import re
+from decimal import Decimal
 
 from ..contracts.errors import InputError
 from ..contracts.semantic import AdapterCandidate, HighPowerPort, SemanticRepository, SemanticVehicle
+
+
+_DECIMAL_INPUT = re.compile(r'(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)')
 
 
 class SemanticService:
     def __init__(self, repository: SemanticRepository):
         self.repository = repository
 
-    def fast_chargers(self) -> list[HighPowerPort]:
-        return self.repository.fast_chargers()
+    def fast_chargers(self, min_power_kw: str) -> list[HighPowerPort]:
+        value = min_power_kw.strip()
+        if len(value) > 20 or not _DECIMAL_INPUT.fullmatch(value):
+            message = 'Enter a minimum power of 0 kW or higher.'
+            raise InputError(message, {'min_power_kw': message})
+        return self.repository.fast_chargers(Decimal(value))
 
     def vehicles(self) -> list[SemanticVehicle]:
         return self.repository.vehicles()

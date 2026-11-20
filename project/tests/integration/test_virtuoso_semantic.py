@@ -84,7 +84,7 @@ def test_fast_chargers_query_configured_graph_and_preserve_power_evidence(endpoi
         'powerEvidenceScope': literal('Port rating'),
     }))
 
-    results = semantic_repository(endpoint_url).fast_chargers()
+    results = semantic_repository(endpoint_url).fast_chargers(Decimal('150.0'))
 
     from ca.uvic.ecs.csc501.cmn.contracts.semantic import HighPowerPort
 
@@ -99,7 +99,8 @@ def test_fast_chargers_query_configured_graph_and_preserve_power_evidence(endpoi
     query, = params['query']
     assert f'GRAPH <{GRAPH}>' in query
     assert query.count('SELECT ') == 1
-    assert 'FILTER (STR(?currentType) = "DC" && ?powerKw > 100)' in query
+    assert 'VALUES ?minimumPowerKw { 150.0 }' in query
+    assert 'FILTER (STR(?currentType) = "DC" && ?powerKw >= ?minimumPowerKw)' in query
 
 
 def test_vehicle_choices_select_only_graph_iri_and_optional_model(endpoint):
@@ -186,7 +187,7 @@ def test_invalid_graph_iri_is_rejected_before_querying(endpoint):
     endpoint_url, requests, _ = endpoint
 
     with pytest.raises(NotReadyError):
-        semantic_repository(endpoint_url, 'https://example.test/invalid>graph').fast_chargers()
+        semantic_repository(endpoint_url, 'https://example.test/invalid>graph').fast_chargers(Decimal('100'))
 
     assert not requests
 

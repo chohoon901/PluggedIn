@@ -237,8 +237,9 @@ def test_website_renders_english_navigation_labels_and_help(client, path):
     assert '<html lang="en">' in response.text
     navigation = re.search(r'<nav aria-label="Main navigation">(.*?)</nav>', response.text, re.S).group(1)
     assert 'Find charging' in navigation
-    assert 'Charging queries' in navigation
-    assert re.findall(r'href="([^"]+)"', navigation) == ['/', '/semantic']
+    assert 'Fast Charging' in navigation
+    assert 'Adapter Finder' in navigation
+    assert re.findall(r'href="([^"]+)"', navigation) == ['/', '/fast-charging', '/adapter-finder']
     assert not re.search(r'[\uac00-\ud7a3]', response.text)
 
 
