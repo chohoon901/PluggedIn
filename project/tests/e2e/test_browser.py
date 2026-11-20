@@ -9,12 +9,11 @@ from playwright.sync_api import expect
 
 
 @pytest.fixture
-def live_app(tmp_path, request):
+def live_app(tmp_path, request, imported_app):
     from ca.uvic.ecs.csc501.dal.database import Database
     from ca.uvic.ecs.csc501.dal.settings import Settings
     from ca.uvic.ecs.csc501.dal.scripts.init_db import init_database
     from ca.uvic.ecs.csc501.dal.scripts.seed_demo import seed_demo
-    from ca.uvic.ecs.csc501.main import create_app
     database = Database(Settings(dal_root=tmp_path / "dal"))
     if getattr(request, 'param', None) == 'sample':
         from ca.uvic.ecs.csc501.dal.scripts.import_sample import build_sample
@@ -27,7 +26,7 @@ def live_app(tmp_path, request):
     with socket.socket() as probe:
         probe.bind(("127.0.0.1", 0))
         port = probe.getsockname()[1]
-    server = uvicorn.Server(uvicorn.Config(create_app(database), host="127.0.0.1", port=port, log_level="error"))
+    server = uvicorn.Server(uvicorn.Config(imported_app(database), host="127.0.0.1", port=port, log_level="error"))
     thread = threading.Thread(target=server.run, daemon=True)
     thread.start()
     deadline = time.monotonic() + 10

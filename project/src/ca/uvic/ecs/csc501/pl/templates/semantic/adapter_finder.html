@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Adapter Finder · PluggedIn{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <h1>Adapter Finder</h1>
+    <p class="subtle">Find charging stations with a port that matches your vehicle through an adapter.</p>
+  </div>
+</div>
+
+<section class="panel data-panel semantic-query" aria-label="Vehicle search">
+  <form method="get" action="{{ url_for('adapter_finder') }}" class="semantic-filter">
+    <div class="field">
+      <label for="semantic-vehicle">Vehicle</label>
+      <select id="semantic-vehicle" name="vehicle_iri" required
+        {% if vehicle_error %}aria-invalid="true" aria-describedby="semantic-vehicle-error"{% endif %}
+        {% if not vehicles %}disabled{% endif %}>
+        <option value="" {% if not vehicle_iri %}selected{% endif %} disabled>Choose a vehicle</option>
+        {% if vehicle_error and vehicle_iri %}
+        <option value="{{ vehicle_iri }}" selected disabled>Unavailable vehicle ({{ vehicle_iri }})</option>
+        {% endif %}
+        {% for vehicle in vehicles %}
+        <option value="{{ vehicle.iri }}"{% if vehicle.iri == vehicle_iri %} selected{% endif %}>{{ vehicle.model or vehicle.iri }}</option>
+        {% endfor %}
+      </select>
+      {% if vehicle_error %}
+      <small id="semantic-vehicle-error" class="field-error" role="alert">{{ vehicle_error }}</small>
+      {% endif %}
+    </div>
+    <button type="submit" class="button"{% if not vehicles %} disabled{% endif %}>Search stations</button>
+  </form>
+
+  {% if adapter_candidates %}
+  <p class="subtle">These results match connectors and available current data. Check vehicle and station eligibility before charging.</p>
+  <div class="table-wrap semantic-results" role="region" aria-label="Adapter candidate results" tabindex="0">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Station</th>
+          <th scope="col">Adapter product</th>
+          <th scope="col">Port connector → vehicle inlet</th>
+          <th scope="col">Current type</th>
+          <th scope="col">Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for candidate in adapter_candidates %}
+        <tr>
+          <td>
+            <strong>{{ candidate.station_name or 'Unnamed station' }}</strong>
+            {% if candidate.station_street or candidate.station_city %}
+            <div class="subtle">{{ [candidate.station_street, candidate.station_city]|select|join(', ') }}</div>
+            {% endif %}
+          </td>
+          <td>{{ candidate.adapter_model }}</td>
+          <td>{{ candidate.port_connector }} → {{ candidate.vehicle_connector }}</td>
+          <td>
+            <div>Port: {{ candidate.port_current or 'Unknown' }}</div>
+            <div>Adapter: {{ candidate.adapter_current or 'Unknown' }}</div>
+          </td>
+          <td>
+            {% if candidate.source_url %}
+            <a href="{{ candidate.source_url }}" aria-label="View product information for {{ candidate.adapter_model }}">Product details</a>
+            {% else %}
+            Unknown
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% elif adapter_candidates is not none %}
+  <p class="subtle semantic-empty">No connector-based adapter candidates found for this vehicle.</p>
+  {% elif not vehicles %}
+  <p class="subtle semantic-empty">No vehicles are available in the charging knowledge graph.</p>
+  {% endif %}
+</section>
+{% endblock %}

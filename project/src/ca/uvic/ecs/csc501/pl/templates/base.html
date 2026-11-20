@@ -11,7 +11,14 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header"><div class="header-inner">
   <a class="brand" href="/" aria-label="PluggedIn home"><span class="brand-mark" aria-hidden="true">ϟ</span>Plugged<span>In</span><small>BC CHARGING COMPANION</small></a>
-  <nav aria-label="Main navigation"><a href="/" {% if request.url.path in ['/', '/stations'] or request.url.path.startswith('/stations/') %}aria-current="page"{% endif %}>Find charging</a></nav>
+  <nav aria-label="Main navigation">
+    <a href="/" {% if request.url.path in ['/', '/stations'] or request.url.path.startswith('/stations/') %}aria-current="page"{% endif %}>Find charging</a>
+    <a href="{{ url_for('fast_charging').path }}" {% if request.url.path == url_for('fast_charging').path %}aria-current="page"{% endif %}>Fast Charging</a>
+    <a href="{{ url_for('adapter_finder').path }}" {% if request.url.path == url_for('adapter_finder').path %}aria-current="page"{% endif %}>Adapter Finder</a>
+    {% for href, label in [('/drivers', 'Drivers'), ('/vehicles', 'Vehicles'), ('/memberships', 'Memberships')] %}
+      <a href="{{ href }}" {% if request.url.path == href or request.url.path.startswith(href ~ '/') %}aria-current="page"{% endif %}>{{ label }}</a>
+    {% endfor %}
+  </nav>
   <span class="region-chip">● BRITISH COLUMBIA</span>
 </div></header>
 <main id="main" class="shell">{% block content %}{% endblock %}</main>

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Fast Charging · PluggedIn{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <h1>Fast Charging</h1>
+    <p class="subtle">Find DC charging stations by their recorded power rating.</p>
+  </div>
+</div>
+
+<section class="panel data-panel semantic-query" aria-label="Power search">
+  <form method="get" action="{{ url_for('fast_charging') }}" class="semantic-filter">
+    <div class="field">
+      <label for="min-power-kw">Minimum power (kW)</label>
+      <input id="min-power-kw" name="min_power_kw" type="text" inputmode="decimal" maxlength="20"
+        placeholder="e.g. 100" value="{{ min_power_kw or '' }}" required
+        {% if power_error %}aria-invalid="true" aria-describedby="min-power-error"{% endif %}>
+      {% if power_error %}
+      <small id="min-power-error" class="field-error" role="alert">{{ power_error }}</small>
+      {% endif %}
+    </div>
+    <button type="submit" class="button">Search stations</button>
+  </form>
+
+  {% if fast_chargers %}
+  <div class="table-wrap semantic-results" role="region" aria-label="DC power results" tabindex="0">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Station</th>
+          <th scope="col">Connector</th>
+          <th scope="col">Power</th>
+          <th scope="col">Rating type</th>
+          <th scope="col">Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for port in fast_chargers %}
+        {% set station = port.station_name or 'Unnamed station' %}
+        <tr>
+          <td><strong>{{ station }}</strong></td>
+          <td>{{ port.connector_name }}</td>
+          <td class="semantic-power">{{ '{:f}'.format(port.power_kw) }} kW</td>
+          <td>{{ 'Operator-published group maximum' if port.power_scope == 'Charging group maximum advertised by operator' else port.power_scope }}</td>
+          <td>
+            {% if port.source_url %}
+            <a href="{{ port.source_url }}" aria-label="View power evidence for {{ station }}">View source</a>
+            {% endif %}
+            {% if port.checked_on %}
+            <div>Checked <time datetime="{{ port.checked_on }}">{{ port.checked_on }}</time></div>
+            {% endif %}
+            {% if not port.source_url and not port.checked_on %}Unknown{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% elif fast_chargers is not none %}
+  <p class="subtle semantic-empty">No DC charging ports are rated at {{ min_power_kw|trim }} kW or higher.</p>
+  {% endif %}
+</section>
+{% endblock %}

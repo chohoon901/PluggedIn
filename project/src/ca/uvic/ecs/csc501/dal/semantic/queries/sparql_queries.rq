@@ -1,0 +1,133 @@
+# ==========================================
+# PluggedIn Project - SPARQL Competency Questions
+# ==========================================
+
+PREFIX plug: <https://github.com/chohoon901/PluggedIn/ontology/>
+PREFIX migration: <https://github.com/chohoon901/PluggedIn/migration/>
+
+# Execute each SELECT separately with the prefix declarations above.
+# For synthetic CQ2–CQ4 checks, substitute https://github.com/chohoon901/PluggedIn/graph/cq-demo/.
+# --- CQ1: Stations by network, with coordinates and optional operator ---
+SELECT ?station ?stationName ?networkName ?operatorName ?lat ?lon
+WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?network a plug:Network ;
+             plug:orgName ?networkName .
+    FILTER (STR(?networkName) = "BCHYDRO")
+    ?station a plug:Station ;
+             plug:partOfNetwork ?network ;
+             plug:latitude ?lat ;
+             plug:longitude ?lon .
+    OPTIONAL { ?station plug:stationName ?stationName . }
+    OPTIONAL { ?station plug:operatedBy/plug:orgName ?operatorName . }
+  }
+}
+ORDER BY ?stationName ?station
+
+# --- CQ2: DC ports at or above the requested power ---
+SELECT ?station ?stationName ?port ?powerKw ?connectorName
+       ?powerEvidenceScope ?powerEvidenceSource ?powerEvidenceCheckedOn
+WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    # The app replaces 100 with the validated minimum supplied by the user.
+    VALUES ?minimumPowerKw { 100 }
+    ?station a plug:Station ;
+             plug:hasPort ?port .
+    ?port plug:currentType ?currentType ;
+          plug:hasConnectorType/plug:connectorName ?connectorName .
+    {
+      ?port plug:powerKw ?powerKw .
+      BIND("Port rating" AS ?powerEvidenceScope)
+    }
+    UNION
+    {
+      # Published equipment evidence retains its source and rating scope.
+      ?port (migration:operatorPublishedPowerKw|migration:installedChargerPowerKw) ?powerKw ;
+            migration:powerEvidenceScope ?powerEvidenceScope ;
+            migration:powerEvidenceSource ?powerEvidenceSource ;
+            migration:powerEvidenceCheckedOn ?powerEvidenceCheckedOn .
+      FILTER NOT EXISTS { ?port plug:powerKw ?portRating . }
+    }
+    FILTER (STR(?currentType) = "DC" && ?powerKw >= ?minimumPowerKw)
+    OPTIONAL { ?station plug:stationName ?stationName . }
+  }
+}
+ORDER BY DESC(?powerKw) ?station ?port
+
+# --- CQ3: verified direct matches between registered vehicles and local ports ---
+# Family aliases and confirmed current types mirror cmn/enums/connector_family.py.
+SELECT DISTINCT ?station ?stationName ?street ?city ?port ?vehicle ?vehicleModel ?portConnectorName ?currentType
+WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?station a plug:Station ;
+             plug:city ?city ;
+             plug:hasPort ?port .
+    FILTER (STR(?city) = "Vancouver")
+    ?port plug:hasConnectorType/plug:connectorName ?portConnectorName ;
+          plug:currentType ?currentType .
+    ?vehicle a plug:Vehicle ;
+             plug:vehicleAccepts/plug:connectorName ?inletName .
+    VALUES (?familyPattern ?requiredCurrent) {
+      ("^(J1772|TYPE 1 [(]J1772[)]|SAE J1772(-2009)?)$" "AC")
+      ("^(CCS1|CCS [(]TYPE 1[)]|J1772COMBO|CCS TYPE 1|CCS COMBO 1)$" "DC")
+      ("^CHADEMO$" "DC")
+    }
+    BIND(REPLACE(REPLACE(UCASE(STR(?portConnectorName)), "^\\s+|\\s+$", ""), "\\s+", " ") AS ?portKey)
+    BIND(REPLACE(REPLACE(UCASE(STR(?inletName)), "^\\s+|\\s+$", ""), "\\s+", " ") AS ?inletKey)
+    FILTER (STR(?currentType) = ?requiredCurrent &&
+            REGEX(?portKey, ?familyPattern) && REGEX(?inletKey, ?familyPattern))
+    OPTIONAL { ?station plug:stationName ?stationName . }
+    OPTIONAL { ?station plug:street ?street . }
+    OPTIONAL { ?vehicle plug:vehicleModel ?vehicleModel . }
+  }
+}
+ORDER BY ?stationName ?station ?port ?vehicle
+
+# --- CQ4: connector-based adapter candidates for a station port and vehicle ---
+# This reports a directed catalogue match for the given port. It does not
+# establish vehicle model, network eligibility or site-wide adapter requirements.
+SELECT ?station ?stationName ?stationStreet ?stationCity ?port ?vehicle ?vehicleModel
+       ?adapter ?adapterModel ?fromName ?toName ?portCurrent ?adapterCurrent ?adapterSource
+WHERE {
+  GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+    ?station a plug:Station ;
+             plug:hasPort ?port .
+    ?port plug:hasConnectorType ?portConnector .
+    ?vehicle a plug:Vehicle ;
+             plug:vehicleAccepts ?inletConnector .
+    ?adapter a plug:Adapter ;
+             plug:fromConnector ?from ;
+             plug:toConnector ?to ;
+             plug:adapterModel ?adapterModel .
+    ?portConnector plug:connectorName ?fromName .
+    ?inletConnector plug:connectorName ?toName .
+    OPTIONAL { ?port plug:currentType ?portCurrent . }
+    OPTIONAL { ?adapter migration:adapterCurrentType ?adapterCurrent . }
+    OPTIONAL { ?adapter migration:adapterEvidence ?adapterSource . }
+    OPTIONAL { ?portConnector migration:connectorFamily ?portFamily . }
+    OPTIONAL { ?inletConnector migration:connectorFamily ?inletFamily . }
+    OPTIONAL { ?from migration:connectorFamily ?fromFamily . }
+    OPTIONAL { ?to migration:connectorFamily ?toFamily . }
+    BIND(COALESCE(STR(?portFamily), STR(?portConnector)) AS ?portKey)
+    BIND(COALESCE(STR(?inletFamily), STR(?inletConnector)) AS ?inletKey)
+    BIND(COALESCE(STR(?fromFamily), STR(?from)) AS ?fromKey)
+    BIND(COALESCE(STR(?toFamily), STR(?to)) AS ?toKey)
+    FILTER (?portKey = ?fromKey && ?inletKey = ?toKey && ?portKey != ?inletKey)
+    FILTER (!BOUND(?portCurrent) || !BOUND(?adapterCurrent) || STR(?portCurrent) = STR(?adapterCurrent))
+
+    # A vehicle that already accepts this port's connector needs no candidate
+    # for this port, even if one of its other inlets would fit an adapter.
+    ?vehicle plug:vehicleAccepts ?directInlet .
+    OPTIONAL { ?directInlet migration:connectorFamily ?directFamily . }
+    BIND(COALESCE(STR(?directFamily), STR(?directInlet)) AS ?directKey)
+    BIND(IF(?portKey = ?directKey, 1, 0) AS ?alreadyDirect)
+    OPTIONAL { ?station plug:stationName ?stationName . }
+    OPTIONAL { ?station plug:street ?stationStreet . }
+    OPTIONAL { ?station plug:city ?stationCity . }
+    OPTIONAL { ?vehicle plug:vehicleModel ?vehicleModel . }
+  }
+}
+GROUP BY ?station ?stationName ?stationStreet ?stationCity ?port ?vehicle ?vehicleModel
+         ?adapter ?adapterModel ?fromName ?toName ?portCurrent ?adapterCurrent ?adapterSource
+HAVING (MAX(?alreadyDirect) = 0)
+ORDER BY ?stationName ?station ?port ?vehicle ?adapter

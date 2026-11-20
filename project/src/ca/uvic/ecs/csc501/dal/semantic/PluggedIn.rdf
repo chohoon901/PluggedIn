@@ -1,0 +1,589 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/elias/ontologies/2026/10/untitled-ontology-3/"
+     xml:base="http://www.semanticweb.org/elias/ontologies/2026/10/untitled-ontology-3/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="https://github.com/chohoon901/PluggedIn/ontology/">
+        <owl:versionIRI rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/belongsToNetwork -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/belongsToNetwork">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/fromConnector -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/fromConnector">
+        <rdfs:comment>The connector type on the charging station side of the adapter.</rdfs:comment>
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Adapter"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/hasConnectorType -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/hasConnectorType">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/hasMembership -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/hasMembership">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Driver"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/hasOperatingPeriod -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/hasOperatingPeriod">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/hasPort -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/hasPort">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/operatedBy -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/operatedBy">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Operator"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/ownedBy -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/ownedBy">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/SiteOwner"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/partOfNetwork -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/partOfNetwork">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/toConnector -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/toConnector">
+        <rdfs:comment>The connector type on the vehicle side of the adapter.</rdfs:comment>
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Adapter"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/vehicleAccepts -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/vehicleAccepts">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/acceptsGuestPayment -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/acceptsGuestPayment">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/accessRestriction -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/accessRestriction">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/adapterMaxPowerKw -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/adapterMaxPowerKw">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Adapter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/adapterModel -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/adapterModel">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Adapter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/businessType -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/businessType">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/SiteOwner"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/carrierName -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/carrierName">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Driver"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/city -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/city">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/closeTime -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/closeTime">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/connectorMaxPowerKw -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/connectorMaxPowerKw">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/connectorName -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/connectorName">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/currentType -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/currentType">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/day -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/day">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/driverName -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/driverName">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Driver"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/endDate -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/endDate">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/hasTruckParking -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/hasTruckParking">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/latitude -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/latitude">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/licenceNumber -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/licenceNumber">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Driver"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/licencePlate -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/licencePlate">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/longitude -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/longitude">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/make -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/make">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/manufacturer -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/manufacturer">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Adapter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/maxVehicleClass -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/maxVehicleClass">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/openTime -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/openTime">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/orgName -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/orgName">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/paymentMethod -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/paymentMethod">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/portNumber -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/portNumber">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/powerKw -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/powerKw">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/province -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/province">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/quantity -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/quantity">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/rangeKm -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/rangeKm">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/startDate -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/startDate">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/stationName -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/stationName">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/status -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/status">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/street -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/street">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/supportPhone -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/supportPhone">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Operator"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/vehicleClass -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/vehicleClass">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/vehicleMaxChargeKw -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/vehicleMaxChargeKw">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/vehicleModel -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/vehicleModel">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/vin -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/vin">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/website -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/chohoon901/PluggedIn/ontology/website">
+        <rdfs:domain rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Adapter -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Adapter"/>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/ConnectorType -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType"/>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Driver -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Driver"/>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Membership -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Membership"/>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Network -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Network">
+        <rdfs:subClassOf rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod"/>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Operator -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Operator">
+        <rdfs:subClassOf rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Organization -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Organization"/>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Port -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Port"/>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/SiteOwner -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/SiteOwner">
+        <rdfs:subClassOf rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Station -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Station"/>
+    
+
+
+    <!-- https://github.com/chohoon901/PluggedIn/ontology/Vehicle -->
+
+    <owl:Class rdf:about="https://github.com/chohoon901/PluggedIn/ontology/Vehicle"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
