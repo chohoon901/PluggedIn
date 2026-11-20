@@ -63,6 +63,18 @@ def test_export_preserves_sample_relationships_and_unknown_evidence(tmp_path, sa
     assert port.find('plug:quantity', NS) is None
     assert port.findtext('migration:recordedQuantity', namespaces=NS) == '6'
 
+    for identifier, source_name, expected_family in (
+        (2, 'J1772COMBO', 'CCS1'),
+        (5, 'CCS (Type 1)', 'CCS1'),
+        (4, 'Tesla (Model S/X)', 'NACS'),
+    ):
+        connector = descriptions[DATA + f'ConnectorType/{identifier}']
+        assert connector.findtext('plug:connectorName', namespaces=NS) == source_name
+        assert [
+            (family.text, family.attrib[DATATYPE])
+            for family in connector.findall('migration:connectorFamily', NS)
+        ] == [(expected_family, XSD + 'string')]
+
     vehicle = descriptions[DATA + 'Vehicle/1']
     assert vehicle.find('plug:vehicleAccepts', NS).attrib[RESOURCE] == DATA + 'ConnectorType/2'
     acceptance = descriptions[DATA + 'VehicleAcceptance/1']

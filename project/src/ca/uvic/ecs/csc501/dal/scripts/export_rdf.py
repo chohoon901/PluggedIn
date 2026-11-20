@@ -8,6 +8,7 @@ import re
 import sqlite3
 from xml.etree import ElementTree as ET
 
+from ...cmn.enums.connector_family import ConnectorFamily
 from ..metadata import read_metadata
 from ..settings import Settings
 
@@ -96,7 +97,7 @@ def export_rdf(settings: Settings, output_path: Path, *, dataset: str) -> dict[s
     IDs live in dataset-qualified resource IRIs. Shared organization IDs keep
     role types on one resource. VehicleAcceptance retains the join-row ID alongside
     the ontology's direct vehicleAccepts edge. Migration properties store metadata
-    and DB defaults that the source marks unconfirmed.
+    and DB defaults that the source marks unconfirmed, plus known connector families.
     """
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]*', dataset):
         raise ValueError('Dataset must use letters, digits, hyphens or underscores.')
@@ -165,6 +166,10 @@ def export_rdf(settings: Settings, output_path: Path, *, dataset: str) -> dict[s
                 if table == 'vehicle_accepts':
                     vehicle = node_for(resource('vehicle', row['vehicle_id']))
                     _link(vehicle, ONTOLOGY, 'vehicleAccepts', resource('connector_type', row['connector_type_id']))
+                elif table == 'connector_type':
+                    family = ConnectorFamily.from_name(row['name'])
+                    if family is not ConnectorFamily.UNKNOWN:
+                        _literal(node, MIGRATION, 'connectorFamily', family.value)
                 elif table == 'station':
                     for field in METADATA_FIELDS:
                         if evidence.get(field) is not None:
