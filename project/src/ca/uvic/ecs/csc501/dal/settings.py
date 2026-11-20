@@ -11,6 +11,12 @@ class Settings:
         self.database_path = self._within(config.get('sqlite', 'database_path', fallback='data/pluggedin.db'))
         self.metadata_path = self._within(config.get('sqlite', 'metadata_path', fallback='data/station_metadata.json'))
         self.busy_timeout_ms = config.getint('sqlite', 'busy_timeout_ms', fallback=5000)
+        self.sparql_endpoint = config.get(
+            'semantic', 'sparql_endpoint', raw=True, fallback='http://localhost:8890/sparql',
+        )
+        self.sparql_graph = config.get(
+            'semantic', 'graph_iri', raw=True, fallback='https://github.com/chohoon901/PluggedIn/graph/',
+        )
         if self.busy_timeout_ms < 0:
             raise ValueError('busy_timeout_ms must not be negative')
         if not config.getboolean('sqlite', 'foreign_keys', fallback=True):

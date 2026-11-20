@@ -40,6 +40,29 @@ This checks the existing Python environment and selected DB without installing p
 
 ## Repeatable demonstration
 
+### Charging queries (Virtuoso)
+
+Generate the sample RDF from the `project` directory after setting up the project venv:
+
+```powershell
+New-Item -ItemType Directory -Force output | Out-Null
+.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.export_rdf --dataset sample20 --output output/pluggedin-sample20-data.rdf
+```
+
+Start Virtuoso and load the [PluggedIn ontology](../src/ca/uvic/ecs/csc501/dal/semantic/PluggedIn.rdf)
+and the exported sample data into the named graph
+`https://github.com/chohoon901/PluggedIn/graph/`. Then run the
+[equipment evidence update](../src/ca/uvic/ecs/csc501/dal/semantic/queries/sample20_equipment_evidence.ru)
+to add the published Kaslo rating and adapter catalogue entry.
+
+Launch the app and open **Charging queries** in the main navigation. **CQ2** shows
+Kaslo's operator-published maximum of 250 kW and its source. For **CQ4**, choose the
+J1772COMBO sample vehicle to see connector-based NACS-to-CCS1 adapter candidates.
+If your Virtuoso address or graph differs, set `sparql_endpoint` and `graph_iri` in
+the `[semantic]` section of [config.properties](../src/ca/uvic/ecs/csc501/dal/config.properties).
+
+### Station search (SQLite)
+
 With an unchanged sample, select **Sample member (synthetic)** (driver `1`) and the **J1772 test car (synthetic)** (vehicle `2`). Search for **2026-11-02 at 12:00 Pacific time (British Columbia)**, keeping the initial area and all statuses. The recorded result is **20 stations: 1 Available, 19 Needs review, 0 Unavailable**. The Available station is **SWTCH Energy, 5965 Student Union Blvd** (station `11`).
 
 The report's simpler exact-ID SQL demonstration also uses vehicle `2`, but it returns **station `1`, with one matching port record**. It compares stored connector IDs only; the full application additionally interprets connector aliases and evaluates hours, access, and payment. These are different queries with different purposes.
