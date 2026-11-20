@@ -17,7 +17,7 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "ca.uvic.ecs.csc501.dal" = ["config.properties", "scripts/schema.sql", "data/*.json"]
-"ca.uvic.ecs.csc501.dal.semantic" = ["queries/*.rq"]
+"ca.uvic.ecs.csc501.dal.semantic" = ["queries/*.rq", "queries/*.ru"]
 "ca.uvic.ecs.csc501.pl" = ["templates/**/*.html", "static/**/*"]
 
 [tool.pytest.ini_options]

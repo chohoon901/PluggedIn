@@ -16,7 +16,33 @@ fieldset.arrival-field{border:0;padding:0;margin:0;min-inline-size:0}
 .arrival-zone{display:flex;align-items:center;gap:10px;margin-top:9px}
 .arrival-zone label{font-size:10px;white-space:nowrap;margin:0}
 .arrival-zone select{font-size:10px;padding:5px 9px;min-height:30px;flex:1;min-width:0;background:var(--paper)}
-@media(max-width:760px){.header-inner nav{gap:14px}.hero h1{font-size:36px}.arrival-field{margin-top:4px!important}.arrival-picker{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.search-buttons .button{gap:8px}}
+@media(max-width:760px){.hero h1{font-size:36px}.arrival-field{margin-top:4px!important}.arrival-picker{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.search-buttons .button{gap:8px}}
+
+.header-inner nav {
+  flex-wrap: wrap;
+  gap: 0 clamp(14px, 1.75vw, 30px);
+}
+.header-inner nav a {
+  border-bottom: 2px solid transparent;
+}
+
+@media (min-width: 761px) {
+  .header-inner {
+    gap: clamp(20px, 2.5vw, 55px);
+  }
+}
+
+@media (max-width: 520px) {
+  .header-inner nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 12px;
+    justify-items: start;
+  }
+  .header-inner nav a {
+    white-space: normal;
+  }
+}
 
 .semantic-query .semantic-results {
   border: 1px solid var(--line);

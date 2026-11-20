@@ -28,16 +28,15 @@ class FormDocument(HTMLParser):
 
 
 @pytest.fixture
-def client(tmp_path):
+def client(tmp_path, imported_app):
     from ca.uvic.ecs.csc501.dal.settings import Settings
     from ca.uvic.ecs.csc501.dal.database import Database
     from ca.uvic.ecs.csc501.dal.scripts.init_db import init_database
     from ca.uvic.ecs.csc501.dal.scripts.seed_demo import seed_demo
-    from ca.uvic.ecs.csc501.main import create_app
     db = Database(Settings(dal_root=tmp_path))
     init_database(db)
     seed_demo(db)
-    with TestClient(create_app(db)) as http:
+    with TestClient(imported_app(db)) as http:
         yield http
     db.engine.dispose()
 

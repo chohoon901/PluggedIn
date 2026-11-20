@@ -4,8 +4,8 @@ Read docs/PluggedIn_Development_Plan_AI_Agent.md and the approved design before 
 
 - Python 3.12+, project venv, src package ca.uvic.ecs.csc501.
 - cmn is pure domain/application; dal owns all persistence and file I/O; pl owns HTTP/SSR/static assets. main composes them.
-- Preserve the supplied 13-table, 65-column schema and original constraints.
-- Store full driver/vehicle/membership data in SQLite. Never add adapter ownership/conversion or driver-vehicle ownership.
+- Preserve the supplied 13-table, 65-column mapping and original constraints. Keep SQLite as a read-only migration source.
+- Store full driver/vehicle/membership data in the authenticated Virtuoso application graph. Never add adapter ownership/conversion or driver-vehicle ownership.
 - SSR must work without JS; forms use 303 redirect on success and 400 HTML with preserved input on invalid submissions.
 - Write Korean explanations above domain fields. Preserve UNKNOWN when evidence is incomplete.
 - Website copy, validation errors and evaluation explanations are English. Preserve the language of user-entered data and Korean developer comments.

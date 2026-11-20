@@ -4,6 +4,8 @@
 # On 2026-11-19, Tesla Canada's location 13658 listed 16 Superchargers at 2710 Kaslo St
 # with an advertised maximum of 250 kW for the charging group. Ford Canada's SKU
 # VRK9Z10E826A lists NACS DC charging into a CCS1 vehicle inlet.
+# Prism Engineering reports two 50 kW DC chargers at Norgate Park from its
+# installation project. The sample lists CCS1 and CHAdeMO at the site.
 # The other catalog entries use A2Z EV's Stellar Pro and Legacy (CCS1 variant)
 # specifications and Tesla Canada's SAE J1772 adapter specifications.
 PREFIX plug: <https://github.com/chohoon901/PluggedIn/ontology/>
@@ -22,6 +24,11 @@ INSERT {
       migration:powerEvidenceSource <https://www.tesla.com/en_CA/findus/location/supercharger/13658> ;
       migration:powerEvidenceScope "Charging group maximum advertised by operator" ;
       migration:powerEvidenceCheckedOn "2026-11-19"^^xsd:date .
+
+    ?norgatePort migration:installedChargerPowerKw 50.0 ;
+      migration:powerEvidenceSource <https://www.prismengineering.com/projects/district-of-north-vancouver-ev-design-and-implementation/> ;
+      migration:powerEvidenceScope "Installed DC charger rating" ;
+      migration:powerEvidenceCheckedOn "2026-11-20"^^xsd:date .
 
     ?adapter a plug:Adapter ;
       plug:adapterModel ?model ;
@@ -59,6 +66,21 @@ WHERE {
       FILTER (?kasloPort = port:9 && STR(?street) = "2710 Kaslo St" &&
               STR(?city) = "Vancouver" && STR(?current) = "DC")
     }
+  }
+  UNION
+  {
+    VALUES (?norgatePort ?norgateConnector) {
+      (port:12 connector:8)
+      (port:13 connector:5)
+    }
+    GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {
+      station:7 a plug:Station ;
+        plug:street ?norgateStreet ; plug:city ?norgateCity ; plug:hasPort ?norgatePort .
+      ?norgatePort a plug:Port ; plug:currentType ?norgateCurrent ;
+        plug:hasConnectorType ?norgateConnector .
+    }
+    FILTER (STR(?norgateStreet) = "1578 Garden Ave" &&
+            STR(?norgateCity) = "District of North Vancouver" && STR(?norgateCurrent) = "DC")
   }
   UNION
   {

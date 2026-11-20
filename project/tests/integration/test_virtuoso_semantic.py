@@ -100,6 +100,7 @@ def test_fast_chargers_query_configured_graph_and_preserve_power_evidence(endpoi
     assert f'GRAPH <{GRAPH}>' in query
     assert query.count('SELECT ') == 1
     assert 'VALUES ?minimumPowerKw { 150.0 }' in query
+    assert '(migration:operatorPublishedPowerKw|migration:installedChargerPowerKw)' in query
     assert 'FILTER (STR(?currentType) = "DC" && ?powerKw >= ?minimumPowerKw)' in query
 
 

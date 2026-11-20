@@ -1,20 +1,18 @@
 """Run the project's read-only SPARQL queries against Virtuoso."""
 
-import json
 import re
+from collections.abc import Callable
 from decimal import Decimal, InvalidOperation
 from functools import cache
-from http.client import HTTPException
 from importlib.resources import files
-from urllib.parse import urlencode, urlsplit
-from urllib.request import Request, urlopen
+from urllib.parse import urlsplit
 
 from ca.uvic.ecs.csc501.cmn.contracts.errors import InputError, NotReadyError
 from ca.uvic.ecs.csc501.cmn.contracts.semantic import AdapterCandidate, HighPowerPort, SemanticVehicle
 
+from .client import SparqlClient
 
-_RESULT_FORMAT = 'application/sparql-results+json'
-_TIMEOUT_SECONDS = 3
+
 _BASE_GRAPH_PATTERN = 'GRAPH <https://github.com/chohoon901/PluggedIn/graph/> {'
 _CQ2_DEFAULT_MINIMUM = 'VALUES ?minimumPowerKw { 100 }'
 _CQ_HEADING = re.compile(r'^# --- (CQ[0-9]+): [^\r\n]+ ---$', re.MULTILINE)
@@ -88,9 +86,16 @@ def _power_kw(row: _Row) -> Decimal:
 
 
 class VirtuosoSemanticRepository:
-    def __init__(self, endpoint: str, graph: str):
-        self._endpoint = endpoint
+    def __init__(self, endpoint: str, graph: str, *, client: SparqlClient | None = None,
+                 require_ready: Callable[[], None] | None = None):
+        self._client = client if client is not None else SparqlClient(endpoint)
         self._graph = graph
+        self._require_ready = require_ready
+
+    def _select(self, query: str) -> list[dict]:
+        if self._require_ready is not None:
+            self._require_ready()
+        return self._client.select(query)
 
     def _graph_pattern(self) -> str:
         if not _is_absolute_iri(self._graph):
@@ -105,28 +110,6 @@ class VirtuosoSemanticRepository:
         graph = self._graph_pattern()
         selection = f'\n    VALUES ?vehicle {{ <{vehicle_iri}> }}' if vehicle_iri is not None else ''
         return f'{prefixes}\n{before}{graph}{selection}{after}'
-
-    def _select(self, query: str) -> list[_Row]:
-        if _web_url(self._endpoint) is None:
-            raise NotReadyError(_UNAVAILABLE)
-        data = urlencode({'query': query, 'format': _RESULT_FORMAT}).encode('ascii')
-        request = Request(self._endpoint, data=data, headers={'Accept': _RESULT_FORMAT})
-        try:
-            with urlopen(request, timeout=_TIMEOUT_SECONDS) as response:
-                payload = json.load(response)
-        except (OSError, HTTPException, ValueError) as exc:
-            raise NotReadyError(_UNAVAILABLE) from exc
-
-        try:
-            variables = payload['head']['vars']
-            rows = payload['results']['bindings']
-        except (KeyError, TypeError) as exc:
-            raise NotReadyError(_BAD_RESULTS) from exc
-        if not isinstance(variables, list) or not all(isinstance(name, str) for name in variables):
-            raise NotReadyError(_BAD_RESULTS)
-        if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
-            raise NotReadyError(_BAD_RESULTS)
-        return rows
 
     def fast_chargers(self, min_power_kw: Decimal) -> list[HighPowerPort]:
         query = self._question('CQ2')

@@ -36,14 +36,13 @@ def test_matched_sample_is_portable_preserves_sources_and_refuses_overwrite(tmp_
     db.engine.dispose()
 
 
-def test_sample_initial_search_and_cross_id_aliases(tmp_path, sample_sources):
+def test_sample_initial_search_and_cross_id_aliases(tmp_path, sample_sources, imported_app):
     from ca.uvic.ecs.csc501.dal.scripts.import_sample import build_sample
-    from ca.uvic.ecs.csc501.main import create_app
     from fastapi.testclient import TestClient
     root = tmp_path / 'sample'
     build_sample(root, *sample_sources)
     db = Database(Settings(root))
-    with TestClient(create_app(db)) as client:
+    with TestClient(imported_app(db)) as client:
         home = client.get('/')
         assert home.status_code == 200 and 'value="-123.5"' not in home.text
         page = client.get('/stations', params={'driver_id': 1, 'vehicle_id': 1, 'arrival_at': '2026-11-02T19:00:00Z'})

@@ -2,6 +2,7 @@
 param(
     [switch]$CheckOnly,
     [switch]$SkipInstall,
+    [switch]$Migrate,
     [ValidateRange(1, 65535)]
     [int]$Port = 8000
 )
@@ -23,6 +24,7 @@ function Invoke-CheckedCommand {
 }
 
 $quickstartExit = 0
+$loadedVirtuosoCredential = $false
 Push-Location -LiteralPath $PSScriptRoot
 try {
     foreach ($requiredFile in @('requirements.txt', 'pyproject.toml', 'src/ca/uvic/ecs/csc501/dal/config.properties')) {
@@ -58,8 +60,21 @@ try {
         Invoke-CheckedCommand -Label 'Installing PluggedIn' -Executable $venvPython -Arguments @('-m', 'pip', 'install', '-e', '.')
     }
 
-    # The DAL validator reads the selected DB and metadata. Never init or seed.
-    Invoke-CheckedCommand -Label 'Validating the selected database' -Executable $venvPython -Arguments @('-m', 'ca.uvic.ecs.csc501.dal.scripts.validate_db')
+    if ($CheckOnly -and $Migrate) {
+        throw 'Choose either -CheckOnly or -Migrate.'
+    }
+    $credentialPath = Join-Path $PSScriptRoot 'output/virtuoso-credentials.xml'
+    if (-not $env:PLUGGEDIN_VIRTUOSO_USER -and -not $env:PLUGGEDIN_VIRTUOSO_PASSWORD -and
+        (Test-Path -LiteralPath $credentialPath -PathType Leaf)) {
+        $virtuosoCredential = Import-Clixml -LiteralPath $credentialPath
+        $loadedVirtuosoCredential = $true
+        $env:PLUGGEDIN_VIRTUOSO_USER = $virtuosoCredential.UserName
+        $env:PLUGGEDIN_VIRTUOSO_PASSWORD = $virtuosoCredential.GetNetworkCredential().Password
+    }
+    if ($Migrate) {
+        Invoke-CheckedCommand -Label 'Importing the SQLite snapshot into Virtuoso' -Executable $venvPython -Arguments @('-m', 'ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso')
+    }
+    Invoke-CheckedCommand -Label 'Checking the Virtuoso application graph' -Executable $venvPython -Arguments @('-m', 'ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso', '--check')
     if ($CheckOnly) {
         Write-Host 'Quickstart checks passed. No server was started.' -ForegroundColor Green
     }
@@ -73,6 +88,10 @@ catch {
     $quickstartExit = 1
 }
 finally {
+    if ($loadedVirtuosoCredential) {
+        $env:PLUGGEDIN_VIRTUOSO_USER = $null
+        $env:PLUGGEDIN_VIRTUOSO_PASSWORD = $null
+    }
     Pop-Location
 }
 exit $quickstartExit

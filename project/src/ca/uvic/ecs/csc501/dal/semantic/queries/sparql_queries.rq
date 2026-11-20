@@ -41,8 +41,8 @@ WHERE {
     }
     UNION
     {
-      # The value is the published maximum for the identified charging group.
-      ?port migration:operatorPublishedPowerKw ?powerKw ;
+      # Published equipment evidence retains its source and rating scope.
+      ?port (migration:operatorPublishedPowerKw|migration:installedChargerPowerKw) ?powerKw ;
             migration:powerEvidenceScope ?powerEvidenceScope ;
             migration:powerEvidenceSource ?powerEvidenceSource ;
             migration:powerEvidenceCheckedOn ?powerEvidenceCheckedOn .

@@ -7,8 +7,6 @@ from fastapi.testclient import TestClient
 
 from ca.uvic.ecs.csc501.cmn.contracts.errors import NotReadyError
 from ca.uvic.ecs.csc501.cmn.contracts.semantic import AdapterCandidate, HighPowerPort, SemanticVehicle
-from ca.uvic.ecs.csc501.dal.database import Database
-from ca.uvic.ecs.csc501.dal.settings import Settings
 from ca.uvic.ecs.csc501.main import create_app
 
 
@@ -42,11 +40,9 @@ class GraphRepository:
 
 
 @pytest.fixture
-def client(tmp_path):
-    db = Database(Settings(dal_root=tmp_path))
-    with TestClient(create_app(db, semantic_repository=GraphRepository())) as http:
+def client():
+    with TestClient(create_app(semantic_repository=GraphRepository())) as http:
         yield http
-    db.engine.dispose()
 
 
 def test_fast_charging_page_starts_with_just_the_power_filter(client):

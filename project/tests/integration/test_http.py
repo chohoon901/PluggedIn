@@ -7,16 +7,20 @@ from fastapi.testclient import TestClient
 
 
 @pytest.fixture
-def client(tmp_path):
+def client(tmp_path, imported_app, request):
     from ca.uvic.ecs.csc501.dal.settings import Settings
     from ca.uvic.ecs.csc501.dal.database import Database
     from ca.uvic.ecs.csc501.dal.scripts.init_db import init_database
     from ca.uvic.ecs.csc501.dal.scripts.seed_demo import seed_demo
-    from ca.uvic.ecs.csc501.main import create_app
     db = Database(Settings(dal_root=tmp_path))
     init_database(db)
     seed_demo(db)
-    with TestClient(create_app(db)) as http:
+    if getattr(request, 'param', None) == 'ccs_with_ac':
+        from ca.uvic.ecs.csc501.dal.models.port_model import PortModel
+
+        with db.session_factory.begin() as session:
+            session.get(PortModel, 1).current_type = 'AC'
+    with TestClient(imported_app(db)) as http:
         yield http
     db.engine.dispose()
 
@@ -127,7 +131,7 @@ def test_ssr_search_has_results_reasons_and_fixed_detail_instant(client):
     assert 'Update date unknown' in detail.text
 
 
-def test_search_apis_match_ssr_and_unready_health_is_503(client, tmp_path):
+def test_search_apis_match_ssr_and_unready_health_is_503(client):
     payload = {'driver_id': 1, 'vehicle_id': 1, 'arrival_at': '2026-10-26T19:00:00Z', 'bbox': {'west': -123.5, 'east': -123.2, 'south': 48.35, 'north': 48.6}}
     result = client.post('/api/v1/stations/search', json=payload)
     assert result.status_code == 200
@@ -140,24 +144,22 @@ def test_search_apis_match_ssr_and_unready_health_is_503(client, tmp_path):
     assert client.get('/stations', params={'driver_id': 'bad', 'vehicle_id': 1}).status_code == 400
     assert client.get('/stations', params={'driver_id': 9999, 'vehicle_id': 1}).status_code == 404
     assert client.get('/api/v1/health').status_code == 200
-    from ca.uvic.ecs.csc501.dal.settings import Settings
-    from ca.uvic.ecs.csc501.dal.database import Database
+    from ca.uvic.ecs.csc501.cmn.application.services import ApplicationService
+    from ca.uvic.ecs.csc501.cmn.contracts.errors import NotReadyError
     from ca.uvic.ecs.csc501.main import create_app
-    db = Database(Settings(dal_root=tmp_path / 'unready'))
-    with TestClient(create_app(db)) as unready:
+
+    def unavailable():
+        raise NotReadyError('Initialize the private Virtuoso application graph first.')
+
+    services = ApplicationService(unavailable, lambda: False)
+    with TestClient(create_app(services=services)) as unready:
         response = unready.get('/api/v1/health')
         assert response.status_code == 503 and response.json()['error']['code']
         assert unready.get('/drivers').headers['content-type'].startswith('text/html')
-    db.engine.dispose()
 
 
+@pytest.mark.parametrize('client', ['ccs_with_ac'], indirect=True)
 def test_unknown_connector_check_and_explanation_are_visible_on_both_pages(client):
-    from ca.uvic.ecs.csc501.dal.models.port_model import PortModel
-
-    # Only the isolated test database changes: CCS with AC cannot be verified.
-    with client.app.state.services._uow_factory() as work:
-        work.session.get(PortModel, 1).current_type = 'AC'
-        work.commit()
 
     query = {'driver_id': 1, 'vehicle_id': 1, 'arrival_at': '2026-10-26T19:00:00Z'}
     evaluation = client.post('/api/v1/stations/1/evaluate', json=query).json()
@@ -223,23 +225,38 @@ def test_status_filter_counts_and_empty_results_preserve_conditions(client):
     assert 'value="-130"' in empty.text
 
 
-@pytest.mark.parametrize('path', [
-    '/', '/drivers', '/drivers/new', '/drivers/1/edit',
-    '/vehicles', '/vehicles/new', '/vehicles/1/edit',
-    '/memberships', '/memberships/new', '/memberships/1/edit',
-    '/stations?driver_id=1&vehicle_id=1&arrival_at=2026-10-26T19%3A00%3A00Z',
-    '/stations/1?driver_id=1&vehicle_id=1&arrival_at=2026-10-26T19%3A00%3A00Z',
-    '/missing-page',
+@pytest.mark.parametrize('path, current_href', [
+    ('/', '/'),
+    ('/drivers', '/drivers'),
+    ('/drivers/new', '/drivers'),
+    ('/drivers/1/edit', '/drivers'),
+    ('/vehicles', '/vehicles'),
+    ('/vehicles/new', '/vehicles'),
+    ('/vehicles/1/edit', '/vehicles'),
+    ('/memberships', '/memberships'),
+    ('/memberships/new', '/memberships'),
+    ('/memberships/1/edit', '/memberships'),
+    ('/stations?driver_id=1&vehicle_id=1&arrival_at=2026-10-26T19%3A00%3A00Z', '/'),
+    ('/stations/1?driver_id=1&vehicle_id=1&arrival_at=2026-10-26T19%3A00%3A00Z', '/'),
+    ('/missing-page', None),
 ])
-def test_website_renders_english_navigation_labels_and_help(client, path):
+def test_website_renders_english_navigation_labels_and_help(client, path, current_href):
     response = client.get(path)
     assert response.status_code in (200, 404)
     assert '<html lang="en">' in response.text
     navigation = re.search(r'<nav aria-label="Main navigation">(.*?)</nav>', response.text, re.S).group(1)
-    assert 'Find charging' in navigation
-    assert 'Fast Charging' in navigation
-    assert 'Adapter Finder' in navigation
-    assert re.findall(r'href="([^"]+)"', navigation) == ['/', '/fast-charging', '/adapter-finder']
+    links = re.findall(r'<a href="([^"]+)"([^>]*)>([^<]+)</a>', navigation)
+    assert [(href, label) for href, _, label in links] == [
+        ('/', 'Find charging'),
+        ('/fast-charging', 'Fast Charging'),
+        ('/adapter-finder', 'Adapter Finder'),
+        ('/drivers', 'Drivers'),
+        ('/vehicles', 'Vehicles'),
+        ('/memberships', 'Memberships'),
+    ]
+    assert [href for href, attrs, _ in links if 'aria-current="page"' in attrs] == (
+        [current_href] if current_href else []
+    )
     assert not re.search(r'[\uac00-\ud7a3]', response.text)
 
 

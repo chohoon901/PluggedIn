@@ -1,6 +1,6 @@
 # PluggedIn
 
-**A relational model and web application for vehicle-specific EV charging accessibility in British Columbia.**
+**A knowledge-graph-backed web application for vehicle-specific EV charging accessibility in British Columbia.**
 
 PluggedIn helps drivers and fleet operators answer: **Can this driver and vehicle use this charging station at the selected arrival time?** It combines opening hours, site and vehicle access, direct connector compatibility, and payment conditions. Each check is `PASS`, `FAIL`, or `UNKNOWN`; the overall result is `AVAILABLE`, `UNAVAILABLE`, or `NEEDS_REVIEW`. Missing evidence remains unknown rather than being treated as permission to charge.
 
@@ -35,19 +35,20 @@ For a visible operating-hours change, inspect station `5` (**GSPLP TGO 05**): it
 - Python **3.12 or later**; the checked environment uses **3.12.14**.
 - Git to clone the repository; VS Code is optional.
 - Runtime packages pinned in [requirements.txt](project/requirements.txt), including FastAPI 0.162.0 and SQLAlchemy 2.0.55.
-- Internet access for package installation and optional map tiles/fonts. No separate database server, Node build, or API key is needed to run the included sample.
+- OpenLink Virtuoso with a private application graph and a dedicated app credential.
+- Internet access for package installation and optional map tiles/fonts.
 
 Windows setup: run [quickstart.ps1](project/quickstart.ps1) using the [Quickstart guide](project/docs/QUICKSTART.md). The script prepares the environment, validates the selected sample, and starts the application.
 
 ## Installation and quickstart
 
-After obtaining the sample20 release, run this from the repository root for automatic Windows setup and startup:
+Configure Virtuoso and the application credential using the [Quickstart guide](project/docs/QUICKSTART.md). After obtaining the sample20 release, run the one-time import from the repository root.
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\project\quickstart.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\project\quickstart.ps1 -Migrate
 ```
 
-Use `-CheckOnly` to validate an existing installation without starting a server, or `-SkipInstall` for later runs. Manual installation commands follow.
+Use `-CheckOnly` to validate the graph without starting the app. For later runs, use `-SkipInstall` in place of `-Migrate`. The manual commands below use the same Virtuoso credential and configuration.
 
 Obtain the version containing the 20-station sample. For a new checkout after it is published on `Sunghun`:
 
@@ -58,7 +59,7 @@ python --version
 python -m venv venv
 .\venv\Scripts\python.exe -m pip install -r requirements.txt
 .\venv\Scripts\python.exe -m pip install -e .
-.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.validate_db
+.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check
 .\venv\Scripts\python.exe -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -66,7 +67,7 @@ Run commands from **`project/`**. If Windows resolves `python` to the Microsoft 
 
 Open [the app](http://127.0.0.1:8000/), [API documentation](http://127.0.0.1:8000/docs), or [health endpoint](http://127.0.0.1:8000/api/v1/health). Stop with **Ctrl+C**. On later runs, keep the existing environment and restart uvicorn; do not repeat data initialization.
 
-The sample DB and its companion files must be included in the checkout. If files are missing, obtain the correct project version or follow the rebuild instructions below.
+The SQLite sample and its companion files are needed for the initial import. For a manual import, use the migration command above without `--check` after configuring the credential.
 
 ### Linux/macOS
 
@@ -76,7 +77,7 @@ The Python package uses the same entry points. From `project/`, replace the virt
 python3 -m venv venv
 venv/bin/python -m pip install -r requirements.txt
 venv/bin/python -m pip install -e .
-venv/bin/python -m ca.uvic.ecs.csc501.dal.scripts.validate_db
+venv/bin/python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check
 venv/bin/python -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -88,19 +89,19 @@ The [SQLite DDL](project/src/ca/uvic/ecs/csc501/dal/scripts/schema.sql) defines 
 - Charging facilities: `station`, `connector_type`, `port`, `operating_period`, `adapter`
 - Profiles and relationships: `vehicle`, `vehicle_accepts`, `driver`, `membership`.
 
-Stations reference organizational roles; ports and opening periods reference stations. Vehicles accept connector types, while memberships connect drivers to networks over a date range. Driver licence numbers, VINs, station coordinates, and other candidate keys have uniqueness constraints. Station owner/operator/network references may be NULL. Foreign keys are enabled on every application DB connection; deletion follows the schema's cascade and restriction rules.
+Stations reference organizational roles; ports and opening periods reference stations. Vehicles accept connector types, while memberships connect drivers to networks over a date range. Driver licence numbers, VINs, station coordinates, and other candidate keys have uniqueness constraints. Station owner/operator/network references may be NULL. The RDF mapping preserves the schema's identifiers and relationship rules. Application writes enforce uniqueness, references and cascading deletes.
 
 ![Simplified PluggedIn architecture](project/docs/images/architecture-compact.jpg)
 
 - `cmn/domain` and `cmn/enums`: domain entities, value objects, and canonical connector/vehicle classifications.
 - `cmn/application`, `cmn/services`, and `cmn/contracts`: use cases, evaluation, repository interfaces, and result types.
-- `dal`: SQLAlchemy models, mappers, repositories, transactions, configuration, and all persistence/file access.
+- `dal`: Virtuoso queries, RDF mapping, transactions, configuration, and SQLite source import.
 - `pl`: FastAPI routes, input schemas, server-rendered templates, and static assets.
 - `main.py`: composition of the layers. Each write use case commits or rolls back its related changes through a unit of work.
 
 ### Active dataset and provenance
 
-[DAL configuration](project/src/ca/uvic/ecs/csc501/dal/config.properties) currently selects:
+[DAL configuration](project/src/ca/uvic/ecs/csc501/dal/config.properties) selects the authenticated Virtuoso endpoint and app graph under `[semantic]`. The original sample files used by the one-time import are configured under `[sqlite]`.
 
 ```ini
 [sqlite]
@@ -141,7 +142,7 @@ database_path=data/readme-rebuild/data/nlr_ocm_sample20.db
 metadata_path=data/readme-rebuild/data/station_metadata.json
 ```
 
-Then run `validate_db` and restart uvicorn using the commands above. For the original sample, restore the two `data/sample20/data/...` paths. Changing configuration does not migrate an older DB schema. Keep the original sample and any user-edited DBs separate.
+Select a new private `app_graph_iri` and apply its access settings before running the migration. The current app graph retains existing registrations. [Virtuoso setup and migration](project/docs/QUICKSTART.md)
 
 ## Run the relational examples
 

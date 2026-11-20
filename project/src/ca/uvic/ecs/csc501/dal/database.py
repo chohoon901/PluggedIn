@@ -4,10 +4,11 @@ from .settings import Settings
 
 
 class Database:
-    def __init__(self, settings: Settings | None = None):
+    def __init__(self, settings: Settings | None = None, *, read_only: bool = False):
         self.settings = settings or Settings()
-        self.engine = create_engine('sqlite:///' + self.settings.database_path.as_posix(),
-                                    connect_args={'check_same_thread': False})
+        path = self.settings.database_path
+        source = path.as_uri() + '?mode=ro&uri=true' if read_only else path.as_posix()
+        self.engine = create_engine('sqlite:///' + source, connect_args={'check_same_thread': False})
 
         @event.listens_for(self.engine, 'connect')
         def configure(connection, _):
