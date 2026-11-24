@@ -88,7 +88,7 @@ Typed attributes & \texttt{powerKw} uses \texttt{xsd:decimal} and \texttt{accept
 \end{tabularx}
 \end{table}
 
-The exporter maps 13 tables and 65 columns. The extra association resource is defined by the mapping vocabulary, so the table count and TBox class count have different meanings. For example, \texttt{data/sample20/Station/1} resolves under the project IRI and identifies the BC Hydro DoubleTree location. The application enforces unique profile identifiers, required fields, and referential integrity at write time. It evaluates missing information according to the recorded evidence.
+The exporter maps 13 tables and 65 columns. The extra association resource is defined by the mapping vocabulary, so the table count and TBox class count have different meanings. For example, \texttt{data/sample20/Station/1} resolves under the project IRI and identifies the BC Hydro DoubleTree location. Unlike relational constraints, RDFS domain and range declarations describe semantic relationships rather than enforcing database-style integrity. Under the Open World Assumption, missing triples do not necessarily imply false statements. Therefore, unique profile identifiers, required fields, and referential integrity are enforced at the application level, while missing evidence is treated as unknown.
 
 \section{Graph Population and Updates}
 
