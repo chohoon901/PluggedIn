@@ -10,6 +10,8 @@
 
 \settopmatter{printacmref=false, printfolios=false}
 \setlength{\emergencystretch}{1em}
+\setlength{\textfloatsep}{10pt}
+\raggedbottom
 \lstdefinelanguage{sparql}{
   keywords={PREFIX, SELECT, WHERE, GRAPH, INSERT, DATA, DELETE, WITH, UNION, FILTER, BIND, VALUES, OPTIONAL, ORDER, BY, DESC},
   sensitive=true,
@@ -185,7 +187,6 @@ FILTER (STR(?currentType) = "DC" &&
 \paragraph{CQ4.}
 Adapter Finder uses the selected vehicle's IRI. It compares the port's connector family with the adapter's \texttt{fromConnector} family and the vehicle inlet with its \texttt{toConnector} family. When both current types are known, they must agree. A direct match to any of the vehicle's inlets suppresses the adapter candidate for that port. For instance, the sample J1772COMBO vehicle returns a Ford NACS-to-CCS1 candidate at Kaslo. These candidates represent connector compatibility evidence. Vehicle model and charging network eligibility require their own checks.
 
-\clearpage
 \balance
 \section{Application and Reproduction}
 
