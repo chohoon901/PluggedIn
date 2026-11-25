@@ -214,11 +214,13 @@ The normal runtime connects FastAPI to Virtuoso through a data access layer. Sta
 
 The repository quickstart specifies the graph configuration and credentials. The Windows quickstart takes \texttt{-Migrate} for a new graph and \texttt{-CheckOnly} for verification. On either platform the project Python environment can run the migration module directly. With the Virtuoso account configured in the environment, run the following from \texttt{project/}.
 
+\noindent\begin{minipage}{\columnwidth}
 \begin{lstlisting}[language=bash, caption={Base RDF/XML export and verification of an existing application graph.}]
 python -m ca.uvic.ecs.csc501.dal.scripts.export_rdf \
   --dataset sample20 --output sample20-data.rdf
 python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check
 \end{lstlisting}
+\end{minipage}
 
 The export produces the base ABox in RDF/XML. Run the migration module without \texttt{--check} for a first import into an empty app graph. The migration reads the bundled snapshot and installs the application records and equipment evidence. The file \texttt{sample20\_equipment\_evidence.ru} contains the equipment additions. The \texttt{--sample-equipment} option applies these additions to an existing app graph.
 
