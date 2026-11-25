@@ -74,6 +74,52 @@ export PLUGGEDIN_VIRTUOSO_PASSWORD
 
 ## 4. Load or update the sample data
 
+### Load the ontology (TBox)
+
+Before importing the instance data, load the RDF/XML ontology into a separate named graph in Virtuoso. This step is also applicable to an existing application graph.
+
+1. Open Conductor and log in as an administrator.
+2. Navigate to **Linked Data → Quad Store Upload**.
+3. Select **File** and upload [PluggedIn.rdf](../src/ca/uvic/ecs/csc501/dal/semantic/PluggedIn.rdf).
+4. Enter the following Named Graph IRI:
+
+   ```text
+   https://github.com/chohoon901/PluggedIn/graph/schema/
+   ```
+
+5. Click **Upload** and confirm that `Upload finished` appears.
+6. Navigate to **Linked Data → Graphs** and verify that the schema graph exists.
+7. Open **Linked Data → SPARQL** and execute the following query:
+
+   ```sparql
+   PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+   SELECT ?type (COUNT(DISTINCT ?entity) AS ?count)
+   WHERE {
+       GRAPH <https://github.com/chohoon901/PluggedIn/graph/schema/> {
+           ?entity a ?type .
+           FILTER (?type IN (
+               owl:Class,
+               owl:ObjectProperty,
+               owl:DatatypeProperty
+           ))
+       }
+   }
+   GROUP BY ?type
+   ```
+
+   Expected results:
+
+   | Type | Count |
+   | --- | ---: |
+   | owl:Class | 12 |
+   | owl:ObjectProperty | 11 |
+   | owl:DatatypeProperty | 40 |
+
+The ontology graph stores the schema (TBox), while the private application graph stores instance data (ABox). Keep these graphs separate. The application graph must be empty before its first migration, so do not upload the ontology into `graph/app/`.
+
+This ontology-loading procedure and the expected declaration counts were verified on macOS using Virtuoso 07.20.3243.
+
 ### First run or previous RDF-only upload
 
 Run the one-time import into the empty application graph. It reads the SQLite snapshot and station metadata included in Git. The initial sample prints `Verified 193 SQLite records in the private Virtuoso graph.` The import also adds the charging power and adapter evidence.

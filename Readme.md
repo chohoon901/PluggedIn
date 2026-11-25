@@ -4,7 +4,7 @@
 
 PluggedIn helps drivers and fleet operators answer: **Can this driver and vehicle use this charging station at the selected arrival time?** It combines opening hours, site and vehicle access, direct connector compatibility, and payment conditions. Each check is `PASS`, `FAIL`, or `UNKNOWN`; the overall result is `AVAILABLE`, `UNAVAILABLE`, or `NEEDS_REVIEW`. Missing evidence remains unknown rather than being treated as permission to charge.
 
-This README describes the **20-station NLR-OCM Vancouver sample**. The older five-station synthetic demo uses a different dataset. The team should confirm that this version and its data files are published on the shared `Sunghun` branch before distributing these instructions. If a different release branch is supplied, use that branch instead.
+This README describes the **20-station NLR-OCM Vancouver sample**. The older five-station synthetic demo uses a different dataset.
 
 ## Example and supported features
 
@@ -42,7 +42,13 @@ Windows setup: run [quickstart.ps1](project/quickstart.ps1) using the [Quickstar
 
 ## Installation and quickstart
 
-Configure Virtuoso and the application credential using the [Quickstart guide](project/docs/QUICKSTART.md). After obtaining the sample20 release, run the one-time import from the repository root.
+Configure Virtuoso and the application credential using the [Quickstart guide](project/docs/QUICKSTART.md).
+
+Before the initial instance-data import, load the RDF/XML ontology (TBox) into the separate `graph/schema/` named graph. Follow the [ontology loading and verification instructions](project/docs/TEAM_RDF_SETUP.en.md#load-the-ontology-tbox).
+
+Keep the ontology graph separate from the private application graph (`graph/app/`), which stores instance data (ABox).
+
+Run the one-time instance-data import from the repository root.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\project\quickstart.ps1 -Migrate
@@ -50,10 +56,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\project\quickstart.ps1 -Mi
 
 Use `-CheckOnly` to validate the graph without starting the app. For later runs, use `-SkipInstall` in place of `-Migrate`. The manual commands below use the same Virtuoso credential and configuration.
 
-Obtain the version containing the 20-station sample. For a new checkout after it is published on `Sunghun`:
+Clone the repository from the `main` branch, which contains the 20-station sample. The following commands show the manual Windows setup:
 
 ```powershell
-git clone https://github.com/chohoon901/PluggedIn.git
+git clone --branch main https://github.com/chohoon901/PluggedIn.git
 cd PluggedIn/project
 python --version
 python -m venv venv
@@ -71,7 +77,7 @@ The SQLite sample and its companion files are needed for the initial import. For
 
 ### Linux/macOS
 
-The Python package uses the same entry points. From `project/`, replace the virtual-environment paths as follows; these OS-specific steps have not been executed in this documentation update.
+The Python package uses the same entry points. From `project/`, use the following virtual-environment paths.
 
 ```bash
 python3 -m venv venv
@@ -181,6 +187,7 @@ Results describe recorded conditions, not real-time occupancy, faults, queues, r
 - [Development plan](project/docs/PluggedIn_Development_Plan_AI_Agent.md)
 - [Original approved architecture](project/docs/superpowers/specs/2026-10-26-pluggedin-design.md) and [sample20 design update](project/docs/superpowers/specs/2026-11-02-idnull-sample-design.md)
 - [Current MVP access-policy record](project/docs/superpowers/plans/2026-11-02-mvp-class-only-access.md)
+- [Semantic Web setup, ontology loading, migration, and demo guide](project/docs/TEAM_RDF_SETUP.en.md)
 
 ## Citation
 
