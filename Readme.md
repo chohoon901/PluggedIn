@@ -4,94 +4,106 @@
 
 PluggedIn helps drivers and fleet operators answer: **Can this driver and vehicle use this charging station at the selected arrival time?** It combines opening hours, site and vehicle access, direct connector compatibility, and payment conditions. Each check is `PASS`, `FAIL`, or `UNKNOWN`; the overall result is `AVAILABLE`, `UNAVAILABLE`, or `NEEDS_REVIEW`. Missing evidence remains unknown rather than being treated as permission to charge.
 
-This README describes the **20-station NLR-OCM Vancouver sample**. The older five-station synthetic demo uses a different dataset. The team should confirm that this version and its data files are published on the shared `Sunghun` branch before distributing these instructions. If a different release branch is supplied, use that branch instead.
+This README uses the bundled **20-station NLR–OCM Vancouver sample**. Virtuoso stores the runtime knowledge graph for station searches and driver, vehicle, and membership records. The app uses the bundled SQLite snapshot and station metadata as read-only migration inputs.
 
 ## Example and supported features
 
-![PluggedIn station search and map](project/docs/images/search-results.png)
+![PluggedIn station search and map](project/docs/images/figure2-search-results.png)
 
-The screenshot illustrates the fixed-date sample below. It is not a live availability report.
+The screenshot shows the station results and map for a sample search.
 
-- Select a driver and vehicle independently.
-- Search using a date and time in **Pacific time (British Columbia)** or UTC; **Search now** uses the current instant.
+- Select a driver and vehicle independently in **Find charging**.
+- Search using a date and time in **Pacific time (British Columbia)** or UTC. **Search now** uses the current instant.
 - Read each station's four checks, reasons, source information, ports, and opening periods.
+- Use **Fast Charging** to filter DC ports by minimum power and **Adapter Finder** to find catalogue matches for a registered vehicle.
+- Add, edit, and delete records through **Drivers**, **Vehicles**, and **Memberships**.
 - Use server-rendered forms, search, and details without JavaScript. Leaflet provides an optional map using OpenStreetMap tiles.
 
 ### A repeatable search
 
-With an unchanged sample database:
+Use the original sample graph and these inputs.
 
 1. Select **Sample member (synthetic)**, driver ID `1`.
 2. Select the **J1772 test car (synthetic)**, vehicle ID `2`.
 3. Enter **2026-11-02**, **12:00**, and **Pacific time (British Columbia)**.
 4. Search with the initial map bounds and **All statuses**.
 
-Expected result: **20 stations: 1 Available, 19 Needs review, 0 Unavailable**. The Available station is **SWTCH Energy, 5965 Student Union Blvd, Vancouver**, internal station ID `11`. The same instant is `2026-11-02T19:00:00Z`. User edits to profiles, memberships, or station data may change these results.
+The search returns **20 stations** with **1 Available, 19 Needs review, and 0 Unavailable**. The Available station is **SWTCH Energy, 5965 Student Union Blvd, Vancouver**, internal station ID `11`. The same instant is `2026-11-02T19:00:00Z`. User edits to profiles, memberships, or station data may change these results.
 
 For a visible operating-hours change, inspect station `5` (**GSPLP TGO 05**): its opening-hours check passes at **12:00** and fails at **23:00** on that Pacific date; at 23:00 its overall result is Unavailable. A daytime opening-hours pass alone does not guarantee an overall Available result. Synthetic sample memberships end on **2026-12-31**, so use the fixed date when reproducing this example.
 
 ## Requirements
 
-- Python **3.12 or later**; the checked environment uses **3.12.14**.
+- Python **3.12 or later**.
 - Git to clone the repository; VS Code is optional.
-- Runtime packages pinned in [requirements.txt](project/requirements.txt), including FastAPI 0.162.0 and SQLAlchemy 2.0.55.
+- Python dependencies pinned in [requirements.txt](project/requirements.txt).
 - OpenLink Virtuoso with a private application graph and a dedicated app credential.
 - Internet access for package installation and optional map tiles/fonts.
 
-Windows setup: run [quickstart.ps1](project/quickstart.ps1) using the [Quickstart guide](project/docs/QUICKSTART.md). The script prepares the environment, validates the selected sample, and starts the application.
-
 ## Installation and quickstart
 
-Configure Virtuoso and the application credential using the [Quickstart guide](project/docs/QUICKSTART.md). After obtaining the sample20 release, run the one-time import from the repository root.
+Clone the team branch that contains the RDF migration and bundled sample.
+
+```text
+git clone --branch Sunghun https://github.com/chohoon901/PluggedIn.git
+cd PluggedIn
+```
+
+Follow the setup guide to start a local Virtuoso, configure the private application graph and the `pluggedin_app` account, and supply credentials on your machine. The default HTTP origin is `http://127.0.0.1:8890`. Set `PLUGGEDIN_VIRTUOSO_ORIGIN` to the HTTP origin of your instance if you use a different port. [Windows Quickstart](project/docs/QUICKSTART.md) · [Windows and macOS setup (English)](project/docs/TEAM_RDF_SETUP.en.md) · [Windows and macOS setup (Korean)](project/docs/TEAM_RDF_SETUP.ko.md)
+
+On Windows, after setting up Virtuoso and the credentials, run the Quickstart from the repository root for the first import.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\project\quickstart.ps1 -Migrate
 ```
 
-Use `-CheckOnly` to validate the graph without starting the app. For later runs, use `-SkipInstall` in place of `-Migrate`. The manual commands below use the same Virtuoso credential and configuration.
+The script prepares the Python environment, imports the bundled SQLite snapshot and station metadata, verifies the **193 source records**, applies the equipment and adapter data, and starts the app. For a graph already initialized by the importer, use `-SkipInstall` to start it again or `-CheckOnly` to verify graph readiness. On macOS, follow the virtual environment, migration, and startup steps in the team guide.
 
-Obtain the version containing the 20-station sample. For a new checkout after it is published on `Sunghun`:
+Open [PluggedIn](http://127.0.0.1:8000/), the [API documentation](http://127.0.0.1:8000/docs), or the [health endpoint](http://127.0.0.1:8000/api/v1/health). Press **Ctrl+C** in the app terminal to stop it.
+
+### RDF files and data import
+
+- **TBox (ontology)** defines classes such as `Station` and `Port` and relationships such as `hasPort`. Open the RDF/XML file in Protégé to inspect it. [PluggedIn.rdf](project/src/ca/uvic/ecs/csc501/dal/semantic/PluggedIn.rdf)
+- **Base ABox (instance data)** contains the sample stations, ports, operating periods, and synthetic profiles. The [RDF/XML exporter](project/src/ca/uvic/ecs/csc501/dal/scripts/export_rdf.py) reads the bundled SQLite snapshot and metadata. Its output is a separate file for inspection or inclusion in the submission package.
+- **Additional ABox triples** record published output evidence for Kaslo and Norgate Park and four catalogue adapters with connector direction, current type, and product sources. The first `sample20` migration applies the update automatically. To apply it to an already initialized `sample20` graph, follow the guide's `--sample-equipment` step. [SPARQL update](project/src/ca/uvic/ecs/csc501/dal/semantic/queries/sample20_equipment_evidence.ru) · [Update an existing graph](project/docs/TEAM_RDF_SETUP.en.md#update-an-existing-application-graph)
+
+To generate the base ABox RDF/XML from `project/` on Windows after installing the package, run:
 
 ```powershell
-git clone https://github.com/chohoon901/PluggedIn.git
-cd PluggedIn/project
-python --version
-python -m venv venv
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
-.\venv\Scripts\python.exe -m pip install -e .
-.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check
-.\venv\Scripts\python.exe -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000
+New-Item -ItemType Directory -Force .\output | Out-Null
+.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.export_rdf --dataset sample20 --output output/sample20-data.rdf
 ```
 
-Run commands from **`project/`**. If Windows resolves `python` to the Microsoft Store alias, use an installed Python 3.12+ interpreter; for example, `py -3.12 -m venv venv` when Python 3.12 is installed. The remaining commands use the virtual environment directly and do not require activation.
+On macOS, create `output/` with `mkdir -p output` and use `./venv/bin/python` with the same module and arguments. The exporter requires a new output path. `project/output/` is excluded from Git, so include the generated RDF/XML when packaging the ABox for assessment. For a runnable app, use the migration command above to initialize an empty private graph. It records and checks the application state as part of the import.
 
-Open [the app](http://127.0.0.1:8000/), [API documentation](http://127.0.0.1:8000/docs), or [health endpoint](http://127.0.0.1:8000/api/v1/health). Stop with **Ctrl+C**. On later runs, keep the existing environment and restart uvicorn; do not repeat data initialization.
+### SPARQL queries and demo results
 
-The SQLite sample and its companion files are needed for the initial import. For a manual import, use the migration command above without `--check` after configuring the credential.
+In the [competency queries file](project/src/ca/uvic/ecs/csc501/dal/semantic/queries/sparql_queries.rq), copy the two `PREFIX` declarations and one `SELECT` at a time. Replace its `GRAPH` IRI with the configured application graph (by default, `https://github.com/chohoon901/PluggedIn/graph/app/`). Execute it on the app instance's authenticated `/sparql-auth` endpoint. In Conductor's **Interactive SQL** on that instance, add `SPARQL` on the first line and end with `;`.
 
-### Linux/macOS
+- **CQ1, stations by network.** The `BCHYDRO` query returns the BC Hydro DoubleTree station and its coordinates.
+- **CQ2, minimum DC power.** Set `minimumPowerKw` to `50` or enter `50` in **Fast Charging**. Expect Kaslo at 250 kW and two Norgate Park connector rows at 50 kW. At 250 kW expect Kaslo, and at 251 kW expect zero results. The Kaslo value is an operator-published group maximum. The Norgate Park value is the installed DC charger rating.
+- **CQ3, direct compatibility.** The Vancouver query returns eight matches between station ports and registered vehicles.
+- **CQ4, adapter candidates.** In **Adapter Finder**, the `J1772COMBO test car (synthetic)` returns the Ford NACS-to-CCS1 adapter at DoubleTree and Kaslo. The other demo vehicles return four candidates for CHAdeMO, one for J1772, and 16 for Tesla. Candidate counts are per port and adapter combination.
 
-The Python package uses the same entry points. From `project/`, replace the virtual-environment paths as follows; these OS-specific steps have not been executed in this documentation update.
-
-```bash
-python3 -m venv venv
-venv/bin/python -m pip install -r requirements.txt
-venv/bin/python -m pip install -e .
-venv/bin/python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check
-venv/bin/python -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000
-```
+To demonstrate graph writes, use **Drivers → Add driver** with a unique synthetic licence number, refresh to check the saved record, edit it, and delete the test entry. The app persists changes through SPARQL `DELETE` and `INSERT` clauses in its Virtuoso unit of work. [Full demo steps](project/docs/TEAM_RDF_SETUP.en.md#6-demo-steps-and-expected-results) · [Graph update implementation](project/src/ca/uvic/ecs/csc501/dal/semantic/store.py#L109-L126)
 
 ## Data, schema, and architecture
 
-The [SQLite DDL](project/src/ca/uvic/ecs/csc501/dal/scripts/schema.sql) defines **13 tables and 65 columns**:
+The migration maps the **13 tables and 65 columns** in the [SQLite DDL](project/src/ca/uvic/ecs/csc501/dal/scripts/schema.sql).
 
 - Organizations and roles: `organization`, `site_owner`, `operator`, `network`.
-- Charging facilities: `station`, `connector_type`, `port`, `operating_period`, `adapter`
+- Charging facilities: `station`, `connector_type`, `port`, `operating_period`, `adapter`.
 - Profiles and relationships: `vehicle`, `vehicle_accepts`, `driver`, `membership`.
 
 Stations reference organizational roles; ports and opening periods reference stations. Vehicles accept connector types, while memberships connect drivers to networks over a date range. Driver licence numbers, VINs, station coordinates, and other candidate keys have uniqueness constraints. Station owner/operator/network references may be NULL. The RDF mapping preserves the schema's identifiers and relationship rules. Application writes enforce uniqueness, references and cascading deletes.
 
-![Simplified PluggedIn architecture](project/docs/images/architecture-compact.jpg)
+```mermaid
+flowchart LR
+    UI["Presentation (pl): FastAPI and HTML forms"] <--> App["Application (cmn): validation and charging evaluation"]
+    App <--> DAL["Data access (dal): RDF mapping and SPARQL"]
+    DAL <-->|Authenticated SPARQL| Graph["Virtuoso private application graph"]
+    Source["SQLite snapshot and station metadata"] -->|One-time import| DAL
+```
 
 - `cmn/domain` and `cmn/enums`: domain entities, value objects, and canonical connector/vehicle classifications.
 - `cmn/application`, `cmn/services`, and `cmn/contracts`: use cases, evaluation, repository interfaces, and result types.
@@ -111,9 +123,9 @@ foreign_keys=true
 busy_timeout_ms=5000
 ```
 
-These paths are relative to `src/ca/uvic/ecs/csc501/dal/`, not the repository root. Keep the SQLite DB and metadata JSON together. The metadata carries time zones, source information, completeness, and uncertainty that are not extra schema columns. The adjacent `source_manifest.json` records source rows, hashes, and mapping decisions.
+These paths are relative to `src/ca/uvic/ecs/csc501/dal/`. Keep the SQLite DB and metadata JSON together. The metadata carries time zones, source information, completeness, and uncertainty that are not extra schema columns. The adjacent `source_manifest.json` records source rows, hashes, and mapping decisions.
 
-The sample contains **20 source charging facilities, 26 port records, 2 synthetic drivers, 4 synthetic LD vehicles, and 6 synthetic memberships**. NLR/AFDC CSV IDs match OCM `DataProvidersReference` values for the selected provider. OSM is not imported yet. Real source facilities are distinguished from fictional driver/vehicle/membership profiles. Source connector names are retained and interpreted through enum aliases; vehicle classes use **LD / MD / HD**. Estimated OCM power is not presented as verified equipment power.
+The sample contains **20 source charging facilities, 26 port records, 98 operating periods, 2 synthetic drivers, 4 synthetic LD vehicles, and 6 synthetic memberships**. NLR/AFDC CSV IDs match OCM `DataProvidersReference` values for the selected provider. OSM is not imported yet. Real source facilities are distinguished from fictional driver/vehicle/membership profiles. Source connector names are retained and interpreted through enum aliases; vehicle classes use **LD / MD / HD**. Estimated OCM power is not presented as verified equipment power.
 
 Sources: [NLR transportation data](https://developer.nlr.gov/docs/transportation/), [AFDC field definitions](https://afdc.energy.gov/data_download/alt_fuel_stations_format), and [Open Charge Map](https://openchargemap.org/). Inclusion in this repository does not change the source providers' terms. The manifest identifies the actual supplied input files and their hashes.
 
@@ -144,21 +156,13 @@ metadata_path=data/readme-rebuild/data/station_metadata.json
 
 Select a new private `app_graph_iri` and apply its access settings before running the migration. The current app graph retains existing registrations. [Virtuoso setup and migration](project/docs/QUICKSTART.md)
 
-## Run the relational examples
+## Relational milestone reference
 
-For assessment, [relational_examples.sql](project/docs/sql/relational_examples.sql) demonstrates SELECT, JOIN, aggregation, INSERT, UPDATE, and DELETE. Use the newly rebuilt DB rather than your user-edited active DB. Python 3.12 includes a SQLite command shell:
-
-```powershell
-.\venv\Scripts\python.exe -X utf8 -m sqlite3 "src/ca/uvic/ecs/csc501/dal/data/readme-rebuild/data/nlr_ocm_sample20.db"
-```
-
-Paste the SQL statements from the examples file into that shell. It prints the results of queries. The write demonstration uses `BEGIN` and ends with `ROLLBACK`, so the demonstration driver is not retained. Enter `.quit` to exit. Do not replace `ROLLBACK` with `COMMIT` when reproducing the example.
-
-The first two report-style queries use vehicle 2 and return station 1 with one exact-ID matching port. Additional queries show 20 stations and 26 port records, aggregate ports per station, and join memberships to drivers and network organizations. The SQL examples compare stored IDs; full application evaluation also interprets connector aliases. Normal users perform CRUD through the web forms; direct SQL is a separate, disposable demonstration and bypasses application-level business checks.
+The earlier relational design remains available for comparing the SQLite schema and query patterns with the RDF implementation. Its SQL examples use the earlier synthetic dataset and legacy vehicle-class labels. [Relational report](docs/04_Relational/4_Relational_Sunghun_Jungwon_Elias.pdf) · [Relational SQL design](project/src/ca/uvic/ecs/csc501/dal/repositories/PluggedIn_Relational_Query_Design.sql)
 
 ## Validation and tests
 
-`validate_db` checks the selected schema, SQLite integrity, foreign keys, and application aggregate rules. To install development tools and run the project suites:
+`validate_db` checks the SQLite migration source's schema, integrity, foreign keys, and application aggregate rules. Quickstart's `-CheckOnly` verifies the Virtuoso graph used at runtime. To install development tools and run the project suites:
 
 ```powershell
 .\venv\Scripts\python.exe -m pip install -r requirements-dev.txt
@@ -167,15 +171,16 @@ The first two report-style queries use vehicle 2 and return station 1 with one e
 .\venv\Scripts\python.exe -m pytest tests/e2e --browser chromium
 ```
 
-The fixed-date example and a fresh source rebuild were checked when preparing these instructions. Historical suite results are in [verification.md](project/docs/verification.md) and the implementation records below; they describe their recorded versions and are not a claim that every suite was rerun for this documentation-only change.
+Past verification results are listed by version in [verification.md](project/docs/verification.md).
 
 ## Scope and limitations
 
-Results describe recorded conditions, not real-time occupancy, faults, queues, road access, charging-bay clearance, actual payment authorization, or guaranteed charging power. Roaming is outside the current MVP. The access policy compares public eligibility and recorded LD/MD/HD limits; missing or restricted evidence remains Unknown. Unknown checks are displayed as **Needs review**. The map is optional; its tiles require internet access, and the list/details remain available without it.
+Results describe recorded conditions, not real-time occupancy, faults, queues, road access, charging-bay clearance, actual payment authorization, or guaranteed charging power. Adapter Finder reports connector-based catalogue matches. Check vehicle-model and charging-network eligibility before using a candidate. Roaming is outside the current MVP. The access policy compares public eligibility and recorded LD/MD/HD limits; missing or restricted evidence remains Unknown. Unknown checks are displayed as **Needs review**. The map is optional; its tiles require internet access, and the list/details remain available without it.
 
 ## More documentation
 
 - [Windows Quickstart guide](project/docs/QUICKSTART.md) and [executable setup script](project/quickstart.ps1)
+- [Semantic Web report (LaTeX source)](docs/05_Semantic/5_Semantic_Sunghun_Jungwon_Elias_Updated.tex)
 - [Sample construction and provenance](project/docs/sample20.md)
 - [NLR vehicle classes and package structure](project/docs/nlr-vehicle-class.md)
 - [Development plan](project/docs/PluggedIn_Development_Plan_AI_Agent.md)

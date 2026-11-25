@@ -1,0 +1,1624 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rdf:RDF xmlns:migration="https://github.com/chohoon901/PluggedIn/migration/" xmlns:plug="https://github.com/chohoon901/PluggedIn/ontology/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J1772</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J1772</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CCS1</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J1772COMBO</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/3">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NACS</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TESLA</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/4">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NACS</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tesla (Model S/X)</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/5">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CCS1</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CCS (Type 1)</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/6">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NACS</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NACS / Tesla Supercharger</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/7">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHADEMO</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHADEMO</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/8">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHADEMO</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHAdeMO</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/ConnectorType" />
+    <migration:connectorFamily rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J1772</migration:connectorFamily>
+    <plug:connectorName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Type 1 (J1772)</plug:connectorName>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Driver/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Driver" />
+    <plug:carrierName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Synthetic test profile</plug:carrierName>
+    <plug:driverName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sample member (synthetic)</plug:driverName>
+    <plug:hasMembership rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/1" />
+    <plug:hasMembership rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/2" />
+    <plug:hasMembership rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/3" />
+    <plug:hasMembership rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/4" />
+    <plug:hasMembership rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/5" />
+    <plug:hasMembership rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/6" />
+    <plug:licenceNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAMPLE-LIC-1</plug:licenceNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Driver/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Driver" />
+    <plug:carrierName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Synthetic test profile</plug:carrierName>
+    <plug:driverName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sample visitor (synthetic)</plug:driverName>
+    <plug:licenceNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAMPLE-LIC-2</plug:licenceNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership" />
+    <plug:belongsToNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/1" />
+    <plug:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-12-31</plug:endDate>
+    <plug:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-01-01</plug:startDate>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership" />
+    <plug:belongsToNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/3" />
+    <plug:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-12-31</plug:endDate>
+    <plug:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-01-01</plug:startDate>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/3">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership" />
+    <plug:belongsToNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/5" />
+    <plug:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-12-31</plug:endDate>
+    <plug:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-01-01</plug:startDate>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/4">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership" />
+    <plug:belongsToNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/7" />
+    <plug:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-12-31</plug:endDate>
+    <plug:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-01-01</plug:startDate>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/5">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership" />
+    <plug:belongsToNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/9" />
+    <plug:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-12-31</plug:endDate>
+    <plug:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-01-01</plug:startDate>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Membership/6">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Membership" />
+    <plug:belongsToNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/11" />
+    <plug:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-12-31</plug:endDate>
+    <plug:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-01-01</plug:startDate>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/10">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/11">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/12">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/13">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/14">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/15">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/16">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/17">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/18">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/19">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/20">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/21">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/22">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/23">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/24">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/25">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/26">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/27">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/28">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/29">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">17:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">08:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/3">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/30">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">17:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">08:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/31">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">17:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">08:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/32">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">17:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">08:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/33">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">17:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">08:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/34">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">17:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">08:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/35">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">17:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">08:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/36">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">07:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/37">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">07:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/38">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">07:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/39">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">07:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/4">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/40">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">07:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/41">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">07:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/42">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">07:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/43">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/44">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/45">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/46">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/47">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/48">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/49">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/5">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/50">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/51">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/52">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/53">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/54">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/55">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/56">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/57">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/58">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/59">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/6">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/60">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/61">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/62">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/63">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/64">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/65">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/66">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/67">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/68">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/69">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/7">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/70">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/71">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/72">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/73">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/74">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/75">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/76">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/77">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/78">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/79">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/8">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/80">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/81">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/82">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/83">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/84">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/85">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/86">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/87">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/88">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/89">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/9">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/90">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/91">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/92">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mon</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">06:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/93">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tue</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">06:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/94">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wed</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">06:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/95">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thu</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">06:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/96">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fri</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">06:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/97">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sat</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">06:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/98">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/OperatingPeriod" />
+    <plug:closeTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21:00:00</plug:closeTime>
+    <plug:day rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sun</plug:day>
+    <plug:openTime rdf:datatype="http://www.w3.org/2001/XMLSchema#string">06:00:00</plug:openTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BCHYDRO</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://electricvehicles.bchydro.com/charge/public-charging/our-fast-charging-network</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/10">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Operator" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWTCH - Charge Everywhere</plug:orgName>
+    <plug:supportPhone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">+1-844-798-2438</plug:supportPhone>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> https://charge.swtchenergy.com/</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/11">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SHELL_RECHARGE</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.shell.us/motorist/electric-vehicle-charging.html</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/12">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Operator" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shell Recharge Solutions (US)</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://shellrecharge.com/en-us/solutions</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Operator" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC Hydro</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://ev.bchydro.com</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/3">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FLO</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.flo.com</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/4">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Operator" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">flo</plug:orgName>
+    <plug:supportPhone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">+1 877 505-2674</plug:supportPhone>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://flo.ca/</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/5">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChargePoint Network</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.chargepoint.com</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/6">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Operator" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ChargePoint</plug:orgName>
+    <plug:supportPhone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1-408-841-4500</plug:supportPhone>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.chargepoint.net/</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/7">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tesla</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.tesla.com/supercharger</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/8">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Operator" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tesla (including non-tesla)</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.tesla.com/en_AU/support/non-tesla-supercharging</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/9">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Network" />
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Organization" />
+    <plug:orgName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWTCH</plug:orgName>
+    <plug:website rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://swtchenergy.com</plug:website>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/4" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/10">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/11">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/12">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/8" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/13">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/5" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/14">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/15">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/16">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/17">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/18">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/19">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/5" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/20">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/21">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/22">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/23">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/24">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/25">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/26">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/9" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/3">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/6" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/4">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/1" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/5">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/8" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/6">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/5" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/7">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/8" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/8">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/5" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Port/9">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Port" />
+    <migration:recordedQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</migration:recordedQuantity>
+    <plug:currentType rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC</plug:currentType>
+    <plug:hasConnectorType rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/6" />
+    <plug:portNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</plug:portNumber>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 404841 + OCM 469092; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 04:56:22 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">North Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/1" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/2" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/3" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/4" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/5" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/6" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/7" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/1" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/2" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/3" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/4" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.31281722</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.0278656</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/2" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/1" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC Hydro - North Vancouver District - DoubleTree</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">720 Old Lillooet Rd</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/10">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UNKNOWN</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 84990 + OCM 250247; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2024-08-16 19:01:54 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Burnaby</plug:city>
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/16" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.278129</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-122.911298</plug:longitude>
+    <plug:maxVehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:maxVehicleClass>
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Simon Fraser University - Cornerstone Building</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8960 University High St</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/11">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 437419 + OCM 469075; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-04-02 20:03:43 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/57" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/58" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/59" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/60" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/61" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/62" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/63" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/17" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.26950073</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.2490006</plug:longitude>
+    <plug:maxVehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:maxVehicleClass>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/10" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/9" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWTCH Energy</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5965 Student Union Blvd</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/12">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UNKNOWN</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 436202 + OCM 469073; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-04-02 20:03:43 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">private</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/18" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.266229</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.1703679</plug:longitude>
+    <plug:maxVehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:maxVehicleClass>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/10" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/9" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWTCH Energy</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2896 W 6th Ave</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/13">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 262617 + OCM 469091; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2024-04-25 20:00:24 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">private</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">North Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/64" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/65" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/66" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/67" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/68" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/69" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/70" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/19" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.308095</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.0635011</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/10" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/9" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Swtch Energy</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">237 Ridgeway Ave</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/14">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 428579 + OCM 469086; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 03:37:45 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/71" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/72" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/73" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/74" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/75" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/76" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/77" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/20" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.287421</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.113388</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/6" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/5" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INDIGO PARK CVAFW-02</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">900 Canada Place</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/15">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 421199 + OCM 469068; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 04:32:02 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/78" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/79" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/80" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/81" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/82" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/83" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/84" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/21" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.2611606</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.2463015</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/4" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/3" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6190 Agronomy Rd</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6190 Agronomy Road</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/16">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 421009 + OCM 469053; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 04:32:02 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">New Westminster</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/85" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/86" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/87" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/88" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/89" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/90" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/91" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/22" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.2068933</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-122.9110976</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/4" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/3" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">City of New Westminster - City Hall</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">511 Royal Avenue</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/17">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UNKNOWN</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 84137 + OCM 250279; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2021-06-07 17:08:43 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/23" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.283447</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.114722</plug:longitude>
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">British Columbia Institute of Technology - Downtown Campus</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">545 Seymour St</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/18">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 208845 + OCM 234285; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2025-08-22 19:25:33 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CREDIT_CARD_ALWAYS</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/92" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/93" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/94" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/95" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/96" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/97" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/98" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/24" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.23723</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.0769734</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/12" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/11" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">City of Vancouver</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5175 Dumfries St</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/19">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UNKNOWN</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 249441 + OCM 250225; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-08-07 20:19:20 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CREDIT_CARD_ALWAYS</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Burnaby</plug:city>
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/25" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.269084</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.000497</plug:longitude>
+    <plug:maxVehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:maxVehicleClass>
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Indigo Park Canada Inc</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4567 Lougheed Hwy</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 439515 + OCM 469090; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 04:31:56 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">North Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/10" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/11" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/12" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/13" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/14" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/8" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/9" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/5" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/6" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.307961</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.007471</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/4" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/3" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Maplewood Fire and Rescue - Fast charger</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2410 Dollarton Hwy</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/20">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UNKNOWN</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 84339 + OCM 111974; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2021-06-07 17:08:43 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Burnaby</plug:city>
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/26" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.253827</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-122.918052</plug:longitude>
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lake City Centre</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3292 Production Way</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/3">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 422669 + OCM 469047; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 03:37:29 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Richmond</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/15" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/16" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/17" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/18" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/19" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/20" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/21" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/7" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/8" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.192874</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.171579</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/6" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/5" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PETRO-CANADA B 68126 - 2</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5111 Grant McConachie Way</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/4">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 434877 + OCM 469066; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-06-18 14:46:21 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/22" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/23" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/24" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/25" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/26" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/27" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/28" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/9" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.2600399</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.04627</plug:longitude>
+    <plug:maxVehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:maxVehicleClass>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/8" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/7" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver, BC - Kaslo St - Tesla Supercharger</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2710 Kaslo St</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/5">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 329666 + OCM 383153; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 03:33:56 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/29" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/30" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/31" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/32" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/33" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/34" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/35" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/10" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.281018</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.116999</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/6" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/5" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GSPLP TGO 05</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">510 West Georgia Street</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/6">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 388224 + OCM 382987; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 03:36:28 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">University Endowment Lands</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/36" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/37" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/38" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/39" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/40" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/41" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/42" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/11" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.264889</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.236506</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/6" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/5" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UEL ADMIN LELEM COMMUNITY</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5490 Shortcut Road</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/7">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 357179 + OCM 383338; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-09-21 04:29:56 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">public</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">District of North Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/43" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/44" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/45" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/46" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/47" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/48" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/49" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/12" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/13" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.323306</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.1185</plug:longitude>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/4" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/3" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Norgate Park</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TEMPORARILY_CLOSED</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1578 Garden Ave</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/8">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPLETE</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 435946 + OCM 469074; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-04-02 20:03:43 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">employees only</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vancouver</plug:city>
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/50" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/51" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/52" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/53" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/54" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/55" />
+    <plug:hasOperatingPeriod rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/OperatingPeriod/56" />
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/14" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.26750183</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.1009979</plug:longitude>
+    <plug:maxVehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:maxVehicleClass>
+    <plug:operatedBy rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/10" />
+    <plug:partOfNetwork rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Organization/9" />
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SWTCH Energy</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">161 E 4th Ave</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Station/9">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Station" />
+    <migration:aggregateCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INCOMPLETE</migration:aggregateCompleteness>
+    <migration:hoursCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UNKNOWN</migration:hoursCompleteness>
+    <migration:portsCompleteness rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARTIAL</migration:portsCompleteness>
+    <migration:recordedAcceptsGuestPayment rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedAcceptsGuestPayment>
+    <migration:recordedHasTruckParking rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</migration:recordedHasTruckParking>
+    <migration:sourceLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NLR/AFDC 404546 + OCM 469078; OCM power is estimated and not used</migration:sourceLabel>
+    <migration:sourceUpdatedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-04-02 20:03:43 UTC</migration:sourceUpdatedAt>
+    <migration:timezone rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America/Vancouver</migration:timezone>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">accepts_guest_payment</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_truck_parking</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">power_kw</migration:unconfirmedField>
+    <migration:unconfirmedField rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity</migration:unconfirmedField>
+    <plug:accessRestriction rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fleet only</plug:accessRestriction>
+    <plug:city rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Burnaby</plug:city>
+    <plug:hasPort rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Port/15" />
+    <plug:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.27278</plug:latitude>
+    <plug:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-123.0206</plug:longitude>
+    <plug:maxVehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:maxVehicleClass>
+    <plug:province rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BC</plug:province>
+    <plug:stationName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Scrap-It Society</plug:stationName>
+    <plug:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</plug:status>
+    <plug:street rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3855 Kitchener St</plug:street>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Vehicle/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle" />
+    <plug:make rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sample</plug:make>
+    <plug:vehicleAccepts rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/2" />
+    <plug:vehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:vehicleClass>
+    <plug:vehicleMaxChargeKw rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</plug:vehicleMaxChargeKw>
+    <plug:vehicleModel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J1772COMBO test car (synthetic)</plug:vehicleModel>
+    <plug:vin rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAMPLE00000000001</plug:vin>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Vehicle/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle" />
+    <plug:make rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sample</plug:make>
+    <plug:vehicleAccepts rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/1" />
+    <plug:vehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:vehicleClass>
+    <plug:vehicleMaxChargeKw rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</plug:vehicleMaxChargeKw>
+    <plug:vehicleModel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J1772 test car (synthetic)</plug:vehicleModel>
+    <plug:vin rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAMPLE00000000002</plug:vin>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Vehicle/3">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle" />
+    <plug:make rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sample</plug:make>
+    <plug:vehicleAccepts rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/7" />
+    <plug:vehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:vehicleClass>
+    <plug:vehicleMaxChargeKw rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</plug:vehicleMaxChargeKw>
+    <plug:vehicleModel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHADEMO test car (synthetic)</plug:vehicleModel>
+    <plug:vin rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAMPLE00000000003</plug:vin>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/Vehicle/4">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/ontology/Vehicle" />
+    <plug:make rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sample</plug:make>
+    <plug:vehicleAccepts rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/3" />
+    <plug:vehicleClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LD</plug:vehicleClass>
+    <plug:vehicleMaxChargeKw rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</plug:vehicleMaxChargeKw>
+    <plug:vehicleModel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TESLA test car (synthetic)</plug:vehicleModel>
+    <plug:vin rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SAMPLE00000000004</plug:vin>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/VehicleAcceptance/1">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/migration/VehicleAcceptance" />
+    <migration:acceptedConnector rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/2" />
+    <migration:acceptingVehicle rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Vehicle/1" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/VehicleAcceptance/2">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/migration/VehicleAcceptance" />
+    <migration:acceptedConnector rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/1" />
+    <migration:acceptingVehicle rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Vehicle/2" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/VehicleAcceptance/3">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/migration/VehicleAcceptance" />
+    <migration:acceptedConnector rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/7" />
+    <migration:acceptingVehicle rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Vehicle/3" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/chohoon901/PluggedIn/data/sample20/VehicleAcceptance/4">
+    <rdf:type rdf:resource="https://github.com/chohoon901/PluggedIn/migration/VehicleAcceptance" />
+    <migration:acceptedConnector rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/ConnectorType/3" />
+    <migration:acceptingVehicle rdf:resource="https://github.com/chohoon901/PluggedIn/data/sample20/Vehicle/4" />
+  </rdf:Description>
+</rdf:RDF>
