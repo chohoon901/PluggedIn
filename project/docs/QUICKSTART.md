@@ -4,7 +4,7 @@ This guide accompanies the executable [quickstart.ps1](../quickstart.ps1). A Mar
 
 ## Before starting
 
-Install Python 3.12 or later, Git and OpenLink Virtuoso. For the one-time import, obtain the team release containing the configured SQLite DB and companion metadata JSON. The running application uses the Virtuoso graph for station searches, CQ2 and CQ4, and all driver, vehicle and membership records.
+Install Python 3.12 or later, Git and OpenLink Virtuoso. Clone the repository from the `main` branch, which includes the configured sample20 SQLite DB and companion metadata JSON. The running application uses the Virtuoso graph for station searches, CQ2 and CQ4, and all driver, vehicle and membership records.
 
 ### Configure the application graph
 
@@ -37,6 +37,14 @@ New-Item -ItemType Directory -Force .\project\output | Out-Null
 Get-Credential -UserName 'pluggedin_app' -Message 'PluggedIn Virtuoso account' |
     Export-Clixml -LiteralPath .\project\output\virtuoso-credentials.xml
 ```
+
+### Load the ontology (TBox)
+
+Before running the initial migration, load the RDF/XML ontology into the separate `graph/schema/` named graph in Virtuoso.
+
+Follow the [ontology loading and verification instructions](TEAM_RDF_SETUP.en.md#load-the-ontology-tbox).
+
+The quickstart migration populates the private application graph (ABox). Do not upload the ontology into `graph/app/`.
 
 ## First run
 
@@ -95,7 +103,7 @@ The report's simpler exact-ID SQL demonstration also uses vehicle `2`, but it re
 
 ## Rebuilding or repairing a missing sample
 
-See the [repository README](../../README.md#rebuild-the-sample-from-source-files) and [sample provenance guide](sample20.md). Rebuild into a new directory using `import_sample` and the original CSV/OCM files. Do not run the old synthetic `seed_demo` against the populated sample. Preserve DBs containing user-entered records.
+See the [repository README](../../Readme.md#rebuild-the-sample-from-source-files) and [sample provenance guide](sample20.md). Rebuild into a new directory using `import_sample` and the original CSV/OCM files. Do not run the old synthetic `seed_demo` against the populated sample. Preserve DBs containing user-entered records.
 
 With an initialized Virtuoso graph and the two credential environment variables set,
 you can also run `python -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000`

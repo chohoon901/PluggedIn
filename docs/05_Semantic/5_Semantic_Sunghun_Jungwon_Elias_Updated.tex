@@ -10,6 +10,8 @@
 
 \settopmatter{printacmref=false, printfolios=false}
 \setlength{\emergencystretch}{1em}
+\setlength{\textfloatsep}{10pt}
+\raggedbottom
 \lstdefinelanguage{sparql}{
   keywords={PREFIX, SELECT, WHERE, GRAPH, INSERT, DATA, DELETE, WITH, UNION, FILTER, BIND, VALUES, OPTIONAL, ORDER, BY, DESC},
   sensitive=true,
@@ -58,7 +60,7 @@ A driver needs to know where a particular vehicle can connect and whether the av
 
 \begin{itemize}
   \item \textbf{CQ1.} Which stations belong to a specified network, and where are they located?
-  \item \textbf{CQ2.} Which DC ports meet a user-supplied minimum power in kilowatts, and which connectors do they use?
+  \item \textbf{CQ2.} Which DC charging ports have recorded power ratings or published equipment ratings that meet a user-supplied minimum power threshold, and which connectors do they use?
   \item \textbf{CQ3.} Which ports at Vancouver stations match the connectors directly accepted by registered vehicles?
   \item \textbf{CQ4.} Which catalogue adapters connect a station port to an inlet of the selected vehicle?
 \end{itemize}
@@ -69,7 +71,7 @@ The search page also evaluates operating hours, site access, direct connection, 
 
 We authored the TBox in Prot\'eg\'e and exported \texttt{PluggedIn.rdf} as RDF/XML. The model uses RDF, RDFS, OWL and XML Schema. It uses \texttt{plug:} for the project IRI followed by \texttt{ontology/}, and \texttt{mig:} for the project IRI followed by \texttt{migration/}. The project IRI is \url{https://github.com/chohoon901/PluggedIn/}.
 
-The TBox declares 12 OWL classes, 11 object properties and 40 datatype properties. \texttt{Network}, \texttt{Operator} and \texttt{SiteOwner} are subclasses of \texttt{Organization}. A station connects to ports and operating periods through object properties. It carries decimal latitude and longitude directly. An operating period uses day, opening time and closing time strings, with time-zone and evidence information stored separately in the graph. \texttt{Adapter} has directed links from the station-side connector to the vehicle-side connector.
+The TBox declares 12 OWL classes, 11 object properties and 40 datatype properties. The ER model's specialization hierarchy is preserved through \texttt{rdfs:subClassOf}, with \texttt{Network}, \texttt{Operator} and \texttt{SiteOwner} as subclasses of \texttt{Organization}. The one-to-many relationships between stations and their ports or operating periods are represented by the object properties \texttt{hasPort} and \texttt{hasOperatingPeriod}. The many-to-many relationship between vehicles and connector types is represented by \texttt{vehicleAccepts}. A station carries decimal latitude and longitude directly. An operating period uses day, opening time and closing time strings, with time-zone and evidence information stored separately in the graph. \texttt{Adapter} has directed links from the station-side connector to the vehicle-side connector.
 
 \begin{table}[t]
 \caption{Examples from the relational-to-RDF mapping.}
@@ -89,7 +91,7 @@ Typed attributes & \texttt{powerKw} uses \texttt{xsd:decimal} and \texttt{accept
 \end{tabularx}
 \end{table}
 
-The exporter maps 13 tables and 65 columns. The extra association resource is defined by the mapping vocabulary, so the table count and TBox class count have different meanings. For example, \texttt{data/sample20/Station/1} resolves under the project IRI and identifies the BC Hydro DoubleTree location. The application enforces unique profile identifiers, required fields, and referential integrity at write time. It evaluates missing information according to the recorded evidence.
+The exporter maps 13 tables and 65 columns. The extra association resource is defined by the mapping vocabulary, so the table count and TBox class count have different meanings. For example, \texttt{data/sample20/Station/1} resolves under the project IRI and identifies the BC Hydro DoubleTree location. Unlike relational constraints, RDFS domain and range declarations describe semantic relationships rather than enforcing database-style integrity. Under the Open World Assumption, missing triples do not necessarily imply false statements. Therefore, unique profile identifiers, required fields, and referential integrity are enforced at the application level, while missing evidence is treated as unknown.
 
 \section{Graph Population and Updates}
 
@@ -186,7 +188,6 @@ FILTER (STR(?currentType) = "DC" &&
 \paragraph{CQ4.}
 Adapter Finder uses the selected vehicle's IRI. It compares the port's connector family with the adapter's \texttt{fromConnector} family and the vehicle inlet with its \texttt{toConnector} family. When both current types are known, they must agree. A direct match to any of the vehicle's inlets suppresses the adapter candidate for that port. For instance, the sample J1772COMBO vehicle returns a Ford NACS-to-CCS1 candidate at Kaslo. These candidates represent connector compatibility evidence. Vehicle model and charging network eligibility require their own checks.
 
-\clearpage
 \balance
 \section{Application and Reproduction}
 
@@ -213,11 +214,13 @@ The normal runtime connects FastAPI to Virtuoso through a data access layer. Sta
 
 The repository quickstart specifies the graph configuration and credentials. The Windows quickstart takes \texttt{-Migrate} for a new graph and \texttt{-CheckOnly} for verification. On either platform the project Python environment can run the migration module directly. With the Virtuoso account configured in the environment, run the following from \texttt{project/}.
 
+\noindent\begin{minipage}{\columnwidth}
 \begin{lstlisting}[language=bash, caption={Base RDF/XML export and verification of an existing application graph.}]
 python -m ca.uvic.ecs.csc501.dal.scripts.export_rdf \
   --dataset sample20 --output sample20-data.rdf
 python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check
 \end{lstlisting}
+\end{minipage}
 
 The export produces the base ABox in RDF/XML. Run the migration module without \texttt{--check} for a first import into an empty app graph. The migration reads the bundled snapshot and installs the application records and equipment evidence. The file \texttt{sample20\_equipment\_evidence.ru} contains the equipment additions. The \texttt{--sample-equipment} option applies these additions to an existing app graph.
 

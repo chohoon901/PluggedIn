@@ -4,7 +4,7 @@
 
 PluggedIn helps drivers and fleet operators answer: **Can this driver and vehicle use this charging station at the selected arrival time?** It combines opening hours, site and vehicle access, direct connector compatibility, and payment conditions. Each check is `PASS`, `FAIL`, or `UNKNOWN`; the overall result is `AVAILABLE`, `UNAVAILABLE`, or `NEEDS_REVIEW`. Missing evidence remains unknown rather than being treated as permission to charge.
 
-This README uses the bundled **20-station NLR–OCM Vancouver sample**. Virtuoso stores the runtime knowledge graph for station searches and driver, vehicle, and membership records. The app uses the bundled SQLite snapshot and station metadata as read-only migration inputs.
+This README uses the bundled **20-station NLR–OCM Vancouver sample**. Virtuoso stores the runtime knowledge graph for station searches and driver, vehicle, and membership records. The app uses the bundled SQLite snapshot and station metadata as read-only migration inputs. The older five-station synthetic demo uses a different dataset.
 
 ## Example and supported features
 
@@ -50,6 +50,8 @@ cd PluggedIn
 ```
 
 Follow the setup guide to start a local Virtuoso, configure the private application graph and the `pluggedin_app` account, and supply credentials on your machine. The default HTTP origin is `http://127.0.0.1:8890`. Set `PLUGGEDIN_VIRTUOSO_ORIGIN` to the HTTP origin of your instance if you use a different port. [Windows Quickstart](project/docs/QUICKSTART.md) · [Windows and macOS setup (English)](project/docs/TEAM_RDF_SETUP.en.md) · [Windows and macOS setup (Korean)](project/docs/TEAM_RDF_SETUP.ko.md)
+
+Before the initial instance-data import, load the RDF/XML ontology (TBox) into the separate `graph/schema/` named graph. Follow the [ontology loading and verification instructions](project/docs/TEAM_RDF_SETUP.en.md#load-the-ontology-tbox). Keep the ontology graph separate from the private application graph (`graph/app/`), which stores instance data (ABox).
 
 On Windows, after setting up Virtuoso and the credentials, run the Quickstart from the repository root for the first import.
 
@@ -186,6 +188,7 @@ Results describe recorded conditions, not real-time occupancy, faults, queues, r
 - [Development plan](project/docs/PluggedIn_Development_Plan_AI_Agent.md)
 - [Original approved architecture](project/docs/superpowers/specs/2026-10-26-pluggedin-design.md) and [sample20 design update](project/docs/superpowers/specs/2026-11-02-idnull-sample-design.md)
 - [Current MVP access-policy record](project/docs/superpowers/plans/2026-11-02-mvp-class-only-access.md)
+- [Semantic Web setup, ontology loading, migration, and demo guide](project/docs/TEAM_RDF_SETUP.en.md)
 
 ## Citation
 
