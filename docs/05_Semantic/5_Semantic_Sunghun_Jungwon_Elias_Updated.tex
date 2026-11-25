@@ -70,6 +70,7 @@ The search page also evaluates operating hours, site access, direct connection, 
 \section{Ontology and Relational Mapping}
 
 We authored the TBox in Prot\'eg\'e and exported \texttt{PluggedIn.rdf} as RDF/XML. The model uses RDF, RDFS, OWL and XML Schema. It uses \texttt{plug:} for the project IRI followed by \texttt{ontology/}, and \texttt{mig:} for the project IRI followed by \texttt{migration/}. The project IRI is \url{https://github.com/chohoon901/PluggedIn/}.
+
 The TBox declares 12 OWL classes, 11 object properties and 40 datatype properties. The ER model's specialization hierarchy is preserved through \texttt{rdfs:subClassOf}, with \texttt{Network}, \texttt{Operator} and \texttt{SiteOwner} as subclasses of \texttt{Organization}. The one-to-many relationships between stations and their ports or operating periods are represented by the object properties \texttt{hasPort} and \texttt{hasOperatingPeriod}. The many-to-many relationship between vehicles and connector types is represented by \texttt{vehicleAccepts}. A station carries decimal latitude and longitude directly. An operating period uses day, opening time and closing time strings, with time-zone and evidence information stored separately in the graph. \texttt{Adapter} has directed links from the station-side connector to the vehicle-side connector.
 
 \begin{table}[t]
