@@ -1,12 +1,33 @@
 # PluggedIn 팀원용 로컬 실행 가이드
 
-이 가이드는 Windows와 macOS에서 각자의 Virtuoso로 PluggedIn을 실행하는 방법을 안내합니다. `715bb9f` (`Migrate PluggedIn storage to Virtuoso RDF`)가 포함된 팀 브랜치를 사용합니다. 저장소에 포함된 `sample20` SQLite 파일과 충전소 메타데이터로 시연용 그래프를 만듭니다.
+이 가이드는 Windows와 macOS에서 각자의 Virtuoso로 PluggedIn을 실행하는 방법을 안내합니다. 저장소의 `main` 브랜치를 사용합니다. 저장소에 포함된 `sample20` SQLite 파일과 충전소 메타데이터로 시연용 그래프를 만듭니다.
 
 ## 1. 프로젝트와 Virtuoso 준비
 
-- Python 3.12 이상, Git, 로컬 OpenLink Virtuoso 서버가 필요합니다. 그래프 관리는 Conductor 또는 Virtuoso SQL 클라이언트에서 할 수 있습니다.
-- 팀 브랜치를 이미 추적 중이라면 저장소 루트에서 `git pull --ff-only`를 실행합니다. 이후 터미널 명령은 같은 위치에서 `cd project`한 뒤 실행합니다.
-- 설치한 Virtuoso 서버를 시작합니다. 기본 HTTP 주소는 `http://127.0.0.1:8890`입니다. Conductor를 쓴다면 브라우저에서 `http://127.0.0.1:8890/conductor`를 엽니다. 포트가 다르면 설치 설정의 `[HTTPServer]`에 있는 포트를 사용합니다.
+### 필요한 프로그램 설치
+
+Git과 Python 3.12 이상을 설치합니다. Windows에서는 PowerShell, macOS에서는 Terminal을 새로 열고 `git --version`을 실행해 Git이 설치됐는지 확인합니다. Python은 Windows에서 `py -3 --version`, macOS에서 `python3 --version`으로 확인합니다. Windows에 `py`가 없으면 `python --version`을 사용합니다. [Git 설치](https://git-scm.com/install/) · [Python 설치](https://www.python.org/downloads/)
+
+Windows에서는 설치 프로그램을 사용하고, Homebrew를 사용하는 macOS에서는 `brew install virtuoso`를 실행해 로컬 Virtuoso 서버를 설치합니다. 2단계와 4단계에서 Virtuoso 관리자 계정으로 로그인합니다. [Virtuoso 다운로드](https://vos.openlinksw.com/owiki/wiki/VOS/VOS/VOSDownload) · [Homebrew 설치](https://brew.sh/) · [Virtuoso Homebrew 패키지](https://formulae.brew.sh/formula/virtuoso)
+
+### 저장소 받기
+
+처음 받는 경우, 프로젝트를 저장할 폴더에서 아래 명령을 실행합니다.
+
+```text
+git clone --branch main https://github.com/chohoon901/PluggedIn.git
+cd PluggedIn
+cd project
+```
+
+이미 `main`을 추적하는 저장소가 있다면 저장소 루트에서 `git pull --ff-only`를 실행한 뒤 `cd project`로 이동합니다. 이후 앱 명령은 이 터미널의 `project/` 폴더에서 실행합니다.
+
+### Virtuoso 시작
+
+- **Windows.** 설치 프로그램으로 서비스를 등록했다면 Windows **서비스** 앱에서 OpenLink Virtuoso를 시작합니다. 터미널에서 실행하려면 `virtuoso.ini`가 들어 있는 Virtuoso 데이터베이스 폴더에서 별도의 PowerShell을 열고 `& ..\bin\virtuoso-t.exe -f -c virtuoso.ini`를 실행합니다. 설치 방식에 따라 실행 파일 이름은 `virtuoso-odbc-t.exe`일 수 있습니다. [OpenLink Windows 설정](https://vos.openlinksw.com/owiki/wiki/VOS/VOSUsageWindows)
+- **macOS.** 별도의 Terminal에서 설치한 `virtuoso.ini`의 위치를 찾습니다. Homebrew로 설치했다면 `brew list virtuoso | grep '/virtuoso.ini$'`로 설정 파일 위치를 확인할 수 있습니다. 파일이 있는 폴더로 이동해 `virtuoso-t -f -c virtuoso.ini`를 실행합니다. [Virtuoso 서버 설정](https://docs.openlinksw.com/virtuoso/ch-server/)
+
+Virtuoso를 실행한 상태에서 [로컬 SPARQL 편집기](http://127.0.0.1:8890/sparql)를 열어 접속을 확인합니다. 포트가 다르면 `virtuoso.ini`의 `[HTTPServer]`에 설정된 포트를 사용합니다. 온톨로지 업로드와 앱 연결에는 같은 Virtuoso 인스턴스를 사용합니다.
 
 ## 2. 앱 전용 그래프 준비
 
@@ -20,7 +41,9 @@ https://github.com/chohoon901/PluggedIn/graph/app/
 
 이미 앱 그래프 이름에 수동으로 RDF를 올려둔 경우, 빈 그래프 이름을 새로 정합니다. 설정 파일의 `app_graph_iri`와 아래 SQL의 앱 그래프 이름을 둘 다 새 이름으로 바꾸면 기존 RDF를 보관하면서 이관할 수 있습니다. [config.properties](../src/ca/uvic/ecs/csc501/dal/config.properties)
 
-앱용 로컬 Virtuoso에서 관리자 계정으로 **Conductor → Interactive SQL**을 열거나 SQL 클라이언트에서 관리자 세션을 엽니다. 아래 예시의 `YOUR_LOCAL_PASSWORD`를 이 PC에서 사용할 앱 계정의 암호로 바꿔 실행합니다. `pluggedin_app` 계정이 이미 있으면 첫 줄은 건너뜁니다.
+앱용 로컬 Virtuoso에서 관리자 계정(일반적으로 `dba`)으로 **Conductor → Interactive SQL**을 열거나 Virtuoso의 `isql`로 접속합니다. `isql`에는 `virtuoso.ini`의 `[Parameters]`에 설정된 SQL 포트(기본 `1111`)를 사용합니다. Windows에서는 Virtuoso 설치 폴더의 `bin/isql.exe`, macOS Homebrew 환경에서는 `$(brew --prefix virtuoso)/bin/isql`을 사용합니다. [Interactive SQL 접속 옵션](https://docs.openlinksw.com/virtuoso/virtuoso_clients_isql/)
+
+아래 예시의 `YOUR_LOCAL_PASSWORD`를 이 PC에서 사용할 앱 계정의 암호로 바꿔 실행합니다. `pluggedin_app` 계정이 이미 있으면 첫 줄은 건너뜁니다.
 
 아래 `nobody` 설정은 이 인스턴스의 `PrivateGraphs` 그룹 전체에 적용됩니다. 다른 프로젝트가 그 그룹이나 기존 계정 권한을 사용 중이라면, 문서 하단의 **다른 로컬 Virtuoso 인스턴스가 필요한 경우**를 따라 앱 전용 인스턴스에서 실행합니다. [OpenLink 그래프 권한 안내](https://docs.openlinksw.com/virtuoso/rdfgraphsecurityintconfsec/)
 
@@ -37,9 +60,11 @@ DB.DBA.RDF_GRAPH_USER_PERMS_SET ('https://github.com/chohoon901/PluggedIn/graph/
 GRANT SPARQL_UPDATE TO "pluggedin_app";
 ```
 
+
+
 ## 3. Python 환경과 연결 설정
 
-운영체제에 맞는 명령을 실행합니다. Virtuoso HTTP 포트가 다르면 `PLUGGEDIN_VIRTUOSO_ORIGIN`의 `8890`을 바꿉니다. 예를 들어 Virtuoso를 `8893`으로 열었다면 `http://127.0.0.1:8893`을 사용합니다. 이후 단계도 암호를 입력한 **같은 터미널**에서 실행합니다.
+운영체제에 맞는 명령을 실행합니다. Virtuoso HTTP 포트가 다르면 `PLUGGEDIN_VIRTUOSO_ORIGIN`의 `8890`을 바꿉니다. 예를 들어 Virtuoso를 `8893`으로 열었다면 `http://127.0.0.1:8893`을 사용합니다. 가상환경의 Python이 3.12 이상인지 확인합니다. 2단계에서 정한 `pluggedin_app` 비밀번호를 입력하고, 이후 명령도 **같은 터미널**에서 실행합니다.
 
 ### Windows PowerShell
 
@@ -72,7 +97,46 @@ printf '\n'
 export PLUGGEDIN_VIRTUOSO_PASSWORD
 ```
 
+
+
 ## 4. 샘플 데이터 적용
+
+
+
+### 온톨로지(TBox) 적재
+
+처음 실행할 때 [PluggedIn.rdf](../src/ca/uvic/ecs/csc501/dal/semantic/PluggedIn.rdf)를 아래 온톨로지 그래프에 올립니다. 다음 단계에서 샘플 데이터를 이관할 앱 그래프는 비어 있어야 합니다.
+
+```text
+https://github.com/chohoon901/PluggedIn/graph/schema/
+```
+
+**Conductor가 있는 경우.** 사용하는 Virtuoso의 `http://127.0.0.1:8890/conductor`를 열고 관리자 계정으로 로그인합니다. **Linked Data → Quad Store Upload → File**에서 `PluggedIn.rdf`를 선택합니다. **Named Graph IRI**에 위 스키마 그래프 주소를 붙여넣고 **Upload**를 누릅니다. `Upload finished` 메시지가 뜨고 **Linked Data → Graphs**에 그래프가 표시되는지 확인합니다.
+
+**Conductor가 없는 경우.** Windows PowerShell에서 `project/` 폴더로 이동한 뒤 아래 명령을 실행합니다. macOS에서는 `curl.exe`를 `curl`로 바꿉니다. 사용하는 Virtuoso의 HTTP 포트가 다르면 주소의 포트를 바꾸고, 관리자 계정 이름이 다르면 `dba`를 바꿉니다. 비밀번호 입력 창이 뜨면 관리자 계정의 비밀번호를 입력합니다. [Virtuoso 그래프 업로드 주소 안내](https://docs.openlinksw.com/virtuoso/rdfsparqlprotocolendpoint/)
+
+```powershell
+curl.exe --anyauth --user dba --fail --silent --show-error --write-out "HTTP %{http_code}\n" --request POST --header "Content-Type: application/rdf+xml" --data-binary "@src/ca/uvic/ecs/csc501/dal/semantic/PluggedIn.rdf" "http://127.0.0.1:8890/sparql-graph-crud-auth?graph-uri=https%3A%2F%2Fgithub.com%2Fchohoon901%2FPluggedIn%2Fgraph%2Fschema%2F"
+```
+
+**TBox 확인.** 같은 인스턴스의 SPARQL 편집기 `http://127.0.0.1:8890/sparql`을 엽니다. **Query Text**에 아래 쿼리를 붙여넣고 **Execute Query**를 누릅니다. 온톨로지를 이미 올렸다면 이 쿼리로 확인한 뒤 다음 단계로 진행합니다.
+
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?type (COUNT(DISTINCT ?entity) AS ?count)
+WHERE {
+    GRAPH <https://github.com/chohoon901/PluggedIn/graph/schema/> {
+        ?entity a ?type .
+        FILTER (?type IN (owl:Class, owl:ObjectProperty, owl:DatatypeProperty))
+    }
+}
+GROUP BY ?type
+```
+
+결과는 **OWL 클래스 12개, 객체 속성 11개, 데이터 속성 40개**입니다. 온톨로지는 `graph/schema/`에 저장하고, 샘플 인스턴스 데이터는 비공개 `graph/app/`에 이관합니다.
+
+Conductor로 온톨로지를 올리고 선언 건수를 확인하는 절차는 macOS의 Virtuoso 07.20.3243에서 검증했습니다.
 
 ### 첫 실행 또는 기존 RDF만 업로드한 경우
 
@@ -90,64 +154,3 @@ Git에 포함된 SQLite와 메타데이터를 준비한 빈 앱 그래프에 한
 ./venv/bin/python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso
 ```
 
-### 기존 앱 그래프에 새 커밋을 적용하는 경우
-
-앱을 종료하고 최신 코드로 업데이트한 뒤 아래 명령을 실행합니다. `Sample20 equipment evidence is ready.`가 나오면 기존 그래프에 출력과 어댑터 근거가 적용된 것입니다. 같은 명령을 다시 실행해도 동일한 트리플은 한 번만 저장됩니다. [적용되는 SPARQL 업데이트](../src/ca/uvic/ecs/csc501/dal/semantic/queries/sample20_equipment_evidence.ru)
-
-**Windows**
-
-```powershell
-.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --sample-equipment
-```
-
-**macOS**
-
-```bash
-./venv/bin/python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --sample-equipment
-```
-
-## 5. 앱 실행
-
-`--check`에서 `Virtuoso application graph is ready.`를 확인한 뒤 서버를 시작합니다.
-
-**Windows**
-
-```powershell
-.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check
-if ($LASTEXITCODE -eq 0) {
-    .\venv\Scripts\python.exe -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000
-}
-```
-
-**macOS**
-
-```bash
-./venv/bin/python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check &&
-  ./venv/bin/python -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000
-```
-
-브라우저에서 앱을 엽니다. 앱을 종료할 때는 실행 중인 터미널에서 **Ctrl+C**를 누릅니다. 다음 실행에는 Virtuoso를 켜고 5단계로 돌아옵니다. 새 터미널이라면 3단계의 연결 환경 변수를 다시 설정합니다. [PluggedIn 열기](http://127.0.0.1:8000/)
-
-## 6. 시연 순서와 예상 결과
-
-1. **Find charging**에서 `Sample member (synthetic)`와 `J1772 test car (synthetic)`를 고릅니다. 날짜는 `2026-11-02`, 시간은 `12:00`, 시간대는 `Pacific time (British Columbia)`로 설정하고 **Find stations**를 누릅니다. 초기 샘플의 기본 검색 범위에서 **20곳**이 나오고, **Available 1, Needs review 19, Unavailable 0**이 표시됩니다. **SWTCH Energy (5965 Student Union Blvd)** 상세에서 **Direct connection**이 **Pass**인지 확인합니다.
-2. **Fast Charging (CQ2)**에서 `0` 또는 `50` kW를 검색하면 **Kaslo**와 **Norgate Park**, `250` kW에서는 **Kaslo**, `251` kW에서는 빈 결과가 나옵니다. Norgate Park는 50 kW이며 커넥터별로 두 줄에 표시됩니다. [Norgate Park 설치 자료](https://www.prismengineering.com/projects/district-of-north-vancouver-ev-design-and-implementation/)
-3. **Adapter Finder (CQ4)**에서 샘플 차량을 골라 **Search stations**를 누릅니다. 각 샘플 차량마다 후보가 한 개 이상 있습니다. 표에서 충전소, 포트와 차량 커넥터의 방향, 어댑터 제품 링크를 보여줍니다. 후보는 커넥터 기준이므로 실제 이용 전에는 차량과 충전 네트워크의 조건을 확인합니다.
-4. **Drivers**, **Vehicles**, **Memberships**에서 시연용 프로필을 확인합니다. 저장을 보여주려면 **Drivers → Add driver**에서 새 가짜 면허번호로 테스트 운전자를 저장하고, 브라우저를 새로 열어 조회한 다음 수정·삭제합니다.
-5. **CQ1과 CQ3의 결과표**를 보여주려면 쿼리 파일의 두 `PREFIX`와 해당 `SELECT` 하나를 복사하고 `GRAPH`에 앱 그래프 이름을 넣습니다. **Interactive SQL**에서는 첫 줄에 `SPARQL`, 마지막에 `;`를 붙여 실행합니다. 초기 샘플에서 **CQ1**은 BC Hydro DoubleTree 충전소 1곳과 좌표를, **CQ3**은 Vancouver의 직접 연결 일치 8건을 반환합니다. [sparql_queries.rq](../src/ca/uvic/ecs/csc501/dal/semantic/queries/sparql_queries.rq)
-
-## 문제가 생기면
-
-- **접속 실패 또는 인증 오류**. Virtuoso 실행 상태, `PLUGGEDIN_VIRTUOSO_ORIGIN`에 지정한 HTTP 포트, 전용 계정 정보를 확인합니다.
-- **그래프가 이미 데이터를 포함한다는 오류**. 먼저 `--check`를 실행합니다. 준비된 그래프라면 4단계의 기존 그래프 명령을 사용합니다. 수동 업로드한 그래프라면 2단계에서 빈 앱 그래프 이름을 지정합니다.
-- **비공개 그래프 오류 또는 `RDF99`**. 2단계의 그래프 이름과 접근 권한을 확인합니다. 기존 Virtuoso의 비공개 그래프를 다른 작업에서도 사용 중이면 앱용 로컬 인스턴스로 전환합니다.
-- **50 kW에서 Kaslo만 표시**. 최신 앱 코드를 받았는지 확인하고 4단계의 기존 그래프 명령을 실행한 뒤 앱을 다시 시작합니다.
-- **8000번이 사용 중**. 앱 시작 명령의 `--port 8000`을 `--port 8001`로 바꿉니다. [8001번 앱 열기](http://127.0.0.1:8001/)
-
-### 다른 로컬 Virtuoso 인스턴스가 필요한 경우
-
-설치한 Virtuoso의 예제 `virtuoso.ini`를 새 빈 작업 폴더에 복사합니다. DB, 트랜잭션 로그, 잠금 파일, 임시 DB 경로가 새 폴더 안을 가리키는지 확인합니다. 비어 있는 포트로 `[Parameters]`의 `ServerPort`를 `127.0.0.1:1113`, `[HTTPServer]`의 `ServerPort`를 `127.0.0.1:8893`처럼 따로 지정합니다. 새 폴더에서 설치된 Virtuoso 서버 실행 파일에 `-f -c virtuoso.ini`를 붙여 시작합니다. Conductor는 8893번, SQL 클라이언트는 1113번을 사용해 2단계를 진행하고, 3단계에서 `http://127.0.0.1:8893`을 지정합니다. [OpenLink 서버 설정 안내](https://docs.openlinksw.com/virtuoso/ch-server/)
-
-### RDF 변경분만 수동으로 적용하는 경우
-
-같은 `sample20` 충전소와 포트가 들어 있는 그래프에 업데이트 파일을 적용할 수 있습니다. 파일의 모든 `GRAPH`를 대상 그래프에 맞추고 `#`로 시작하는 주석 줄을 제거합니다. 맨 앞에 `SPARQL`, 맨 끝에 `;`를 붙여 **Interactive SQL**에서 실행합니다. 앱 화면에서도 새 결과를 보려면 최신 CQ2 쿼리가 있는 코드를 사용합니다. [sample20_equipment_evidence.ru](../src/ca/uvic/ecs/csc501/dal/semantic/queries/sample20_equipment_evidence.ru) · [Virtuoso 실행 예시](https://docs.openlinksw.com/virtuoso/rdfindertmethodsparqlendpoint/)

@@ -1,12 +1,33 @@
 # PluggedIn local setup for teammates
 
-Use this guide to run PluggedIn on Windows or macOS with your own local Virtuoso. Use the team checkout that includes `715bb9f` (`Migrate PluggedIn storage to Virtuoso RDF`). The repository includes the `sample20` SQLite file and station metadata used to build the demo graph.
+Use this guide to run PluggedIn on Windows or macOS with your own local Virtuoso. Use the repository's `main` branch. The repository includes the `sample20` SQLite file and station metadata used to build the demo graph.
 
 ## 1. Prepare the project and Virtuoso
 
-- You need Python 3.12 or later, Git, and a local OpenLink Virtuoso server. Use Conductor or the Virtuoso SQL client to manage the graph.
-- If your checkout already tracks the team branch, run `git pull --ff-only` from the repository root. Run the terminal commands below after running `cd project` from the same directory.
-- Start your Virtuoso server. The default HTTP address is `http://127.0.0.1:8890`. If you use Conductor, open `http://127.0.0.1:8890/conductor`. For a different port, use the value in the `[HTTPServer]` section of your Virtuoso configuration.
+### Install the prerequisites
+
+Install Git and Python 3.12 or later. Open a new PowerShell window on Windows or Terminal on macOS. Confirm Git is available with `git --version` and check Python using `py -3 --version` on Windows or `python3 --version` on macOS. On Windows, use `python --version` if the `py` launcher is unavailable. [Git installer](https://git-scm.com/install/) · [Python installer](https://www.python.org/downloads/)
+
+Install a local Virtuoso server using the Windows installer or, on macOS with Homebrew, `brew install virtuoso`. Keep your Virtuoso administrator login for steps 2 and 4. [Virtuoso downloads](https://vos.openlinksw.com/owiki/wiki/VOS/VOS/VOSDownload) · [Homebrew installation](https://brew.sh/) · [Virtuoso Homebrew package](https://formulae.brew.sh/formula/virtuoso)
+
+### Get the team checkout
+
+For a new checkout of `main`, run these commands in the folder where you want to keep the project.
+
+```text
+git clone --branch main https://github.com/chohoon901/PluggedIn.git
+cd PluggedIn
+cd project
+```
+
+If you already have a checkout tracking `main`, run `git pull --ff-only` from the repository root and then `cd project`. Keep this terminal in `project/` for the remaining app commands.
+
+### Start Virtuoso
+
+- **Windows.** If the installer created a service, start OpenLink Virtuoso from the Windows **Services** app. To run it in the foreground, open a separate PowerShell window in the installed Virtuoso database folder containing `virtuoso.ini` and run `& ..\bin\virtuoso-t.exe -f -c virtuoso.ini`. Some installations name the executable `virtuoso-odbc-t.exe`. [OpenLink Windows setup](https://vos.openlinksw.com/owiki/wiki/VOS/VOSUsageWindows)
+- **macOS.** In a separate Terminal window, find the installed `virtuoso.ini`. For Homebrew, `brew list virtuoso | grep '/virtuoso.ini$'` can show the packaged configuration path. From the directory containing that file, run `virtuoso-t -f -c virtuoso.ini`. [Virtuoso server configuration](https://docs.openlinksw.com/virtuoso/ch-server/)
+
+Keep Virtuoso running. Open [the local SPARQL editor](http://127.0.0.1:8890/sparql) to check that the server responds. If your instance uses a different HTTP port, use the port in the `[HTTPServer]` section of `virtuoso.ini`. Use the same instance for the ontology upload and the app connection.
 
 ## 2. Prepare the private application graph
 
@@ -20,7 +41,9 @@ https://github.com/chohoon901/PluggedIn/graph/app/
 
 If you manually loaded RDF under the application graph name, choose a new, empty graph name. Use it for `app_graph_iri` in the configuration file and in the SQL below so the migration can run alongside your earlier RDF. [config.properties](../src/ca/uvic/ecs/csc501/dal/config.properties)
 
-On your local application instance, open **Conductor → Interactive SQL** or start a session in the Virtuoso SQL client as an administrator. Replace `YOUR_LOCAL_PASSWORD` with a password for the app account on this machine. If the `pluggedin_app` account already exists, skip the first statement.
+On your local application instance, sign in as a Virtuoso administrator (typically `dba`). Open **Conductor → Interactive SQL** or connect with the Virtuoso `isql` client. Use the SQL port in `[Parameters]` in `virtuoso.ini` (default `1111`) for `isql`. On Windows, use `isql.exe` from Virtuoso's `bin` directory. On macOS with Homebrew, use `$(brew --prefix virtuoso)/bin/isql`. [Interactive SQL connection options](https://docs.openlinksw.com/virtuoso/virtuoso_clients_isql/)
+
+Replace `YOUR_LOCAL_PASSWORD` with a password for the app account on this machine. If the `pluggedin_app` account already exists, skip the first statement.
 
 The `nobody` setting below applies to the entire `PrivateGraphs` group on that instance. If other projects use the group or depend on existing account permissions, use a separate local Virtuoso instance before running the SQL. See the setup notes at the end of this guide. [OpenLink graph permissions](https://docs.openlinksw.com/virtuoso/rdfgraphsecurityintconfsec/)
 
@@ -39,7 +62,7 @@ GRANT SPARQL_UPDATE TO "pluggedin_app";
 
 ## 3. Set up Python and the connection
 
-Run the commands for your OS. If Virtuoso uses a different HTTP port, replace `8890` in `PLUGGEDIN_VIRTUOSO_ORIGIN`. For example, use `http://127.0.0.1:8893` for a local instance on port 8893. Run the remaining commands in the **same terminal** where you entered the password.
+Run the commands for your OS. If Virtuoso uses a different HTTP port, replace `8890` in `PLUGGEDIN_VIRTUOSO_ORIGIN`. For example, use `http://127.0.0.1:8893` for a local instance on port 8893. Verify that the virtual environment reports Python 3.12 or later. Enter the `pluggedin_app` password you set in step 2 and run the remaining app commands in the **same terminal**.
 
 ### Windows PowerShell
 
@@ -76,49 +99,38 @@ export PLUGGEDIN_VIRTUOSO_PASSWORD
 
 ### Load the ontology (TBox)
 
-Before importing the instance data, load the RDF/XML ontology into a separate named graph in Virtuoso. This step is also applicable to an existing application graph.
+For a fresh setup, load [PluggedIn.rdf](../src/ca/uvic/ecs/csc501/dal/semantic/PluggedIn.rdf) into the separate ontology graph below. Then continue to the instance-data import, which needs an empty application graph.
 
-1. Open Conductor and log in as an administrator.
-2. Navigate to **Linked Data → Quad Store Upload**.
-3. Select **File** and upload [PluggedIn.rdf](../src/ca/uvic/ecs/csc501/dal/semantic/PluggedIn.rdf).
-4. Enter the following Named Graph IRI:
+```text
+https://github.com/chohoon901/PluggedIn/graph/schema/
+```
 
-   ```text
-   https://github.com/chohoon901/PluggedIn/graph/schema/
-   ```
+**With Conductor.** Open `http://127.0.0.1:8890/conductor` on your Virtuoso instance and sign in as an administrator. Go to **Linked Data → Quad Store Upload**. Select **File**, choose `PluggedIn.rdf`, paste the schema graph IRI above as the **Named Graph IRI**, and click **Upload**. Check for `Upload finished` and look for the graph under **Linked Data → Graphs**.
 
-5. Click **Upload** and confirm that `Upload finished` appears.
-6. Navigate to **Linked Data → Graphs** and verify that the schema graph exists.
-7. Open **Linked Data → SPARQL** and execute the following query:
+**If Conductor is unavailable.** Run the command below from `project/` in Windows PowerShell. On macOS use `curl` instead of `curl.exe`. Use your instance's HTTP port and replace `dba` if your administrator login uses another name. Enter the administrator password when prompted. [Virtuoso graph upload endpoint](https://docs.openlinksw.com/virtuoso/rdfsparqlprotocolendpoint/)
 
-   ```sparql
-   PREFIX owl: <http://www.w3.org/2002/07/owl#>
+```powershell
+curl.exe --anyauth --user dba --fail --silent --show-error --write-out "HTTP %{http_code}\n" --request POST --header "Content-Type: application/rdf+xml" --data-binary "@src/ca/uvic/ecs/csc501/dal/semantic/PluggedIn.rdf" "http://127.0.0.1:8890/sparql-graph-crud-auth?graph-uri=https%3A%2F%2Fgithub.com%2Fchohoon901%2FPluggedIn%2Fgraph%2Fschema%2F"
+```
 
-   SELECT ?type (COUNT(DISTINCT ?entity) AS ?count)
-   WHERE {
-       GRAPH <https://github.com/chohoon901/PluggedIn/graph/schema/> {
-           ?entity a ?type .
-           FILTER (?type IN (
-               owl:Class,
-               owl:ObjectProperty,
-               owl:DatatypeProperty
-           ))
-       }
-   }
-   GROUP BY ?type
-   ```
+**Verify the TBox.** Open the SPARQL editor at `http://127.0.0.1:8890/sparql` on the same instance. Paste this query into **Query Text** and click **Execute Query**. If you already loaded the ontology, use this query to check it before continuing.
 
-   Expected results:
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
-   | Type | Count |
-   | --- | ---: |
-   | owl:Class | 12 |
-   | owl:ObjectProperty | 11 |
-   | owl:DatatypeProperty | 40 |
+SELECT ?type (COUNT(DISTINCT ?entity) AS ?count)
+WHERE {
+    GRAPH <https://github.com/chohoon901/PluggedIn/graph/schema/> {
+        ?entity a ?type .
+        FILTER (?type IN (owl:Class, owl:ObjectProperty, owl:DatatypeProperty))
+    }
+}
+GROUP BY ?type
+```
 
-The ontology graph stores the schema (TBox), while the private application graph stores instance data (ABox). Keep these graphs separate. The application graph must be empty before its first migration, so do not upload the ontology into `graph/app/`.
+Expect 12 OWL classes, 11 object properties, and 40 datatype properties. The ontology stays in `graph/schema/`. The private `graph/app/` is for instance data.
 
-This ontology-loading procedure and the expected declaration counts were verified on macOS using Virtuoso 07.20.3243.
+The Conductor upload and declaration counts were verified on macOS using Virtuoso 07.20.3243.
 
 ### First run or previous RDF-only upload
 
@@ -192,7 +204,7 @@ Open the app in your browser. Stop it with **Ctrl+C** in its terminal. The next 
 
 ### Run a separate local Virtuoso instance if needed
 
-Copy the example `virtuoso.ini` from your installed Virtuoso into a new, empty working directory. Check that the database, transaction log, lock file, and temporary database paths point inside the new directory. Use two free ports, for example `127.0.0.1:1113` for `ServerPort` under `[Parameters]` and `127.0.0.1:8893` under `[HTTPServer]`. In the new directory, run your installed Virtuoso server executable with `-f -c virtuoso.ini`. Use port 8893 for Conductor, 1113 for the SQL client, and `http://127.0.0.1:8893` in step 3. [OpenLink server configuration](https://docs.openlinksw.com/virtuoso/ch-server/)
+Copy the example `virtuoso.ini` from your installed Virtuoso into a new, empty working directory. Check that the database, transaction log, lock file, and temporary database paths point inside the new directory. Use two free ports, for example `127.0.0.1:1113` for `ServerPort` under `[Parameters]` and `127.0.0.1:8893` under `[HTTPServer]`. In the new directory, run your installed Virtuoso server executable with `-f -c virtuoso.ini`. Use port 8893 for HTTP, including the SPARQL editor and Conductor if installed. Use 1113 for the SQL client and set `PLUGGEDIN_VIRTUOSO_ORIGIN` to `http://127.0.0.1:8893` in step 3. [OpenLink server configuration](https://docs.openlinksw.com/virtuoso/ch-server/)
 
 ### Apply just the RDF additions manually
 

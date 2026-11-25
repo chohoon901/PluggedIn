@@ -42,13 +42,33 @@ For a visible operating-hours change, inspect station `5` (**GSPLP TGO 05**): it
 
 ## Installation and startup
 
-**[Team setup guide for Windows and macOS](project/docs/TEAM_RDF_SETUP.en.md)**
+**[Windows and macOS setup guide (English)](project/docs/TEAM_RDF_SETUP.en.md)** · **[Windows·macOS 실행 가이드 (한국어)](project/docs/TEAM_RDF_SETUP.ko.md)**
 
-In the repository, the guide is at `project/docs/TEAM_RDF_SETUP.en.md`.
+The guides are in `project/docs/TEAM_RDF_SETUP.en.md` and `project/docs/TEAM_RDF_SETUP.ko.md`.
 
-Use the team branch that contains this README and the Virtuoso migration. Follow steps 1 through 5 to configure Virtuoso, load the TBox, migrate the sample data into the private application graph, and start PluggedIn. The guide also covers starting with an existing graph.
+Follow steps 1 through 5 to check out `main`, configure Virtuoso, load the TBox, migrate the sample data into the private application graph, and start PluggedIn. Both guides cover starting with an existing graph.
 
 Open [PluggedIn](http://127.0.0.1:8000/), the [API documentation](http://127.0.0.1:8000/docs), or the [health endpoint](http://127.0.0.1:8000/api/v1/health). Press **Ctrl+C** in the app terminal to stop it.
+
+### Quickstart
+
+After guide steps 1–3 and the TBox upload, run the first command only for an empty graph and use the rest to start the app in the same terminal.
+
+```powershell
+# Windows
+.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso
+.\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check
+if ($LASTEXITCODE -eq 0) {
+    .\venv\Scripts\python.exe -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000
+}
+```
+
+```bash
+# macOS
+./venv/bin/python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso
+./venv/bin/python -m ca.uvic.ecs.csc501.dal.scripts.migrate_to_virtuoso --check &&
+  ./venv/bin/python -m uvicorn ca.uvic.ecs.csc501.main:app --host 127.0.0.1 --port 8000
+```
 
 ### RDF files and data import
 
