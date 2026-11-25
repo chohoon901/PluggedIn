@@ -107,7 +107,7 @@ def test_cq_uses_the_supplied_authenticated_client(service):
     headers, body = second[2:]
     encoded = b64encode(f'{USERNAME}:{PASSWORD}'.encode()).decode('ascii')
     assert headers['Authorization'] == f'Basic {encoded}'
-    assert headers['Accept'] == RESULT_FORMAT
+    assert headers['Accept'] == '*/*'
     params = parse_qs(body.decode('ascii'))
     assert params['format'] == [RESULT_FORMAT]
     assert f'GRAPH <{GRAPH}>' in params['query'][0]

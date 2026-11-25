@@ -76,7 +76,7 @@ class SparqlClient:
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         params = {'query': query}
         if expect_json:
-            headers['Accept'] = _RESULT_FORMAT
+            headers['Accept'] = '*/*'
             params['format'] = _RESULT_FORMAT
 
         try:
