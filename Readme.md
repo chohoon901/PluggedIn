@@ -40,26 +40,13 @@ For a visible operating-hours change, inspect station `5` (**GSPLP TGO 05**): it
 - OpenLink Virtuoso with a private application graph and a dedicated app credential.
 - Internet access for package installation and optional map tiles/fonts.
 
-## Installation and quickstart
+## Installation and startup
 
-Clone the team branch that contains the RDF migration and bundled sample.
+**[Team setup guide for Windows and macOS](project/docs/TEAM_RDF_SETUP.en.md)**
 
-```text
-git clone --branch Sunghun https://github.com/chohoon901/PluggedIn.git
-cd PluggedIn
-```
+In the repository, the guide is at `project/docs/TEAM_RDF_SETUP.en.md`.
 
-Follow the setup guide to start a local Virtuoso, configure the private application graph and the `pluggedin_app` account, and supply credentials on your machine. The default HTTP origin is `http://127.0.0.1:8890`. Set `PLUGGEDIN_VIRTUOSO_ORIGIN` to the HTTP origin of your instance if you use a different port. [Windows Quickstart](project/docs/QUICKSTART.md) · [Windows and macOS setup (English)](project/docs/TEAM_RDF_SETUP.en.md) · [Windows and macOS setup (Korean)](project/docs/TEAM_RDF_SETUP.ko.md)
-
-Before the initial instance-data import, load the RDF/XML ontology (TBox) into the separate `graph/schema/` named graph. Follow the [ontology loading and verification instructions](project/docs/TEAM_RDF_SETUP.en.md#load-the-ontology-tbox). Keep the ontology graph separate from the private application graph (`graph/app/`), which stores instance data (ABox).
-
-On Windows, after setting up Virtuoso and the credentials, run the Quickstart from the repository root for the first import.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\project\quickstart.ps1 -Migrate
-```
-
-The script prepares the Python environment, imports the bundled SQLite snapshot and station metadata, verifies the **193 source records**, applies the equipment and adapter data, and starts the app. For a graph already initialized by the importer, use `-SkipInstall` to start it again or `-CheckOnly` to verify graph readiness. On macOS, follow the virtual environment, migration, and startup steps in the team guide.
+Use the team branch that contains this README and the Virtuoso migration. Follow steps 1 through 5 to configure Virtuoso, load the TBox, migrate the sample data into the private application graph, and start PluggedIn. The guide also covers starting with an existing graph.
 
 Open [PluggedIn](http://127.0.0.1:8000/), the [API documentation](http://127.0.0.1:8000/docs), or the [health endpoint](http://127.0.0.1:8000/api/v1/health). Press **Ctrl+C** in the app terminal to stop it.
 
@@ -76,7 +63,7 @@ New-Item -ItemType Directory -Force .\output | Out-Null
 .\venv\Scripts\python.exe -m ca.uvic.ecs.csc501.dal.scripts.export_rdf --dataset sample20 --output output/sample20-data.rdf
 ```
 
-On macOS, create `output/` with `mkdir -p output` and use `./venv/bin/python` with the same module and arguments. The exporter requires a new output path. `project/output/` is excluded from Git, so include the generated RDF/XML when packaging the ABox for assessment. For a runnable app, use the migration command above to initialize an empty private graph. It records and checks the application state as part of the import.
+On macOS, create `output/` with `mkdir -p output` and use `./venv/bin/python` with the same module and arguments. The exporter requires a new output path. `project/output/` is excluded from Git, so include the generated RDF/XML when packaging the ABox for assessment. The first-run migration initializes and checks the application state in an empty private graph. [First-run migration](project/docs/TEAM_RDF_SETUP.en.md#first-run-or-previous-rdf-only-upload)
 
 ### SPARQL queries and demo results
 
@@ -156,7 +143,7 @@ database_path=data/readme-rebuild/data/nlr_ocm_sample20.db
 metadata_path=data/readme-rebuild/data/station_metadata.json
 ```
 
-Select a new private `app_graph_iri` and apply its access settings before running the migration. The current app graph retains existing registrations. [Virtuoso setup and migration](project/docs/QUICKSTART.md)
+Select a new private `app_graph_iri` and apply its access settings before running the migration. The current app graph retains existing registrations. [Virtuoso setup and migration](project/docs/TEAM_RDF_SETUP.en.md)
 
 ## Relational milestone reference
 
@@ -164,7 +151,7 @@ The earlier relational design remains available for comparing the SQLite schema 
 
 ## Validation and tests
 
-`validate_db` checks the SQLite migration source's schema, integrity, foreign keys, and application aggregate rules. Quickstart's `-CheckOnly` verifies the Virtuoso graph used at runtime. To install development tools and run the project suites:
+`validate_db` checks the SQLite migration source's schema, integrity, foreign keys, and application aggregate rules. Use `migrate_to_virtuoso --check` to verify the Virtuoso graph used at runtime. To install development tools and run the project suites:
 
 ```powershell
 .\venv\Scripts\python.exe -m pip install -r requirements-dev.txt
@@ -181,14 +168,12 @@ Results describe recorded conditions, not real-time occupancy, faults, queues, r
 
 ## More documentation
 
-- [Windows Quickstart guide](project/docs/QUICKSTART.md) and [executable setup script](project/quickstart.ps1)
 - [Semantic Web report (LaTeX source)](docs/05_Semantic/5_Semantic_Sunghun_Jungwon_Elias_Updated.tex)
 - [Sample construction and provenance](project/docs/sample20.md)
 - [NLR vehicle classes and package structure](project/docs/nlr-vehicle-class.md)
 - [Development plan](project/docs/PluggedIn_Development_Plan_AI_Agent.md)
 - [Original approved architecture](project/docs/superpowers/specs/2026-10-26-pluggedin-design.md) and [sample20 design update](project/docs/superpowers/specs/2026-11-02-idnull-sample-design.md)
 - [Current MVP access-policy record](project/docs/superpowers/plans/2026-11-02-mvp-class-only-access.md)
-- [Semantic Web setup, ontology loading, migration, and demo guide](project/docs/TEAM_RDF_SETUP.en.md)
 
 ## Citation
 
