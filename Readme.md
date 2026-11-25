@@ -8,7 +8,7 @@ This README describes the **20-station NLR-OCM Vancouver sample**. The older fiv
 
 ## Example and supported features
 
-![PluggedIn station search and map](project/docs/images/search-results.png)
+![PluggedIn station search and map](project/docs/images/figure2-search-results.png)
 
 The screenshot illustrates the fixed-date sample below. It is not a live availability report.
 
